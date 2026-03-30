@@ -19,6 +19,9 @@ class OrderFactory extends Factory
     {
         return [
             //
+            // total_price i total_quantity
+            'total_price' => fake()->numberBetween(5000, 1000),
+            'total_quantity' => fake()->numberBetween(1, 5),
         ];
     }
 }

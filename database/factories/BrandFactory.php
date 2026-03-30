@@ -19,6 +19,7 @@ class BrandFactory extends Factory
     {
         return [
             //
+            'title' => fake()->lexify('??????') // sa true se vraca string a bez bi bilo ['test']
         ];
     }
 }

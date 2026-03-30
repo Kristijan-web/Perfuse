@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Discount;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,11 @@ class DiscountFactory extends Factory
     {
         return [
             //
+            'discount' => fake()->numberBetween(1, 90),
+            'start_date' => fake()->dateTime(),
+            'end_date' => fake()->dateTime(),
+
+
         ];
     }
 }

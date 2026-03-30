@@ -19,6 +19,7 @@ class WaterTypeFactory extends Factory
     {
         return [
             //
+            'type' => 'type' . fake()->lexify('????????')
         ];
     }
 }

@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->string('gender');
             $table->foreignId('brand_id')->constrained();
             $table->foreignId('water_type_id')->constrained();
+            $table->foreignId('discount_id')->nullable()->constrained();
+            $table->softDeletes();
         });
     }
 

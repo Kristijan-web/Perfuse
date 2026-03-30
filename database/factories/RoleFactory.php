@@ -21,6 +21,7 @@ class RoleFactory extends Factory
         return [
             //  
 
+            // unutar seedera su definisani koji podaci ce biti insertovani i koliko
 
         ];
     }

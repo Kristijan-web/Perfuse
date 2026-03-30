@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Ml;
 use App\Models\MlProduct;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +21,10 @@ class MlProductFactory extends Factory
     {
         return [
             //
+            // 
+            'ml_id' => Ml::inRandomOrder()->first()->id,
+            'product_id' => Product::inRandomOrder()->first()->id,
+
         ];
     }
 }
