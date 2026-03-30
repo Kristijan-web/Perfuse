@@ -17,8 +17,11 @@ class RoleFactory extends Factory
      */
     public function definition(): array
     {
+        // kako se popunjava role sa fiksnim vrednostima kao sto su user i admin
         return [
-            //
+            //  
+
+
         ];
     }
 }
