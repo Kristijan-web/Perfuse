@@ -14,12 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             // drzi referencu ka cart-u i ka proizvodu
-
             // Kada se obrise cart da li obrisati cart_items? da
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
-
             $table->unique(['product_id', 'cart_id']);
 
 
