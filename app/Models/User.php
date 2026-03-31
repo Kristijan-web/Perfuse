@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -47,6 +48,13 @@ class User extends Authenticatable
         ];
     }
 
+    use SoftDeletes;
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
     public function cart()
     {
 
@@ -60,6 +68,11 @@ class User extends Authenticatable
         // 1 proizvod moze da pripada vise cart-ova
         // 1 cart moze da sadrzi vise proizvoda
         return $this->belongsToMany(Product::class, 'cart_items');
+    }
+
+    public function orderLines()
+    {
+        return $this->hasMany(OrderLine::class);
     }
 
 }

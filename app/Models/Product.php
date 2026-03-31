@@ -13,7 +13,7 @@ class Product extends Model
 
     use SoftDeletes;
 
-    public function brands()
+    public function brand()
     {
 
         return $this->belongsTo(Brand::class); // jedan proizvod pripada jednom brand-u
@@ -26,7 +26,7 @@ class Product extends Model
 
     // 1 proizvod moze imati 1 watyer_type
     // 1 water type moze da pripada vise proizvoda
-    public function waterTypes()
+    public function waterType()
     {
         return $this->belongsTo(WaterType::class);
     }
@@ -48,6 +48,11 @@ class Product extends Model
     public function mls()
     {
         return $this->belongsToMany(Ml::class);
+    }
+
+    public function orderLines()
+    {
+        return $this->hasMany(OrderLine::class);
     }
 
 }
