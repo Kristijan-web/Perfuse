@@ -9,4 +9,9 @@ class Ml extends Model
 {
     /** @use HasFactory<\Database\Factories\MlFactory> */
     use HasFactory;
+
+    public function products()
+    {
+        return $this->belongsToMany(MlProduct::class);
+    }
 }

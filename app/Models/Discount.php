@@ -12,4 +12,12 @@ class Discount extends Model
     use HasFactory;
 
     use SoftDeletes;
+
+    // 1 discount moze da pripada jednom user-u
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
 }

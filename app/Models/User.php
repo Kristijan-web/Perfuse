@@ -46,4 +46,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function cart()
+    {
+
+        // 1 user moze da ima 1 cart 
+        // 1 cart pripada 1 user-u
+        return $this->hasOne(Cart::class);
+    }
+
+    public function product()
+    {
+        // 1 proizvod moze da pripada vise cart-ova
+        // 1 cart moze da sadrzi vise proizvoda
+        return $this->belongsToMany(Product::class, 'cart_items');
+    }
+
 }

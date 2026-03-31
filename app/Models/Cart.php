@@ -12,14 +12,21 @@ class Cart extends Model
     // cart zavisi od user-a i od proizvoda
     public function user()
     {
-        // 1 cart moze da pripada samo jednom useru
+        // 1 cart moze da pripada samo jednom useru, jedan user moze da ima samo jedan
         return $this->belongsTo(User::class);
-        // sta da jedan user moze da ima vise cart-ova i da 1 cart moze da pripada vise user-a?
-        // Onda bih ovde koristili belongsToMany 
-        // Kako ce laravel zakljuciti ime pivot tabele?
-        // - Pa kontam da ce videti da se ovva tabela zove cart a druga user i onda ce ih spojiti po alfabetskom rasporedu i razdvojiti sa _
-        // - cart_user bi bio neki naziv za pivot tabelu
+
     }
 
     // 1 cart moze da sadrzi samo 1 proizvo, a 1 proizvod moze da pripada vise cart-ova
+    public function products() // ovo rresava cart_items
+    {
+        return $this->belongsToMany(Product::class, 'cart_items');
+    }
+
+
+
+
+
 }
+
+
