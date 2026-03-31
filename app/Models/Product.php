@@ -12,4 +12,10 @@ class Product extends Model
     use HasFactory;
 
     use SoftDeletes;
+
+    public function brand()
+    {
+
+        return $this->belongsTo(Brand::class); // jedan proizvod pripada jednom brand-u
+    }
 }

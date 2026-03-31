@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             DiscountHistorySeeder::class,
             MlSeeder::class,
             MlProductSeeder::class,
+            CartItemSeeder::class
         ]);
 
 

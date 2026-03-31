@@ -14,6 +14,18 @@ class MlProductSeeder extends Seeder
     public function run(): void
     {
         //
-        MlProduct::factory(10)->create();
+        // MlProduct::factory(10)->create();
+
+        MlProduct::firstOrCreate(['ml_id' => 1, "product_id" => 1]);
+        MlProduct::firstOrCreate(['ml_id' => 2, "product_id" => 1]);
+        MlProduct::firstOrCreate(['ml_id' => 3, "product_id" => 1]);
+
+        MlProduct::firstOrCreate(['ml_id' => 1, "product_id" => 2]);
+        MlProduct::firstOrCreate(['ml_id' => 2, "product_id" => 2]);
+        MlProduct::firstOrCreate(['ml_id' => 3, "product_id" => 2]);
+
+        MlProduct::firstOrCreate(['ml_id' => 1, "product_id" => 3]);
+        MlProduct::firstOrCreate(['ml_id' => 2, "product_id" => 3]);
+        MlProduct::firstOrCreate(['ml_id' => 3, "product_id" => 3]);
     }
 }

@@ -12,5 +12,12 @@ class Brand extends Model
     use HasFactory;
 
     use SoftDeletes;
+
+
+    // proizvod moze da pripada jednom brandu, jedan brand moze da ima vise proizovd
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
 

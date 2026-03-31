@@ -22,8 +22,8 @@ class MlProductFactory extends Factory
         return [
             //
             // 
-            'ml_id' => Ml::inRandomOrder()->first()->id,
-            'product_id' => Product::inRandomOrder()->first()->id,
+
+            // rucno napravi
 
         ];
     }

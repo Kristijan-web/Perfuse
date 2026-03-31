@@ -14,8 +14,17 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             // drzi referencu ka ml i products
+            // Ovde mora postojati kompozitni kljuc koji cine ml_id i product_id, jer moze da se desi da imam proizvod 1 i ml 1 pa opet proizvod 1 i ml 1 a to ne bi smelo
             $table->foreignId('ml_id')->constrained();
             $table->foreignId('product_id')->constrained();
+            $table->unique(['product_id', 'ml_id']);
+
+            //         Product::factory() // za 1 proizvod kreira record u mls tabeli i 
+            // ->create()
+            // ->mls()
+            // ->attach(
+            //     Ml::take(3)->pluck('id')
+            // );
         });
     }
 
