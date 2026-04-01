@@ -43,7 +43,7 @@
                                 <label class="auth-label" for="repeat-password">
                                     Potvrdi &scaron;ifru
                                 </label>
-                                <input class="auth-input" id="repeat-password" name="confirm_password" type="password"
+                                <input class="auth-input" id="repeat-password" name="password_confirmation" type="password"
                                     autocomplete="new-password" placeholder="Potvrdi &scaron;ifru">
                             </div>
 

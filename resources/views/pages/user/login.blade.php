@@ -31,14 +31,13 @@
 
                     <form method="POST" action="" class="auth-form flex flex-1 flex-col">
                         @csrf
-
                         <div class="auth-fields">
                             <div>
                                 <label class="auth-label" for="login-email">
                                     Email
                                 </label>
-                                <input class="auth-input" id="login-email" name="email" type="email"
-                                    autocomplete="email" placeholder="Email">
+                                <input class="auth-input" id="login-email" name="email" type="email" autocomplete="email"
+                                    placeholder="Email">
                             </div>
 
                             <div>

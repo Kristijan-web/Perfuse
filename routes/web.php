@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Pages\HomeController;
 use Illuminate\Support\Facades\Route;
 
-use function Laravel\Prompts\clear;
 
 
 // Route::get("/", [PageController::class, 'home'])->name('homePage');
@@ -20,7 +20,10 @@ Route::controller(PageController::class)->group(function () {
 
 });
 
-// Sta ako zelim da zovem samo metode iz controlera bez da pisem samo controller
+Route::controller(AuthController::class)->group(function () {
 
+    Route::post('/login', 'login')->name("loginAPI");
+    Route::post('/register', 'register')->name("registerAPI");
 
-// kako da
+});
+
