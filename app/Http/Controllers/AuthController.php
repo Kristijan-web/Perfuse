@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -22,11 +23,13 @@ class AuthController extends Controller
 
         // mora da napravim custom request za reigster i tu da radim validaciju
 
+        $user_role_id = Role::where('role', 'user')->first()->id;
+
         try {
 
             $validated = $request->validated();
 
-            User::create(['email' => $validated['email'], 'password' => $validated['password'], 'name' => $validated['name'], 'role_id' => 1]);
+            User::create(['email' => $validated['email'], 'password' => $validated['password'], 'name' => $validated['name']]);
 
             return redirect()->route('homePage');
 

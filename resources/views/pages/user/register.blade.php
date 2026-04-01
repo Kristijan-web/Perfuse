@@ -67,13 +67,11 @@
                 {{-- <p>CAo</p> --}}
                           @if($errors->any())
 
-                          @if($errors->has('errorCode'))
-                            <h1>OPAA</h1>
-                          @endif
+                      
                           <ul>
                             @foreach($errors->all() as $key => $message) 
 
-                                <li>{{ $key }}</li>
+                                <li>{{ $message }}</li>
                                 
                             
                             @endforeach
