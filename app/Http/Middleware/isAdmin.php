@@ -17,6 +17,16 @@ class isAdmin
     {
 
         // ukoliko je koriscen auth middleware trebao bi da imam pristup user-u na $request->user()
+        $user_id = $request->user()?->id;
+
+        if (!$user_id) {
+
+
+        }
+
+
+
+
 
         return $next($request);
     }

@@ -17,6 +17,17 @@ class PageController extends Controller
     {
         return view('pages.user.shopPage.shop');
     }
+
+    public function login()
+    {
+
+    }
+
+    public function register()
+    {
+
+    }
+
 }
 
 

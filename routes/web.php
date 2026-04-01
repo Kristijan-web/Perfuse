@@ -7,7 +7,18 @@ use Illuminate\Support\Facades\Route;
 use function Laravel\Prompts\clear;
 
 
-Route::get("/", [PageController::class, 'home'])->name('homePage');
-Route::get("/shop", [PageController::class, 'shop'])->name("shopPage");
+// Route::get("/", [PageController::class, 'home'])->name('homePage');
+// Route::get("/shop", [PageController::class, 'shop'])->name("shopPage");
+
+
+Route::controller(PageController::class)->group(function () {
+
+    Route::get('/', 'home')->name('homePage');
+    Route::get('/shop', 'shop')->name('shopPage');
+
+});
+
+// Sta ako zelim da zovem samo metode iz controlera bez da pisem samo controller
+
 
 // kako da
