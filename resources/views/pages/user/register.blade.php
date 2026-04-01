@@ -11,7 +11,7 @@
                         </h1>
                     </div>
 
-                    <form method="POST" action="" class="auth-form flex flex-1 flex-col">
+                    <form method="POST" action="{{ route('registerAPI') }}" class="auth-form flex flex-1 flex-col">
                         @csrf
 
                         <div class="auth-fields">
@@ -19,15 +19,15 @@
                                 <label class="auth-label" for="register-name">
                                     Ime
                                 </label>
-                                <input class="auth-input" id="register-name" name="name" type="text" autocomplete="name"
-                                    placeholder="Ime">
+                                <input class="auth-input"  id="register-name" name="name" type="text" value="{{ old('name') }}"
+                                    autocomplete="name" placeholder="Ime">
                             </div>
 
                             <div>
                                 <label class="auth-label" for="register-email">
                                     Email
                                 </label>
-                                <input class="auth-input" id="register-email" name="email" type="email" autocomplete="email"
+                                <input class="auth-input" id="register-email" name="email" type="email" autocomplete="email" value="{{ old('email') }}"
                                     placeholder="Email">
                             </div>
 
@@ -35,7 +35,7 @@
                                 <label class="auth-label" for="register-password">
                                     &Scaron;ifra
                                 </label>
-                                <input class="auth-input" id="register-password" name="password" type="password"
+                                <input class="auth-input" id="register-password" name="password" type="password" 
                                     autocomplete="new-password" placeholder="&Scaron;ifra">
                             </div>
 
@@ -54,15 +54,55 @@
                             </label>
                         </div>
 
+                        <script>
+                            // sta je cilj?
+                            // - Da se na serveru popuni div za gresku
+                            // Kako to da uradim?
+                            // - Kada se desi greska ona se upisuje session pod kljucem $errors 
+                            //  U kom formatu je $errors?
+                            // - Asocijativni niz
+                            // - Znaci samo prodjem kroz taj niz i ispisem message koji se nalaze, ne kljuceve jer je kljuc vezan za input a meni sad to nije bitno
+                        
+                        </script>
+                {{-- <p>CAo</p> --}}
+                          @if($errors->any())
+
+                          @if($errors->has('errorCode'))
+                            <h1>OPAA</h1>
+                          @endif
+                          <ul>
+                            @foreach($errors->all() as $key => $message) 
+
+                                <li>{{ $key }}</li>
+                                
+                            
+                            @endforeach
+                          </ul>
+                            
+                          @endif 
+                        
                         <div class="auth-submit-wrap lg:mt-auto pt-5">
                             <button
                                 class="auth-submit focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2"
                                 type="submit">
                                 Registruj se
                             </button>
+
+
+
+
                         </div>
+
                     </form>
+
                 </div>
+                        {{-- @if($errors->any())
+            <ul class="px-4 py-2 bg-red-100">
+                @foreach ($errors->all() as $error)
+                    <li class="my-2 text-red-500">{{$error}}</li>
+                @endforeach
+            </ul>
+        @endif --}}
 
                 <aside class="auth-side flex flex-col justify-center overflow-hidden">
                     <div class="auth-side-glow"></div>

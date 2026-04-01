@@ -26,25 +26,24 @@ class AuthController extends Controller
 
             $validated = $request->validated();
 
-            User::create(['email' => $validated['email'], 'password' => $validated['password'], 'name' => $validated['name']]);
+            User::create(['email' => $validated['email'], 'password' => $validated['password'], 'name' => $validated['name'], 'role_id' => 1]);
 
             return redirect()->route('homePage');
 
-
-            // ako se desi greska treba da se upise u log fajl
-            // ako je sve dobro vraca se redict na home page
 
         } catch (Throwable $err) {
 
 
 
-            $stackTrace = $err->getTraceAsString();
+            // $stackTrace = $err->getTraceAsString();
             $errorCode = uuid_create();
             $message = $err->getMessage();
+            $errorLine = $err->getLine();
+            $errorFile = $err->getFile();
 
-            $logEntry = $errorCode . " " . $message . " " . $stackTrace;
+            $logEntry = $errorCode . " " . $message . " " . "in file:" . " " . $errorFile . " " . "at line:" . " " . $errorLine;
 
-            Log::error($logEntry);
+            Log::channel('custom')->error($logEntry);
 
             return redirect()->back()->withErrors(['errorCode' => $errorCode]);
 

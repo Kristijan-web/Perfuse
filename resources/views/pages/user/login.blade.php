@@ -29,7 +29,7 @@
                         </h1>
                     </div>
 
-                    <form method="POST" action="" class="auth-form flex flex-1 flex-col">
+                    <form method="POST" action="{{ route('loginAPI') }}" class="auth-form flex flex-1 flex-col">
                         @csrf
                         <div class="auth-fields">
                             <div>

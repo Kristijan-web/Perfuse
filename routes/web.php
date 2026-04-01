@@ -2,13 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Pages\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
-
-// Route::get("/", [PageController::class, 'home'])->name('homePage');
-// Route::get("/shop", [PageController::class, 'shop'])->name("shopPage");
 
 
 Route::controller(PageController::class)->group(function () {
