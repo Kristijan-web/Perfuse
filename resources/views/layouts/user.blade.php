@@ -5,6 +5,7 @@
 
 <body>
 
+    <x-user.fixed.header />
 
     @yield("content")
 

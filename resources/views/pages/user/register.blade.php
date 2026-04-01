@@ -1,67 +1,87 @@
-@extends("layouts.user")
+@extends('layouts.user')
 
 @section('content')
-    <div
-        class="w-full bg-white transition-all duration-400 ease-in-out md:absolute md:h-full md:w-1/2 md:right-1/2 md:translate-x-0 px-6 pt-8 pb-8 md:block md:p-10 md:pt-4">
-        <div class="flex h-full flex-col">
-            <h2 class="mb-4 text-xl font-bold text-gray-800 md:mb-6 md:text-2xl">
-                Napravite nalog
-            </h2>
+    <main class="auth-shell">
+        <div class="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center justify-center">
+            <section class="auth-card">
+                <div class="auth-form-panel flex flex-col">
+                    <div class="max-w-md">
+                        <h1 class="auth-title">
+                            Napravite nalog
+                        </h1>
+                    </div>
 
-            <form method="POST" action="" class="flex grow flex-col justify-center space-y-4 md:space-y-5">
-                @csrf
+                    <form method="POST" action="" class="auth-form flex flex-1 flex-col">
+                        @csrf
 
-                <div>
-                    <label class="mb-1 block text-sm font-medium text-gray-700 md:mb-2" for="register-name">
-                        Ime
-                    </label>
-                    <input
-                        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                        id="register-name" name="name" type="text" autocomplete="username" placeholder="Ime">
+                        <div class="auth-fields">
+                            <div>
+                                <label class="auth-label" for="register-name">
+                                    Ime
+                                </label>
+                                <input class="auth-input" id="register-name" name="name" type="text" autocomplete="name"
+                                    placeholder="Ime">
+                            </div>
+
+                            <div>
+                                <label class="auth-label" for="register-email">
+                                    Email
+                                </label>
+                                <input class="auth-input" id="register-email" name="email" type="email" autocomplete="email"
+                                    placeholder="Email">
+                            </div>
+
+                            <div>
+                                <label class="auth-label" for="register-password">
+                                    &Scaron;ifra
+                                </label>
+                                <input class="auth-input" id="register-password" name="password" type="password"
+                                    autocomplete="new-password" placeholder="&Scaron;ifra">
+                            </div>
+
+                            <div>
+                                <label class="auth-label" for="repeat-password">
+                                    Potvrdi &scaron;ifru
+                                </label>
+                                <input class="auth-input" id="repeat-password" name="confirm_password" type="password"
+                                    autocomplete="new-password" placeholder="Potvrdi &scaron;ifru">
+                            </div>
+
+                            <label class="auth-checkbox-row" for="remember">
+                                <input class="h-5 w-5 rounded border-slate-300 text-slate-900 focus:ring-slate-400"
+                                    type="checkbox" id="remember" name="remember">
+                                <span>Zapamti me</span>
+                            </label>
+                        </div>
+
+                        <div class="auth-submit-wrap lg:mt-auto pt-5">
+                            <button
+                                class="auth-submit focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2"
+                                type="submit">
+                                Registruj se
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
-                <div>
-                    <label class="mb-1 block text-sm font-medium text-gray-700 md:mb-2" for="register-email">
-                        Email
-                    </label>
-                    <input
-                        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                        id="register-email" name="email" type="email" autocomplete="email" placeholder="Email">
-                </div>
+                <aside class="auth-side flex flex-col justify-center overflow-hidden">
+                    <div class="auth-side-glow"></div>
 
-                <div>
-                    <label class="mb-1 block text-sm font-medium text-gray-700 md:mb-2" for="register-password">
-                        Šifra
-                    </label>
-                    <input
-                        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                        id="register-password" name="password" type="password" placeholder="Šifra"
-                        autocomplete="current-password">
-                </div>
+                    <div class="auth-side-content flex flex-col items-center">
+                        <p class="auth-side-title">
+                            Ve&#263; imate nalog?
+                        </p>
+                        <p class="auth-side-copy">
+                            Prijavite se da bi ste ostali povezani
+                        </p>
 
-                <div>
-                    <label class="mb-1 block text-sm font-medium text-gray-700 md:mb-2" for="repeat-password">
-                        Potvrdi šifru
-                    </label>
-                    <input
-                        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                        id="repeat-password" name="confirm_password" type="password" placeholder="Potvrdi šifru"
-                        autocomplete="password">
-                </div>
-
-                <div class="flex items-center">
-                    <input type="checkbox" id="remember" name="remember" class="h-4 w-4 text-blue-500">
-                    <label for="remember" class="ml-2 text-sm text-gray-600">
-                        Zapamti me
-                    </label>
-                </div>
-
-                <div class="mt-4 md:mt-auto">
-                    <button class="btn w-full" type="submit">
-                        Registruj se
-                    </button>
-                </div>
-            </form>
+                        <a href="#"
+                            class="auth-side-link focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#101010]">
+                            Prijava
+                        </a>
+                    </div>
+                </aside>
+            </section>
         </div>
-    </div>
+    </main>
 @endsection
