@@ -23,7 +23,6 @@ class AuthController extends Controller
 
         // mora da napravim custom request za reigster i tu da radim validaciju
 
-        $user_role_id = Role::where('role', 'user')->first()->id;
 
         try {
 
@@ -31,7 +30,7 @@ class AuthController extends Controller
 
             User::create(['email' => $validated['email'], 'password' => $validated['password'], 'name' => $validated['name']]);
 
-            return redirect()->route('homePage');
+            return redirect()->route('loginPage');
 
 
         } catch (Throwable $err) {

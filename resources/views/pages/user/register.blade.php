@@ -5,6 +5,7 @@
         <div class="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center justify-center">
             <section class="auth-card">
                 <div class="auth-form-panel flex flex-col">
+
                     <div class="max-w-md">
                         <h1 class="auth-title">
                             Napravite nalog
@@ -21,6 +22,9 @@
                                 </label>
                                 <input class="auth-input"  id="register-name" name="name" type="text" value="{{ old('name') }}"
                                     autocomplete="name" placeholder="Ime">
+                                    @if($errors->has('name')) 
+                                    <p class="text-red-500">* {{ $errors->first('name') }}</p>
+                                    @endif
                             </div>
 
                             <div>
@@ -29,6 +33,12 @@
                                 </label>
                                 <input class="auth-input" id="register-email" name="email" type="email" autocomplete="email" value="{{ old('email') }}"
                                     placeholder="Email">
+
+                                    @if ($errors->has('email'))
+
+                                    <p class="text-red-500">* {{ $errors->first('email') }}</p>
+                                        
+                                    @endif
                             </div>
 
                             <div>
@@ -37,6 +47,9 @@
                                 </label>
                                 <input class="auth-input" id="register-password" name="password" type="password" 
                                     autocomplete="new-password" placeholder="&Scaron;ifra">
+                                    @if($errors->has('password')) 
+                                        <p class="text-red-500">* {{ $errors->first('password') }} </p>
+                                    @endif
                             </div>
 
                             <div>
@@ -65,19 +78,21 @@
                         
                         </script>
                 {{-- <p>CAo</p> --}}
-                          @if($errors->any())
+                          {{-- @if($errors->any())
 
                       
-                          <ul>
+                          <ul class="px-4 py-2 bg-red-100">
                             @foreach($errors->all() as $key => $message) 
 
-                                <li>{{ $message }}</li>
+                                <li class="my-2 text-red-500">*{{ $message }}</li>
                                 
                             
                             @endforeach
-                          </ul>
+                          </ul> 
+                            @endif 
+                          --}}
                             
-                          @endif 
+                        
                         
                         <div class="auth-submit-wrap lg:mt-auto pt-5">
                             <button

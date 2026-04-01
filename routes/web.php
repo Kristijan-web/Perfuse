@@ -11,8 +11,14 @@ Route::controller(PageController::class)->group(function () {
 
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
-    Route::get('/register', 'register')->name('registerPage');
-    Route::get('/login', 'login')->name('loginPage');
+
+    // ako je korisnik ulogovan on ne bi trebao da moze da pristupa login i register stranicama
+
+    Route::middleware('guest')->group(function () {
+        Route::get('/register', 'register')->name('registerPage');
+        Route::get('/login', 'login')->name('loginPage');
+
+    });
 
 });
 
