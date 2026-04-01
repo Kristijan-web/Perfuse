@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -15,6 +14,13 @@ class AuthController extends Controller
 
     public function login($request)
     {
+        // Kako se radi login user-a?
+        // - Dohvatam prosledjen email
+        // - Nalazim user-a po email-u
+        // - uzimam taj password i proveravam da li odgovarama hash-u prosledjnog password-a
+        // - Ako je sve dobro upisujem user-ove podatke u sesiju i redirect-ujem ga na home page ili ukoliko je admin na admin panel
+
+
 
     }
 
