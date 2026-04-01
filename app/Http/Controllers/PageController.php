@@ -20,7 +20,7 @@ class PageController extends Controller
 
     public function login()
     {
-
+        return view('pages.user.login');
     }
 
     public function register()

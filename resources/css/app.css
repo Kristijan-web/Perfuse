@@ -53,6 +53,7 @@
     .auth-card {
         width: 100%;
         max-width: 60rem;
+        min-height: 40rem;
         overflow: hidden;
         border-radius: var(--space-16);
         background: var(--color-surface);
