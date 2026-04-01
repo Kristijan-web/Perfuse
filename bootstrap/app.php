@@ -16,6 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
+        // ovde mogu i da hvatam svoje custom error-e i da im dodajem statusCode koji tip podatka vracu (JSON/XML, text,itd...) i mogu da uzmem prosledjenu poruku preko $e->getMessage(0)
+        //
     
         $exceptions->render(function (ModelNotFoundException $e, $request) {
             dd("UPAO U global handler u boostrap/app.php");
