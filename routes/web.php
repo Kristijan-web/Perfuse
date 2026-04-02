@@ -11,8 +11,11 @@ Route::controller(PageController::class)->group(function () {
 
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
+    Route::get('/cart', 'cart')->name('cartPage');
 
-    // ako je korisnik ulogovan on ne bi trebao da moze da pristupa login i register stranicama
+    // Route::middleware(['auth', 'isAdmin'])->group(function () {
+
+    // });
 
     Route::middleware('guest')->group(function () {
         Route::get('/register', 'register')->name('registerPage');
@@ -23,8 +26,11 @@ Route::controller(PageController::class)->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
 
-    Route::post('/login', 'login')->name("loginAPI");
-    Route::post('/register', 'register')->name("registerAPI");
+    Route::middleware('guest')->group(function () {
+        Route::post('/login', 'login')->name("loginAPI");
+        Route::post('/register', 'register')->name("registerAPI");
+    });
+
     Route::post('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header
 
 });

@@ -17,14 +17,16 @@ class isAdmin
     {
 
         // ukoliko je koriscen auth middleware trebao bi da imam pristup user-u na $request->user()
-        $user_id = $request->user()?->id;
+        // $user_id = $request->user()?->id;
+        $role = $request->user()->role;
 
-        if (!$user_id) {
+        // mora da dohvatim njegov naziv role
+        // - Znaci mora join sa roles
 
 
+        if ($role->name != 'admin') {
+            return redirect()->back();
         }
-
-
 
 
 

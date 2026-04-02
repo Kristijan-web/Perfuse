@@ -28,6 +28,11 @@ class PageController extends Controller
         return view("pages.user.register");
     }
 
+    public function cart()
+    {
+        return view('pages.user.cart');
+    }
+
 }
 
 

@@ -16,7 +16,7 @@
             <a href="#" class="text-white transition-opacity duration-200 hover:opacity-75">Shop</a>
             <a href="#" class="text-white transition-opacity duration-200 hover:opacity-75">Kontakt</a>
 
-            <a href="#"
+            <a href="{{ route('cartPage') }}"
                 class="inline-flex items-center gap-[10px] text-white transition-opacity duration-200 hover:opacity-75">
                 <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
                     aria-hidden="true">
@@ -52,7 +52,7 @@
 
             @auth
                 <form method="POST" action="{{ route('logoutAPI') }}" class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
-                                            duration-200 hover:opacity-75">
+                                                        duration-200 hover:opacity-75">
                     @csrf
 
                     {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
