@@ -18,8 +18,7 @@ class PageController extends Controller
     {
         // mora da prosledim proizvode, mora da uzmem njihove brandove, water-type-ove, image-e, discount-ove i koju militrazu imaju
         $products = Product::with(['brand', 'waterType', 'images', 'discount', 'mls'])->get();
-        dd($products[0]->brand->title);
-        return view('pages.user.shop');
+        return view('pages.user.shop', ['products' => $products]);
     }
 
     public function login()
@@ -38,5 +37,7 @@ class PageController extends Controller
     }
 
 }
+
+
 
 

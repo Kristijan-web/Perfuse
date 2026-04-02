@@ -8,80 +8,80 @@
     @php
         $brands = ['Calvin Klein', 'Dior', 'Chanel', 'Tom Ford'];
         $waterTypes = ['Eau de parfum', 'Eau de toilette', 'Parfum', 'Elixir'];
-        $products = [
-            [
-                'title' => 'Arabians Tonka',
-                'brand' => 'Montale',
-                'gender' => 'Unisex',
-                'water' => 'Eau de parfum',
-                'price' => 18490,
-                'discount' => 15,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-            [
-                'title' => 'Sauvage',
-                'brand' => 'Dior',
-                'gender' => 'Muški',
-                'water' => 'Eau de toilette',
-                'price' => 12990,
-                'discount' => null,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-            [
-                'title' => 'Libre',
-                'brand' => 'YSL',
-                'gender' => 'Ženski',
-                'water' => 'Eau de parfum',
-                'price' => 14190,
-                'discount' => 10,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-            [
-                'title' => 'Oud Wood',
-                'brand' => 'Tom Ford',
-                'gender' => 'Unisex',
-                'water' => 'Parfum',
-                'price' => 21990,
-                'discount' => null,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-            [
-                'title' => 'Eros',
-                'brand' => 'Versace',
-                'gender' => 'Muški',
-                'water' => 'Eau de parfum',
-                'price' => 11290,
-                'discount' => 20,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-            [
-                'title' => 'Coco Mademoiselle',
-                'brand' => 'Chanel',
-                'gender' => 'Ženski',
-                'water' => 'Elixir',
-                'price' => 19990,
-                'discount' => null,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-            [
-                'title' => 'One',
-                'brand' => 'Calvin Klein',
-                'gender' => 'Unisex',
-                'water' => 'Eau de toilette',
-                'price' => 8990,
-                'discount' => 5,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-            [
-                'title' => 'La Vie Est Belle',
-                'brand' => 'Lancome',
-                'gender' => 'Ženski',
-                'water' => 'Eau de parfum',
-                'price' => 16490,
-                'discount' => null,
-                'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-            ],
-        ];
+        // $products = [
+        //     [
+        //         'title' => 'Arabians Tonka',
+        //         'brand' => 'Montale',
+        //         'gender' => 'Unisex',
+        //         'water' => 'Eau de parfum',
+        //         'price' => 18490,
+        //         'discount' => 15,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        //     [
+        //         'title' => 'Sauvage',
+        //         'brand' => 'Dior',
+        //         'gender' => 'Muški',
+        //         'water' => 'Eau de toilette',
+        //         'price' => 12990,
+        //         'discount' => null,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        //     [
+        //         'title' => 'Libre',
+        //         'brand' => 'YSL',
+        //         'gender' => 'Ženski',
+        //         'water' => 'Eau de parfum',
+        //         'price' => 14190,
+        //         'discount' => 10,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        //     [
+        //         'title' => 'Oud Wood',
+        //         'brand' => 'Tom Ford',
+        //         'gender' => 'Unisex',
+        //         'water' => 'Parfum',
+        //         'price' => 21990,
+        //         'discount' => null,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        //     [
+        //         'title' => 'Eros',
+        //         'brand' => 'Versace',
+        //         'gender' => 'Muški',
+        //         'water' => 'Eau de parfum',
+        //         'price' => 11290,
+        //         'discount' => 20,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        //     [
+        //         'title' => 'Coco Mademoiselle',
+        //         'brand' => 'Chanel',
+        //         'gender' => 'Ženski',
+        //         'water' => 'Elixir',
+        //         'price' => 19990,
+        //         'discount' => null,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        //     [
+        //         'title' => 'One',
+        //         'brand' => 'Calvin Klein',
+        //         'gender' => 'Unisex',
+        //         'water' => 'Eau de toilette',
+        //         'price' => 8990,
+        //         'discount' => 5,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        //     [
+        //         'title' => 'La Vie Est Belle',
+        //         'brand' => 'Lancome',
+        //         'gender' => 'Ženski',
+        //         'water' => 'Eau de parfum',
+        //         'price' => 16490,
+        //         'discount' => null,
+        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
+        //     ],
+        // ];
     @endphp
 
     <section class="gradient_image_shop relative mb-18 h-thumbnail w-full bg-cover bg-no-repeat bg-left sm:bg-center ">
@@ -246,42 +246,10 @@
             <div
                 class="col-span-full mt-8 grid grid-cols-1 justify-self-center gap-5 sm:grid-cols-2 md:grid-cols-3 lg:col-start-4 lg:col-end-13 lg:mt-0 lg:grid-cols-3 2xl:grid-cols-4">
                 @foreach ($products as $product)
-                    @php
-                        $discountedPrice = $product['discount']
-                            ? $product['price'] - round(($product['price'] * $product['discount']) / 100)
-                            : null;
-                    @endphp
 
-                    <article
-                        class="shadow-my-shadow relative flex w-full flex-col items-center justify-between gap-3 overflow-hidden rounded-sm p-10">
-                        @if ($product['discount'])
-                            <div class="text-secondary-color absolute -right-7 top-5 w-[120px] rotate-45 bg-black text-center">
-                                {{ $product['discount'] }}%
-                            </div>
-                        @endif
+                    <x-user.shop-layout.product-item :product="$product" />
 
-                        <img class="mb-5 w-full rounded-sm sm:w-full min-[440px]:w-1/2" src="{{ $product['image'] }}"
-                            alt="{{ $product['brand'] }} {{ $product['title'] }}">
 
-                        <p class="text-xl">{{ $product['brand'] }} {{ $product['title'] }}</p>
-                        <span class="text-main-color-shade/70">{{ $product['gender'] }}</span>
-                        <span class="text-main-color-shade/70">{{ $product['water'] }}</span>
-
-                        @if ($product['discount'])
-                            <s class="text-main-color-shade/70">{{ number_format($product['price'], 0, ',', '.') }} RSD</s>
-                            <p>{{ number_format($discountedPrice, 2, ',', '.') }} RSD</p>
-                        @else
-                            <p>{{ number_format($product['price'], 0, ',', '.') }} RSD</p>
-                        @endif
-
-                        <span class="text-main-color-tint absolute right-[15px] top-[10px] text-xl">
-                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                                <path
-                                    d="m12 20.5-1.2-1.1C5.4 14.5 2 11.4 2 7.5 2 4.4 4.4 2 7.5 2c1.8 0 3.5.8 4.5 2.1C13 2.8 14.7 2 16.5 2 19.6 2 22 4.4 22 7.5c0 3.9-3.4 7-8.8 11.9L12 20.5Z"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                    </article>
                 @endforeach
             </div>
         </div>
