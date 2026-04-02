@@ -25,6 +25,7 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::post('/login', 'login')->name("loginAPI");
     Route::post('/register', 'register')->name("registerAPI");
+    Route::post('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header
 
 });
 

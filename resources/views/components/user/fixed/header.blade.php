@@ -28,24 +28,42 @@
             </a>
 
             {{-- // sad sintaksa da se ode na login --}}
-            <a href="{{ route('registerPage') }}"
-                class="inline-flex items-center gap-[10px] text-white  decoration-white  transition-opacity duration-200 hover:opacity-75">
-                {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
-                    aria-hidden="true">
-                    <circle cx="12" cy="8" r="4"></circle>
-                    <path d="M4 20c1.6-4 5-6 8-6s6.4 2 8 6" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg> --}}
-                <span>Register</span>
-            </a>
-            <a href="{{ route('loginPage') }}"
-                class="inline-flex items-center gap-[10px] text-white  decoration-white  transition-opacity duration-200 hover:opacity-75">
-                {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
-                    aria-hidden="true">
-                    <circle cx="12" cy="8" r="4"></circle>
-                    <path d="M4 20c1.6-4 5-6 8-6s6.4 2 8 6" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg> --}}
-                <span>Login</span>
-            </a>
+            @guest
+                <a href="{{ route('registerPage') }}"
+                    class="inline-flex items-center gap-[10px] text-white  decoration-white  transition-opacity duration-200 hover:opacity-75">
+                    {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 20c1.6-4 5-6 8-6s6.4 2 8 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg> --}}
+                    <span>Register</span>
+                </a>
+                <a href="{{ route('loginPage') }}"
+                    class="inline-flex items-center gap-[10px] text-white  decoration-white  transition-opacity duration-200 hover:opacity-75">
+                    {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 20c1.6-4 5-6 8-6s6.4 2 8 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg> --}}
+                    <span>Login</span>
+                </a>
+
+            @endguest
+
+            @auth
+                <form method="POST" action="{{ route('logoutAPI') }}" class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
+                                            duration-200 hover:opacity-75">
+                    @csrf
+
+                    {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 20c1.6-4 5-6 8-6s6.4 2 8 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg> --}}
+                    <button type="submit">Logout</button>
+                </form>
+            @endauth
+
         </nav>
     </div>
 </header>
