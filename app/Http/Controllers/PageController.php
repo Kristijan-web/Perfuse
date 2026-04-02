@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\APIFeatures;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,20 @@ class PageController extends Controller
         return view('pages.user.home');
     }
 
-    public function shop()
+    public function shop(Request $request)
     {
         // mora da prosledim proizvode, mora da uzmem njihove brandove, water-type-ove, image-e, discount-ove i koju militrazu imaju
+
+        // korisnik moze da prosledi /products?minPrice=10&maxPrice=20
+        // - Ja samo treba da pozovem APIFeatures i da mu prosledim query builder za model i queryString
+        // Kako ide sintaksa da pristupim query string-u
+        $queryString = $request->query(); // vraca asocijativni array sa vrednostima 
+        $products = Product::query();
+        $products = (new APIFeatures($queryString, $products))->filter()->sort()->getQuery();
+
+
         $products = Product::with(['brand', 'waterType', 'images', 'discount', 'mls'])->get();
+
         return view('pages.user.shop', ['products' => $products]);
     }
 

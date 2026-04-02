@@ -88,46 +88,23 @@ class APIFeatures
     public function sort()
     {
 
+
         $allowedFields = ['sortBy', 'sortOrder'];
-        $allowedFieldValues = ['asc', 'desc']; // za sortOrder
 
-        dd(array_keys($this->queryString));
+        $queryStringCopy = $this->queryString;
 
-        // $queryStringFieldsAsString = implode(",", array_keys($this->queryString));
-        $queryStringFieldsArray = array_keys($this->queryString);
+        foreach ($queryStringCopy as $field => $fieldValue) {
 
-        $queryStringCopyAsArray = $this->sanitize($allowedFields, $queryStringFieldsArray);
-
-
-        $sortBy = [$queryStringCopy['sortBy']] ?? ['price']; // moraju da parametri budu u nizu jer ce se koristiti za foreach zbog orderBy
-
-
-        // $this->queryString ce biti asocijativni niz, jedino tu da uzmem i join-am kljuceve
-        // $queryStringCopy['sortOrder'] -> ce biti 'asc,desc'
-        $sortOrder = $this->sanitize($allowedFieldValues, $queryStringCopy['sortOrder'] ?? 'asc');
-        dd($sortOrder);
-
-        // nevalja da funkcija promeni tip prosledjenog podatka
-
-        // treba biti niz sa jednom vrednoscu
-        // koji tip podatka mi vraca $sortOrder -> vraca niz
-        // Da li vraca asocijativan ili obican niz??
-
-        // General question
-        // Da li isti 2 argument prosledjujem u sanitize za svaki poziv?
-        // - Prvi prosledjuje asocijativni niz
-        // - Drugi prosledjuje obican string
-
-        // Ovo ispod koristi obican niz koliko vidim
-        foreach ($sortBy as $key => $sortField) {
-
-            $doesSortOrderExistsForGivenSortBy = isset($sortOrder[$key]);
-
-            if ($doesSortOrderExistsForGivenSortBy)
-                $this->query->orderBy($sortField, $sortOrder[$key]);
+            if (in_array($field, $allowedFields)) {
+                unset($queryStringCopy[$field]);
+            }
         }
 
-        // $this->query->orderBy($sortBy, $sortOrder);
+        $sortBy = $queryStringCopy['sortBy'] ?? 'price';
+        $sortOrder = $queryStringCopy['sortOrder'] ?? 'asc';
+
+        $this->query->orderBy($sortBy, $sortOrder);
+
         return $this;
 
     }
