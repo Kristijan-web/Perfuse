@@ -6,82 +6,8 @@
 
 @section('content')
     @php
-        // $brands = ['Calvin Klein', 'Dior', 'Chanel', 'Tom Ford'];
         $waterTypes = ['Eau de parfum', 'Eau de toilette', 'Parfum', 'Elixir'];
-        // $products = [
-        //     [
-        //         'title' => 'Arabians Tonka',
-        //         'brand' => 'Montale',
-        //         'gender' => 'Unisex',
-        //         'water' => 'Eau de parfum',
-        //         'price' => 18490,
-        //         'discount' => 15,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        //     [
-        //         'title' => 'Sauvage',
-        //         'brand' => 'Dior',
-        //         'gender' => 'Muški',
-        //         'water' => 'Eau de toilette',
-        //         'price' => 12990,
-        //         'discount' => null,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        //     [
-        //         'title' => 'Libre',
-        //         'brand' => 'YSL',
-        //         'gender' => 'Ženski',
-        //         'water' => 'Eau de parfum',
-        //         'price' => 14190,
-        //         'discount' => 10,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        //     [
-        //         'title' => 'Oud Wood',
-        //         'brand' => 'Tom Ford',
-        //         'gender' => 'Unisex',
-        //         'water' => 'Parfum',
-        //         'price' => 21990,
-        //         'discount' => null,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        //     [
-        //         'title' => 'Eros',
-        //         'brand' => 'Versace',
-        //         'gender' => 'Muški',
-        //         'water' => 'Eau de parfum',
-        //         'price' => 11290,
-        //         'discount' => 20,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        //     [
-        //         'title' => 'Coco Mademoiselle',
-        //         'brand' => 'Chanel',
-        //         'gender' => 'Ženski',
-        //         'water' => 'Elixir',
-        //         'price' => 19990,
-        //         'discount' => null,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        //     [
-        //         'title' => 'One',
-        //         'brand' => 'Calvin Klein',
-        //         'gender' => 'Unisex',
-        //         'water' => 'Eau de toilette',
-        //         'price' => 8990,
-        //         'discount' => 5,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        //     [
-        //         'title' => 'La Vie Est Belle',
-        //         'brand' => 'Lancome',
-        //         'gender' => 'Ženski',
-        //         'water' => 'Eau de parfum',
-        //         'price' => 16490,
-        //         'discount' => null,
-        //         'image' => asset('Images/ShopPage/Products/shop-item-1.jpg'),
-        //     ],
-        // ];
+
     @endphp
 
     <section class="gradient_image_shop relative mb-18 h-thumbnail w-full bg-cover bg-no-repeat bg-left sm:bg-center ">

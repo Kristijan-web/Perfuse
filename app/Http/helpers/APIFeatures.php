@@ -30,7 +30,6 @@ class APIFeatures
 
     public function __construct(array $queryString, Builder $query)
     {
-
         $this->queryString = $queryString;
         $this->query = $query;
 
@@ -40,10 +39,9 @@ class APIFeatures
     public function filter()
     {
 
-        $allowedFields = ['minPrice', 'maxPrice', 'productTitle', 'categoryTitle', 'onSale'];
+        $allowedFields = ['minPrice', 'maxPrice', 'brand', 'categoryTitle', 'onSale'];
 
         $queryStringCopy = $this->queryString;
-
 
         // Deletes the fields that are not allowed
         foreach ($queryStringCopy as $key => $value) {
@@ -51,13 +49,13 @@ class APIFeatures
                 unset($queryStringCopy[$key]);
             }
         }
+
         // filtering logic
         $maxPrice = $queryStringCopy['maxPrice'] ?? null;
         $minPrice = $queryStringCopy['minPrice'] ?? null;
-        $productTitle = $queryStringCopy['productTitle'] ?? null;
+        $brand = $queryStringCopy['brand'] ?? null;
         $categoryTitle = $queryStringCopy['categoryTitle'] ?? null;
         $onSale = $queryStringCopy['onSale'] ?? null;
-
         // price filtering
         if ($minPrice && $maxPrice) {
             $this->query->whereBetween('price', [$minPrice, $maxPrice]);
@@ -70,9 +68,19 @@ class APIFeatures
         }
 
         // product title filtering
-        if ($productTitle) {
-            // otkud znam da li radi title za category ili product
-            $this->query->where('title', 'LIKE', "%$productTitle%");
+        if ($brand) {
+            // sad treba da odem do brand tabele i da izbucem samo one proizvode koji odgovaraju prosledjenom brand-u 
+            // Kako da filtiriram proizode koji imaju prosledjeni brand?
+            // - Pa da se uradi eager loading sa Product::with(['brand', 'waterType'])
+            // - 
+            // $this->query->where('title', 'LIKE', "%$productTitle%");
+
+            // sta pass-ujem 
+            $this->query->whereHas('brand', function ($q) use ($brand) {
+
+                $q->whereIn('title', $brand);
+
+            });
         }
 
         // category title filtering
