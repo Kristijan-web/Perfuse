@@ -17,7 +17,6 @@ Route::controller(PageController::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/register', 'register')->name('registerPage');
         Route::get('/login', 'login')->name('loginPage');
-
     });
 
 });

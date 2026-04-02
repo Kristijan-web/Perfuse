@@ -31,12 +31,20 @@
 
                     <form method="POST" action="{{ route('loginAPI') }}" class="auth-form flex flex-1 flex-col">
                         @csrf
+
+                        @if($errors->has('message'))
+
+                        <p class="text-red-500 p-2">* {{ $errors->first('message')  }}</p>
+
+                        @endif
+                        
                         <div class="auth-fields">
+              
                             <div>
                                 <label class="auth-label" for="login-email">
                                     Email
                                 </label>
-                                <input class="auth-input" id="login-email" name="email" type="email" autocomplete="email"
+                                <input class="auth-input" id="login-email" name="email" type="email" autocomplete="email" value="{{ old('email') }}"
                                     placeholder="Email">
                             </div>
 
