@@ -35,6 +35,13 @@
     --color-shadow-card: rgba(15, 23, 42, 0.14);
     --color-overlay-soft: rgba(255, 255, 255, 0.12);
     --color-overlay-faint: rgba(255, 255, 255, 0.08);
+    --color-main-color-shade: var(--color-neutral-950);
+    --color-main-color-tint: var(--color-neutral-500);
+    --color-secondary-color: var(--color-slate-100);
+    --color-secondary-new: #f3f3f3;
+    --shadow-my-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    --height-thumbnail: calc(100vh - 80px);
+    --breakpoint-440pixels: 27.5rem;
 }
 
 @layer base {
@@ -44,6 +51,24 @@
 }
 
 @layer components {
+    .btn {
+        @apply inline-block cursor-pointer rounded-sm border border-main-color-shade bg-main-color-shade px-6 py-3 text-secondary-color;
+    }
+
+    .btn:hover {
+        @apply shadow-md;
+    }
+
+    .btn:active {
+        @apply border-main-color-shade bg-secondary-color text-main-color-shade;
+    }
+
+    .gradient_image_shop {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+            url('http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg');
+    }
+
     .auth-shell {
         min-height: 100vh;
         padding: var(--space-24) var(--space-16);
