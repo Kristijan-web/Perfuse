@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Helpers\APIFeatures;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\WaterType;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -29,7 +30,8 @@ class PageController extends Controller
         // $products = Product::with(['brand', 'waterType', 'images', 'discount', 'mls'])->get();
         // ovo vraca sve recorde a meni trebaju samo title-ovi
         $brands = Brand::all();
-        return view('pages.user.shop', ['products' => $products, 'brands' => $brands, 'request' => $request]);
+        $waterTypes = WaterType::all();
+        return view('pages.user.shop', ['products' => $products, 'brands' => $brands, 'request' => $request, 'waterTypes' => $waterTypes]);
     }
 
     public function login()

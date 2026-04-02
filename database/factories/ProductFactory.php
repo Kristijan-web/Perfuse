@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             //
             'title' => fake()->words(1, true),
             'price' => fake()->numberBetween(10, 10000),
-            'gender' => fake()->randomElement(['male', 'female']),
+            'gender' => fake()->randomElement(['muski', 'zenski']),
             'brand_id' => Brand::inRandomOrder()->first()->id,
             'water_type_id' => WaterType::inRandomOrder()->first()->id,
             'discount_id' => fake()->boolean(90) ? Discount::inRandomOrder()->first()->id : NULL,

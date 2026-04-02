@@ -15,6 +15,9 @@ class WaterTypeSeeder extends Seeder
     {
         //
 
-        WaterType::factory(10)->create();
+        // WaterType::factory(3)->create();
+        WaterType::firstOrCreate(['type' => 'Parfemska']);
+        WaterType::firstOrCreate(['type' => 'Toaletna']);
+        WaterType::firstOrCreate(['type' => 'Kolonjska']);
     }
 }

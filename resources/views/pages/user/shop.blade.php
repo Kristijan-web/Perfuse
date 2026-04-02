@@ -6,7 +6,6 @@
 
 @section('content')
     @php
-        $waterTypes = ['Eau de parfum', 'Eau de toilette', 'Parfum', 'Elixir'];
 
     @endphp
 
@@ -88,17 +87,20 @@
                         <p class="mb-4 text-xl">Pol</p>
                         <div class="flex flex-col gap-3">
                             <label class="flex items-center gap-3">
-                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black">
+                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black" {{-- // ako je
+                                    izabran checkbox treba da ostane nakon request-a --}} {{-- Ako je ova vrednost ovog
+                                    inputa u array $request->query('gender', []) onda staviti checked --}}
+                                {{ in_array('muski', $request->query('gender', [])) ? 'checked' : ''}}
+                                name="gender[muski]" value="muski">
                                 <span>Muški</span>
                             </label>
                             <label class="flex items-center gap-3">
-                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black">
+                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black" name="gender[]"
+                                {{ in_array('zenski', $request->query('gender', [])) ? 'checked' : "" }}
+                                    value="zenski">
                                 <span>Ženski</span>
                             </label>
-                            <label class="flex items-center gap-3">
-                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black">
-                                <span>Unisex</span>
-                            </label>
+
                         </div>
                     </div>
 
@@ -108,8 +110,8 @@
                             @foreach ($waterTypes as $waterType)
                                 <label class="flex items-center justify-between gap-3">
                                     <span class="flex items-center gap-3">
-                                        <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black">
-                                        <span>{{ $waterType }}</span>
+                                        <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black" name="waterType[]"  value=" {{$waterType->type  }}" {{ in_array($waterType->type, $request->query('waterType', [])) ? 'checked' : '' }}>
+                                        <span>{{ $waterType->type }}</span>
                                     </span>
                                 </label>
                             @endforeach
@@ -119,7 +121,8 @@
                     <div>
                         <p class="mb-4 text-xl">Na popustu</p>
                         <label class="flex items-center gap-3">
-                            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black">
+                            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black " name='onSale[]' value="1"  {{ in_array('1', $request->query('onSale', [])) ? 'checked' : '' }}>
+                           
                             <span>Da</span>
                         </label>
                     </div>

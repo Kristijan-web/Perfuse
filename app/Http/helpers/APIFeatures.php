@@ -39,7 +39,7 @@ class APIFeatures
     public function filter()
     {
 
-        $allowedFields = ['minPrice', 'maxPrice', 'brand', 'categoryTitle', 'onSale'];
+        $allowedFields = ['minPrice', 'maxPrice', 'brand', 'waterType', 'onSale', 'gender'];
 
         $queryStringCopy = $this->queryString;
 
@@ -54,8 +54,10 @@ class APIFeatures
         $maxPrice = $queryStringCopy['maxPrice'] ?? null;
         $minPrice = $queryStringCopy['minPrice'] ?? null;
         $brand = $queryStringCopy['brand'] ?? null;
-        $categoryTitle = $queryStringCopy['categoryTitle'] ?? null;
         $onSale = $queryStringCopy['onSale'] ?? null;
+        $gender = $queryStringCopy['gender'] ?? null;
+        $waterType = $queryStringCopy['waterType'] ?? null;
+
         // price filtering
         if ($minPrice && $maxPrice) {
             $this->query->whereBetween('price', [$minPrice, $maxPrice]);
@@ -83,11 +85,17 @@ class APIFeatures
             });
         }
 
-        // category title filtering
-        if ($categoryTitle) {
-            $this->query->whereHas('category', function ($query2) use ($categoryTitle): void {
-                $query2->where('title', 'LIKE', "%$categoryTitle%");
+
+        if ($waterType) {
+            // water type je u drugoj tabeli
+            $this->query->whereHas('waterType', function ($q) use ($waterType) {
+                $q->whereIn('type', $waterType);
             });
+        }
+
+        if ($gender) {
+            // samo uzmi proizvode koji imaju gender
+            $this->query->whereiN("gender", $gender);
         }
 
         // getting products on sale
