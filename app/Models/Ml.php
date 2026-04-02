@@ -12,6 +12,6 @@ class Ml extends Model
 
     public function products()
     {
-        return $this->belongsToMany(MlProduct::class);
+        return $this->belongsToMany(MlProduct::class, 'ml_products'); // mora 2. arugment jer ocekuje da se pivot tabela zove ml_product a ne ml_products
     }
 }

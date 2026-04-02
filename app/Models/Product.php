@@ -31,6 +31,12 @@ class Product extends Model
         return $this->belongsTo(WaterType::class);
     }
 
+    // 1 PROIZVOD moze da ima 1 discount 
+    // 1 discount moze da pripada 1 proizvodu
+    public function discount()
+    {
+        return $this->belongsTo(Discount::class);
+    }
 
     public function discountHistories()
     {
@@ -47,7 +53,7 @@ class Product extends Model
 
     public function mls()
     {
-        return $this->belongsToMany(Ml::class);
+        return $this->belongsToMany(Ml::class, 'ml_products'); // mora ml_products jer eloquent ocekuje da se pivot tabela zove ml_product a ne ml_products i raspored dal ce products_ml ili ml_products zavisi od prvog slova nezavisnih tabela i onda ih sortira po prvom slovu i doda _
     }
 
     public function orderLines()

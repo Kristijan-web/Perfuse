@@ -101,7 +101,7 @@
     <section class="mb-24">
         <div class="mx-auto grid max-w-[1600px] grid-cols-12 grid-rows-[42px_auto_auto] items-start gap-4 px-4">
             <div
-                class="bg-main-color-shade text-secondary-color row-start-2 row-end-3 col-start-1 col-end-7 cursor-pointer rounded-sm py-4 lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-end-4 lg:h-full lg:bg-white lg:p-5 lg:py-4 lg:text-main-color-shade lg:shadow-my-shadow">
+                class="bg-main-color-shade text-secondary-color row-start-2 row-end-3 col-start-1 col-end-7  rounded-sm py-4 lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-end-4 lg:h-full lg:bg-white lg:p-5 lg:py-4 lg:text-main-color-shade lg:shadow-my-shadow">
                 <div class="flex items-center justify-between px-4 lg:hidden">
                     <span>Filteri</span>
                     <span class="flex items-center justify-center">
@@ -196,6 +196,12 @@
                             <span>Da</span>
                         </label>
                     </div>
+
+                    <div class='w-full flex items-center justify-center'>
+                        <button class="btn w-30 p-2 ">Filtriraj</button>
+
+                    </div>
+
                 </div>
             </div>
 
@@ -212,7 +218,7 @@
             </div>
 
             <div
-                class="bg-main-color-shade text-secondary-color col-start-7 col-end-13 cursor-pointer rounded-sm py-4 lg:col-start-10 lg:col-end-13 lg:bg-white lg:py-0 lg:text-main-color-shade 2xl:col-start-9">
+                class="bg-main-color-shade text-secondary-color col-start-7 col-end-13  rounded-sm py-4 lg:col-start-10 lg:col-end-13 lg:bg-white lg:py-0 lg:text-main-color-shade 2xl:col-start-9">
                 <div class="flex items-center justify-between px-4 lg:hidden">
                     <span>Sort</span>
                     <span class="flex items-center justify-center">

@@ -18,6 +18,7 @@ class isAdmin
 
         // ukoliko je koriscen auth middleware trebao bi da imam pristup user-u na $request->user()
         // $user_id = $request->user()?->id;
+        dd("ALO BRE JARANE");
         $role = $request->user()->role;
 
         // mora da dohvatim njegov naziv role
