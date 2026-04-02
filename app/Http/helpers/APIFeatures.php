@@ -1,0 +1,167 @@
+<?php
+/**
+ *  Used for providing functionality for filtering and sorting and it also sanitizes the provided fields
+ * 
+ *  When working with different DB model, you must add the fields that you're going to allow to be used for filtering and sort, they are usually      *  defined in $alloweFields variables
+ * 
+ */
+
+
+namespace App\Http\Helpers;
+use Illuminate\Database\Eloquent\Builder;
+use InvalidArgumentException;
+
+// Illuminate\Database\Query\Builder
+
+/**
+ * Main class used for filtering and sorting
+ * 
+ * Currently it contains methods like: filter, sort, sanitize, getQuery
+ */
+class APIFeatures
+{
+
+    // private string[] $queryString;
+    /**
+     * @param string[] $queryString
+     */
+    protected array $queryString;
+    protected Builder $query;
+
+    public function __construct(array $queryString, Builder $query)
+    {
+
+        $this->queryString = $queryString;
+        $this->query = $query;
+
+    }
+
+
+    public function filter()
+    {
+
+        $allowedFields = ['minPrice', 'maxPrice', 'productTitle', 'categoryTitle'];
+
+        $queryStringCopy = $this->queryString;
+
+
+        // Deletes the fields that are not allowed
+        foreach ($queryStringCopy as $key => $value) {
+            if (!in_array($key, $allowedFields)) {
+                unset($queryStringCopy[$key]);
+            }
+        }
+        // filtering logic
+        $maxPrice = $queryStringCopy['maxPrice'] ?? null;
+        $minPrice = $queryStringCopy['minPrice'] ?? null;
+        $productTitle = $queryStringCopy['productTitle'] ?? null;
+        $categoryTitle = $queryStringCopy['categoryTitle'] ?? null;
+
+        // price filtering
+        if ($minPrice && $maxPrice) {
+            $this->query->whereBetween('price', [$minPrice, $maxPrice]);
+        }
+        if ($minPrice && !$maxPrice) {
+            $this->query->where('price', ">=", $minPrice);
+        }
+        if (!$minPrice && $maxPrice) {
+            $this->query->where('price', "<=", $maxPrice);
+        }
+
+        // product title filtering
+        if ($productTitle) {
+            // otkud znam da li radi title za category ili product
+            $this->query->where('title', 'LIKE', "%$productTitle%");
+        }
+
+        // category title filtering
+        if ($categoryTitle) {
+            $this->query->whereHas('category', function ($query2) use ($categoryTitle): void {
+                $query2->where('title', 'LIKE', "%$categoryTitle%");
+            });
+        }
+
+
+        return $this;
+    }
+
+    public function sort()
+    {
+
+        $allowedFields = ['sortBy', 'sortOrder'];
+        $allowedFieldValues = ['asc', 'desc']; // za sortOrder
+
+        dd(array_keys($this->queryString));
+
+        // $queryStringFieldsAsString = implode(",", array_keys($this->queryString));
+        $queryStringFieldsArray = array_keys($this->queryString);
+
+        $queryStringCopyAsArray = $this->sanitize($allowedFields, $queryStringFieldsArray);
+
+
+        $sortBy = [$queryStringCopy['sortBy']] ?? ['price']; // moraju da parametri budu u nizu jer ce se koristiti za foreach zbog orderBy
+
+
+        // $this->queryString ce biti asocijativni niz, jedino tu da uzmem i join-am kljuceve
+        // $queryStringCopy['sortOrder'] -> ce biti 'asc,desc'
+        $sortOrder = $this->sanitize($allowedFieldValues, $queryStringCopy['sortOrder'] ?? 'asc');
+        dd($sortOrder);
+
+        // nevalja da funkcija promeni tip prosledjenog podatka
+
+        // treba biti niz sa jednom vrednoscu
+        // koji tip podatka mi vraca $sortOrder -> vraca niz
+        // Da li vraca asocijativan ili obican niz??
+
+        // General question
+        // Da li isti 2 argument prosledjujem u sanitize za svaki poziv?
+        // - Prvi prosledjuje asocijativni niz
+        // - Drugi prosledjuje obican string
+
+        // Ovo ispod koristi obican niz koliko vidim
+        foreach ($sortBy as $key => $sortField) {
+
+            $doesSortOrderExistsForGivenSortBy = isset($sortOrder[$key]);
+
+            if ($doesSortOrderExistsForGivenSortBy)
+                $this->query->orderBy($sortField, $sortOrder[$key]);
+        }
+
+        // $this->query->orderBy($sortBy, $sortOrder);
+        return $this;
+
+    }
+
+    public function sanitize(array $allowedFields, array $sentFields)
+    {
+
+        // MA NEK MOZE DA SE PROSLEDI I ASOCIJATVNI NIZ I OBICAN STRING, a sanitize ce da sanitizuje i vrati isti tip koji je  prosledjen
+        // znaci samo nek imam if(associative_array) {logic}, i isto if(string) {logic} i vracaju tip koji je prosledjen 
+
+
+
+        // if (!is_array($sentFields)) {
+        // $sentFields = explode(",", $sentFields);
+        if (!array_is_list($sentFields)) {
+            throw new InvalidArgumentException('Expected default array structure, the one with numerical indexes');
+        }
+
+        foreach ($sentFields as $key => $fieldValue) {
+            if (!in_array($fieldValue, $allowedFields)) {
+                unset($sentFields[$key]);
+            }
+        }
+
+
+        return $sentFields;
+
+    }
+
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+
+}
+

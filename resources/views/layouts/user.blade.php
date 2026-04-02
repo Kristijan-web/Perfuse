@@ -9,6 +9,9 @@
 
     @yield("content")
 
+    <x-shared.footer />
+
+
 </body>
 
 </html>
