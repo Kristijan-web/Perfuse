@@ -6,7 +6,7 @@
 
 @section('content')
     @php
-        $brands = ['Calvin Klein', 'Dior', 'Chanel', 'Tom Ford'];
+        // $brands = ['Calvin Klein', 'Dior', 'Chanel', 'Tom Ford'];
         $waterTypes = ['Eau de parfum', 'Eau de toilette', 'Parfum', 'Elixir'];
         // $products = [
         //     [
@@ -100,7 +100,7 @@
 
     <section class="mb-24">
         <div class="mx-auto grid max-w-[1600px] grid-cols-12 grid-rows-[42px_auto_auto] items-start gap-4 px-4">
-            <div
+            <form method="GET" action="{{ route('shopPage') }}"
                 class="bg-main-color-shade text-secondary-color row-start-2 row-end-3 col-start-1 col-end-7  rounded-sm py-4 lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-end-4 lg:h-full lg:bg-white lg:p-5 lg:py-4 lg:text-main-color-shade lg:shadow-my-shadow">
                 <div class="flex items-center justify-between px-4 lg:hidden">
                     <span>Filteri</span>
@@ -117,11 +117,12 @@
                     <div>
                         <p class="mb-4 text-xl">Proizvođač</p>
                         <div class="flex flex-col gap-3">
-                            @foreach ($brands as $brand)
+                            @foreach ($brands as $brandRecord)
                                 <label class="flex items-center justify-between gap-3">
                                     <span class="flex items-center gap-3">
-                                        <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black">
-                                        <span>{{ $brand }}</span>
+                                        <input type="checkbox" name="brand[]" value="{{ $brandRecord->title }}" {{ in_array($brandRecord->title, $request->query('brand', [])) ? 'checked' : '' }}
+                                            class="h-4 w-4 rounded border-gray-300 text-black">
+                                        <span>{{ $brandRecord->title }}</span>
                                     </span>
                                 </label>
                             @endforeach
@@ -203,7 +204,7 @@
                     </div>
 
                 </div>
-            </div>
+            </form>
 
             <div
                 class="relative col-span-full row-start-1 row-end-2 h-11 self-start overflow-visible lg:col-start-4 lg:col-end-10 lg:w-full lg:overflow-hidden xl:w-[108%] 2xl:col-end-9">

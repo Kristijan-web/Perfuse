@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\APIFeatures;
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,9 @@ class PageController extends Controller
 
 
         $products = Product::with(['brand', 'waterType', 'images', 'discount', 'mls'])->get();
-
-        return view('pages.user.shop', ['products' => $products]);
+        // ovo vraca sve recorde a meni trebaju samo title-ovi
+        $brands = Brand::all();
+        return view('pages.user.shop', ['products' => $products, 'brands' => $brands, 'request' => $request]);
     }
 
     public function login()
