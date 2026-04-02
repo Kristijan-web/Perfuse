@@ -40,7 +40,7 @@ class APIFeatures
     public function filter()
     {
 
-        $allowedFields = ['minPrice', 'maxPrice', 'productTitle', 'categoryTitle'];
+        $allowedFields = ['minPrice', 'maxPrice', 'productTitle', 'categoryTitle', 'onSale'];
 
         $queryStringCopy = $this->queryString;
 
@@ -56,6 +56,7 @@ class APIFeatures
         $minPrice = $queryStringCopy['minPrice'] ?? null;
         $productTitle = $queryStringCopy['productTitle'] ?? null;
         $categoryTitle = $queryStringCopy['categoryTitle'] ?? null;
+        $onSale = $queryStringCopy['onSale'] ?? null;
 
         // price filtering
         if ($minPrice && $maxPrice) {
@@ -79,6 +80,12 @@ class APIFeatures
             $this->query->whereHas('category', function ($query2) use ($categoryTitle): void {
                 $query2->where('title', 'LIKE', "%$categoryTitle%");
             });
+        }
+
+        // getting products on sale
+        if ($onSale) {
+            // ako u tabelu products postoji discount_id = null
+            $this->query->whereNotNull('discount_id');
         }
 
 
@@ -106,6 +113,13 @@ class APIFeatures
         $this->query->orderBy($sortBy, $sortOrder);
 
         return $this;
+
+    }
+
+    public function paginate($page = 1)
+    {
+
+        // Jednostavno ako se vraca 30 redova, treba da se uzmu redovi od 1-10 za page 1 pa za page 2 od 11 do 20, page 3 od 21 do 30
 
     }
 
