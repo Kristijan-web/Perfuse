@@ -67,30 +67,11 @@
                             </label>
                         </div>
 
-                        <script>
-                            // sta je cilj?
-                            // - Da se na serveru popuni div za gresku
-                            // Kako to da uradim?
-                            // - Kada se desi greska ona se upisuje session pod kljucem $errors 
-                            //  U kom formatu je $errors?
-                            // - Asocijativni niz
-                            // - Znaci samo prodjem kroz taj niz i ispisem message koji se nalaze, ne kljuceve jer je kljuc vezan za input a meni sad to nije bitno
-                        
-                        </script>
-                {{-- <p>CAo</p> --}}
-                          {{-- @if($errors->any())
+                            @if($errors->has('errorCode'))
 
-                      
-                          <ul class="px-4 py-2 bg-red-100">
-                            @foreach($errors->all() as $key => $message) 
+                            <p class="text-red-500">Nesto nije u redu sa aplikacijom, molimo vas kontaktirajte nas na 111-222-333 i prosledite ovaj kod:{{ $errors->first('errorCode') }}</p>
 
-                                <li class="my-2 text-red-500">*{{ $message }}</li>
-                                
-                            
-                            @endforeach
-                          </ul> 
-                            @endif 
-                          --}}
+                            @endif
                             
                         
                         

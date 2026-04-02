@@ -38,6 +38,12 @@
 
                         @endif
                         
+                        @if($errors->has('errorCode'))
+
+                            <p class="text-red-500">Nesto nije u redu sa aplikacijom, molimo vas kontaktirajte nas na 111-222-333 i prosledite ovaj kod:{{ $errors->first('errorCode') }}</p>
+
+                        @endif
+
                         <div class="auth-fields">
               
                             <div>
