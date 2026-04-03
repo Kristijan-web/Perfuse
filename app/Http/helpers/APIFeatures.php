@@ -118,14 +118,13 @@ class APIFeatures
 
         foreach ($queryStringCopy as $field => $fieldValue) {
 
-            if (in_array($field, $allowedFields)) {
+            if (!in_array($field, $allowedFields)) {
                 unset($queryStringCopy[$field]);
             }
         }
 
         $sortBy = $queryStringCopy['sortBy'] ?? 'price';
         $sortOrder = $queryStringCopy['sortOrder'] ?? 'asc';
-
         $this->query->orderBy($sortBy, $sortOrder);
 
         return $this;

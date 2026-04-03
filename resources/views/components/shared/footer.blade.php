@@ -27,21 +27,22 @@
                             <span>Korpa</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="transition hover:opacity-80" href="{{ url('/podesavanja') }}">Podesavanja</a>
-                    </li>
-                    <li>
-                        <a class="flex items-center gap-2 transition hover:opacity-80" href="{{ url('/prijava') }}">
-                            <span class="flex items-center justify-center" aria-hidden="true">
-                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                            <span>Prijava</span>
-                        </a>
-                    </li>
+
+                    @guest
+                        <li>
+                            <a class="flex items-center gap-2 transition hover:opacity-80" href="{{ url('/prijava') }}">
+                                <span class="flex items-center justify-center" aria-hidden="true">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <span>Prijava</span>
+                            </a>
+                        </li>
+                    @endguest
+
                 </ul>
             </nav>
         </div>
@@ -53,7 +54,7 @@
             </address>
             <a class="transition hover:opacity-80" href="tel:+111222333">+111 222-333</a>
             <a class="break-all transition hover:opacity-80" href="mailto:exmoor23@gmail.com">exmoor23@gmail.com</a>
-            <p>RSS &amp; SITEMAP</p>
+            {{-- <p>RSS &amp; SITEMAP</p> --}}
         </div>
 
         <div class="text-secondary-color">

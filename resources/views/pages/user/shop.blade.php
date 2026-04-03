@@ -108,7 +108,7 @@
                                     izabran checkbox treba da ostane nakon request-a --}} {{-- Ako je ova vrednost ovog
                                     inputa u array $request->query('gender', []) onda staviti checked --}}
                                 {{ in_array('muski', $request->query('gender', [])) ? 'checked' : ''}}
-                                name="gender[muski]" value="muski">
+                                name="gender[]" value="muski">
                                 <span>Muški</span>
                             </label>
                             <label class="flex items-center gap-3">
@@ -183,10 +183,23 @@
                             <option>Prvo najveca</option>
                         </select>
                     </div>
-                    <div class="hidden items-center gap-3 2xl:flex">
-                        <button class="btn px-9 py-2">Prvo najmanja</button>
-                        <button class="btn px-9 py-2">Prvo najveca</button>
-                    </div>
+                    <a class="btn px-9 py-2" href="{{ route('shopPage', array_merge(request()->query(), ['sortBy' => 'price','sortOrder' => 'asc'])) }}">
+                          Prvo najmanja
+                    </a>
+                    {{-- <form method="GET" action="{{ route('shopPage') }}" class="hidden items-center gap-3 2xl:flex">
+                        <input type="hidden" name="sortOrder" value="asc">        
+                        <button name="sortBy" value="price" type="submit" class="btn px-9 py-2">Prvo najmanja</button>
+                    </form> --}}
+
+                    {{-- <form method="GET" action="{{ route('shopPage') }}">
+                        <input type="hidden" name="sortOrder" value="desc">
+                        <button name='sortBy' value="price" type="submit" class="btn px-9 py-2">Prvo najveca</button>
+
+                    </form> --}}
+                        <a class="btn px-9 py-2" href="{{ route('shopPage', array_merge(request()->query(), ['sortBy' => 'price','sortOrder' => 'desc'])) }}">
+                          Prvo najveca
+                    </a>
+                 
                 </div>
             </div>
 
