@@ -37,6 +37,13 @@ class PageController extends Controller
         return view('pages.user.shop', ['products' => $products, 'brands' => $brands, 'request' => $request, 'waterTypes' => $waterTypes, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice]);
     }
 
+    public function productDetails(Product $product, Request $request)
+    {
+        // dd($product->title);
+
+        return view('pages.user.productDetails', ['product' => $product]);
+    }
+
     public function login()
     {
         return view('pages.user.login');
@@ -52,10 +59,7 @@ class PageController extends Controller
         return view('pages.user.cart');
     }
 
-    public function productDetails()
-    {
-        return view('pages.user.productDetails');
-    }
+
 
 }
 

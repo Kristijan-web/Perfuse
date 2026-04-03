@@ -11,7 +11,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
     Route::get('/cart', 'cart')->name('cartPage');
-    Route::get('/shop/product/{id}', 'productDetails')->name("productDetails");
+    Route::get('/shop/product/{product}', 'productDetails')->name("productDetails");
 
     // Route::middleware(['auth', 'isAdmin'])->group(function () {
 

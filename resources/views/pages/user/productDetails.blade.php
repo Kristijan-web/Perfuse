@@ -118,12 +118,12 @@ if (!function_exists('product_details_format_price')) {
 
                     <div class="grid grid-cols-3 gap-4">
                         <?php foreach ($product['images'] as $index => $image): ?>
-                            <div
-                                class="overflow-hidden rounded-3xl border <?php echo $index === 0 ? 'border-black bg-stone-100' : 'border-black/10 bg-white'; ?> p-4">
-                                <img src="<?php echo e($image); ?>"
-                                    alt="<?php echo e($product['brand'] . ' thumbnail ' . ($index + 1)); ?>"
-                                    class="aspect-square w-full object-contain">
-                            </div>
+                        <div
+                            class="overflow-hidden rounded-3xl border <?php    echo $index === 0 ? 'border-black bg-stone-100' : 'border-black/10 bg-white'; ?> p-4">
+                            <img src="<?php    echo e($image); ?>"
+                                alt="<?php    echo e($product['brand'] . ' thumbnail ' . ($index + 1)); ?>"
+                                class="aspect-square w-full object-contain">
+                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -208,113 +208,19 @@ if (!function_exists('product_details_format_price')) {
 
                     <div class="grid gap-4 sm:grid-cols-3">
                         <?php foreach ($product['highlights'] as $highlight): ?>
-                            <div class="rounded-[1.75rem] border border-black/10 bg-white p-5 shadow-sm">
-                                <p class="text-sm leading-7 text-black/75">
-                                    <?php echo e($highlight); ?>
-                                </p>
-                            </div>
+                        <div class="rounded-[1.75rem] border border-black/10 bg-white p-5 shadow-sm">
+                            <p class="text-sm leading-7 text-black/75">
+                                <?php    echo e($highlight); ?>
+                            </p>
+                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="bg-white py-14">
-            <div class="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-[1fr_0.9fr] lg:px-12">
-                <div class="rounded-[2rem] border border-black/10 p-8">
-                    <p class="text-sm uppercase tracking-[0.3em] text-black/45">Opis mirisa</p>
-                    <p class="mt-5 text-lg leading-8 text-black/75">
-                        <?php echo e($product['description']); ?>
-                    </p>
 
-                    <div class="mt-8 grid gap-5 sm:grid-cols-3">
-                        <?php foreach ($product['notes'] as $note): ?>
-                            <div class="rounded-3xl bg-stone-100 p-5">
-                                <p class="text-sm leading-7 text-black/75">
-                                    <?php echo e($note); ?>
-                                </p>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
 
-                <div class="rounded-[2rem] bg-stone-950 p-8 text-white">
-                    <p class="text-sm uppercase tracking-[0.3em] text-white/45">Detalji proizvoda</p>
-                    <div class="mt-6 space-y-4">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                            <span class="text-white/60">SKU</span>
-                            <span>
-                                <?php echo e($product['sku']); ?>
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                            <span class="text-white/60">Brand</span>
-                            <span>
-                                <?php echo e($product['brand']); ?>
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                            <span class="text-white/60">Pol</span>
-                            <span class="capitalize">
-                                <?php echo e($product['gender']); ?>
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                            <span class="text-white/60">Tip</span>
-                            <span>
-                                <?php echo e($product['waterType']); ?>
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-white/60">Dostava</span>
-                            <span>4 do 7 dana</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mx-auto max-w-7xl px-6 py-14 lg:px-12">
-            <div class="mb-8 flex items-end justify-between gap-4">
-                <div>
-                    <p class="text-sm uppercase tracking-[0.3em] text-black/45">Predlozi</p>
-                    <h2 class="mt-2 text-3xl font-semibold">Slicni parfemi</h2>
-                </div>
-                <a href="<?php echo e(route('shopPage')); ?>"
-                    class="text-sm uppercase tracking-[0.2em] text-black/55 transition hover:text-black">
-                    Pogledaj shop
-                </a>
-            </div>
-
-            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                <?php foreach ($relatedProducts as $relatedProduct): ?>
-                    <article class="rounded-[2rem] bg-white p-7 shadow-my-shadow">
-                        <div class="rounded-[1.75rem] bg-stone-100 p-6">
-                            <img src="<?php echo e($relatedProduct['image']); ?>"
-                                alt="<?php echo e($relatedProduct['brand'] . ' ' . $relatedProduct['title']); ?>"
-                                class="mx-auto aspect-square w-full max-w-[220px] object-contain">
-                        </div>
-                        <div class="mt-6 space-y-2">
-                            <p class="text-2xl">
-                                <?php echo e($relatedProduct['brand'] . ' ' . $relatedProduct['title']); ?>
-                            </p>
-                            <div class="flex flex-wrap gap-3 text-sm text-black/55">
-                                <span>
-                                    <?php echo e($relatedProduct['gender']); ?>
-                                </span>
-                                <span>/</span>
-                                <span>
-                                    <?php echo e($relatedProduct['waterType']); ?>
-                                </span>
-                            </div>
-                            <p class="pt-2 text-lg font-medium">
-                                <?php echo e(product_details_format_price($relatedProduct['price'])); ?>
-                            </p>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
     </main>
 
     <?php echo $__env->make('components.shared.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
