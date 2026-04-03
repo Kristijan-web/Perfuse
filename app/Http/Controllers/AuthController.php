@@ -86,26 +86,6 @@ class AuthController extends Controller
 
         return redirect()->route('loginPage');
 
-
-        // } catch (Throwable $err) {
-
-
-
-        //     // $stackTrace = $err->getTraceAsString();
-        //     $errorCode = uuid_create();
-        //     $errorMessage = $err->getMessage();
-        //     $errorLine = $err->getLine();
-        //     $errorFile = $err->getFile();
-
-        //     $logEntry = $errorCode . " " . $errorMessage . " " . "in file:" . " " . $errorFile . " " . "at line:" . " " . $errorLine;
-
-        //     Log::channel('custom')->error($logEntry);
-
-        //     return redirect()->back()->withErrors(['errorCode' => $errorCode]);
-
-
-        // }
-
     }
 
     public function logout(Request $request)
