@@ -6,20 +6,14 @@
 
 @section('content')
     @php
-        $productPrices = $products
-            ->pluck('price')
-            ->filter(fn($price) => is_numeric($price))
-            ->map(fn($price) => (int) $price)
-            ->values();
+        $sliderMinPrice = is_numeric($minPrice) ? (int) $minPrice : 0;
+        $sliderMaxPrice = is_numeric($maxPrice) ? (int) $maxPrice : $sliderMinPrice;
 
-        $absoluteMinPrice = $productPrices->isNotEmpty() ? $productPrices->min() : 0;
-        $absoluteMaxPrice = $productPrices->isNotEmpty() ? $productPrices->max() : 0;
+        $selectedMinPrice = (int) $request->query('minPrice', $sliderMinPrice);
+        $selectedMaxPrice = (int) $request->query('maxPrice', $sliderMaxPrice);
 
-        $selectedMinPrice = (int) $request->query('minPrice', $absoluteMinPrice);
-        $selectedMaxPrice = (int) $request->query('maxPrice', $absoluteMaxPrice);
-
-        $selectedMinPrice = max($absoluteMinPrice, min($selectedMinPrice, $absoluteMaxPrice));
-        $selectedMaxPrice = max($selectedMinPrice, min($selectedMaxPrice, $absoluteMaxPrice));
+        $selectedMinPrice = max($sliderMinPrice, min($selectedMinPrice, $sliderMaxPrice));
+        $selectedMaxPrice = max($selectedMinPrice, min($selectedMaxPrice, $sliderMaxPrice));
     @endphp
 
     <section class="gradient_image_shop relative mb-18 h-thumbnail w-full bg-cover bg-no-repeat bg-left sm:bg-center ">
@@ -86,11 +80,11 @@
 
                             <div class="absolute left-0 top-0 mt-0 w-full">
                                 <input id="min-price-slider" type="range" name="minPrice"
-                                    min="{{ $absoluteMinPrice }}" max="{{ $absoluteMaxPrice }}"
+                                    min="{{ $sliderMinPrice }}" max="{{ $sliderMaxPrice }}"
                                     value="{{ $selectedMinPrice }}"
                                     class="price-range-input absolute left-0 -mt-6 w-full appearance-none bg-transparent">
                                 <input id="max-price-slider" type="range" name="maxPrice"
-                                    min="{{ $absoluteMinPrice }}" max="{{ $absoluteMaxPrice }}"
+                                    min="{{ $sliderMinPrice }}" max="{{ $sliderMaxPrice }}"
                                     value="{{ $selectedMaxPrice }}"
                                     class="price-range-input absolute left-0 -mt-6 w-full appearance-none bg-transparent">
                             </div>
@@ -98,10 +92,10 @@
 
                         <div class="mt-2 flex justify-between">
                             <div class="text-sm font-medium text-gray-500">
-                                {{ number_format($absoluteMinPrice, 0, ',', '.') }}
+                                {{ number_format($sliderMinPrice, 0, ',', '.') }}
                             </div>
                             <div class="text-sm font-medium text-gray-500">
-                                {{ number_format($absoluteMaxPrice, 0, ',', '.') }}
+                                {{ number_format($sliderMaxPrice, 0, ',', '.') }}
                             </div>
                         </div>
                     </div>

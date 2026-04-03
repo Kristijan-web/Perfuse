@@ -31,7 +31,10 @@ class PageController extends Controller
         // ovo vraca sve recorde a meni trebaju samo title-ovi
         $brands = Brand::all();
         $waterTypes = WaterType::all();
-        return view('pages.user.shop', ['products' => $products, 'brands' => $brands, 'request' => $request, 'waterTypes' => $waterTypes]);
+        $minPrice = Product::min('price');
+        $maxPrice = Product::max('price');
+
+        return view('pages.user.shop', ['products' => $products, 'brands' => $brands, 'request' => $request, 'waterTypes' => $waterTypes, 'minPrice' => $minPrice, 'maxPrice' => $maxPrice]);
     }
 
     public function login()
