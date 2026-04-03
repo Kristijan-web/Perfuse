@@ -6,7 +6,20 @@
 
 @section('content')
     @php
+        $productPrices = $products
+            ->pluck('price')
+            ->filter(fn($price) => is_numeric($price))
+            ->map(fn($price) => (int) $price)
+            ->values();
 
+        $absoluteMinPrice = $productPrices->isNotEmpty() ? $productPrices->min() : 0;
+        $absoluteMaxPrice = $productPrices->isNotEmpty() ? $productPrices->max() : 0;
+
+        $selectedMinPrice = (int) $request->query('minPrice', $absoluteMinPrice);
+        $selectedMaxPrice = (int) $request->query('maxPrice', $absoluteMaxPrice);
+
+        $selectedMinPrice = max($absoluteMinPrice, min($selectedMinPrice, $absoluteMaxPrice));
+        $selectedMaxPrice = max($selectedMinPrice, min($selectedMaxPrice, $absoluteMaxPrice));
     @endphp
 
     <section class="gradient_image_shop relative mb-18 h-thumbnail w-full bg-cover bg-no-repeat bg-left sm:bg-center ">
@@ -59,27 +72,37 @@
                             <h2 class="text-xl font-bold text-gray-800">Izaberite cenu</h2>
                             <p class="mt-2 text-lg text-gray-600">
                                 Izabrani raspon:
-                                <span class="font-semibold text-main-color-shade">20 - 80</span>
+                                <span id="price-range-label" class="font-semibold text-main-color-shade">
+                                    {{ number_format($selectedMinPrice, 0, ',', '.') }} -
+                                    {{ number_format($selectedMaxPrice, 0, ',', '.') }}
+                                </span>
                             </p>
                         </div>
 
-                        <div class="relative pt-6 pb-6">
+                        <div class="relative px-1 pt-6 pb-6">
                             <div class="relative h-2 w-full rounded-full bg-gray-200">
-                                <div class="bg-main-color-shade absolute h-full rounded-full"
-                                    style="left: 20%; right: 20%;"></div>
+                                <div id="price-slider-track" class="bg-main-color-shade absolute h-full rounded-full"></div>
                             </div>
 
-                            <div class="pointer-events-none absolute left-0 top-0 mt-0 w-full">
-                                <input type="range" min="0" max="100" value="20"
-                                    class="pointer-events-none absolute left-0 -mt-6 w-full appearance-none bg-transparent">
-                                <input type="range" min="0" max="100" value="80"
-                                    class="pointer-events-none absolute left-0 -mt-6 w-full appearance-none bg-transparent">
+                            <div class="absolute left-0 top-0 mt-0 w-full">
+                                <input id="min-price-slider" type="range" name="minPrice"
+                                    min="{{ $absoluteMinPrice }}" max="{{ $absoluteMaxPrice }}"
+                                    value="{{ $selectedMinPrice }}"
+                                    class="price-range-input absolute left-0 -mt-6 w-full appearance-none bg-transparent">
+                                <input id="max-price-slider" type="range" name="maxPrice"
+                                    min="{{ $absoluteMinPrice }}" max="{{ $absoluteMaxPrice }}"
+                                    value="{{ $selectedMaxPrice }}"
+                                    class="price-range-input absolute left-0 -mt-6 w-full appearance-none bg-transparent">
                             </div>
                         </div>
 
                         <div class="mt-2 flex justify-between">
-                            <div class="text-sm font-medium text-gray-500">0</div>
-                            <div class="text-sm font-medium text-gray-500">100</div>
+                            <div class="text-sm font-medium text-gray-500">
+                                {{ number_format($absoluteMinPrice, 0, ',', '.') }}
+                            </div>
+                            <div class="text-sm font-medium text-gray-500">
+                                {{ number_format($absoluteMaxPrice, 0, ',', '.') }}
+                            </div>
                         </div>
                     </div>
 
@@ -250,4 +273,76 @@
         </div>
     </section>
 
+    <style>
+        .price-range-input {
+            pointer-events: none;
+        }
+
+        .price-range-input::-webkit-slider-thumb {
+            pointer-events: auto;
+            appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 9999px;
+            background: #2c3e50;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 1px rgba(44, 62, 80, 0.2);
+        }
+
+        .price-range-input::-moz-range-thumb {
+            pointer-events: auto;
+            height: 18px;
+            width: 18px;
+            border-radius: 9999px;
+            background: #2c3e50;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 1px rgba(44, 62, 80, 0.2);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const minSlider = document.getElementById('min-price-slider');
+            const maxSlider = document.getElementById('max-price-slider');
+            const rangeLabel = document.getElementById('price-range-label');
+            const track = document.getElementById('price-slider-track');
+
+            if (!minSlider || !maxSlider || !rangeLabel || !track) {
+                return;
+            }
+
+            const formatPrice = (value) => new Intl.NumberFormat('sr-RS').format(Number(value));
+            const absoluteMin = Number(minSlider.min);
+            const absoluteMax = Number(minSlider.max);
+            const sliderRange = Math.max(absoluteMax - absoluteMin, 1);
+
+            const updateSlider = () => {
+                let minValue = Number(minSlider.value);
+                let maxValue = Number(maxSlider.value);
+
+                if (minValue > maxValue) {
+                    if (document.activeElement === minSlider) {
+                        maxValue = minValue;
+                        maxSlider.value = String(maxValue);
+                    } else {
+                        minValue = maxValue;
+                        minSlider.value = String(minValue);
+                    }
+                }
+
+                const left = ((minValue - absoluteMin) / sliderRange) * 100;
+                const right = ((maxValue - absoluteMin) / sliderRange) * 100;
+
+                track.style.left = `${left}%`;
+                track.style.width = `${Math.max(right - left, 0)}%`;
+                rangeLabel.textContent = `${formatPrice(minValue)} - ${formatPrice(maxValue)}`;
+            };
+
+            minSlider.addEventListener('input', updateSlider);
+            maxSlider.addEventListener('input', updateSlider);
+            updateSlider();
+        });
+    </script>
 @endsection
