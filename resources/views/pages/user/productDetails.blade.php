@@ -79,31 +79,6 @@ if (!function_exists('product_details_format_price')) {
     <?php echo $__env->make('components.user.fixed.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <main>
-        <section
-            class="border-b border-black/10 bg-gradient-to-br from-stone-950 via-neutral-900 to-stone-800 text-secondary-color">
-            <div class="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-14 lg:px-12 lg:py-20">
-                <p class="text-sm uppercase tracking-[0.35em] text-white/60">Perfume Details</p>
-                <div class="flex flex-col gap-4 lg:max-w-3xl">
-                    <div class="flex flex-wrap items-center gap-3 text-sm text-white/70">
-                        <a href="<?php echo e(route('homePage')); ?>" class="transition hover:text-white">Pocetna</a>
-                        <span>/</span>
-                        <a href="<?php echo e(route('shopPage')); ?>" class="transition hover:text-white">Shop</a>
-                        <span>/</span>
-                        <span class="text-white">
-                            <?php echo e($product['brand'] . ' ' . $product['title']); ?>
-                        </span>
-                    </div>
-
-                    <h1 class="text-4xl leading-tight font-semibold sm:text-5xl">
-                        <?php echo e($product['brand'] . ' ' . $product['title']); ?>
-                    </h1>
-
-                    <p class="max-w-2xl text-lg leading-8 text-white/75">
-                        <?php echo e($product['description']); ?>
-                    </p>
-                </div>
-            </div>
-        </section>
 
         <section class="mx-auto max-w-7xl px-6 py-12 lg:px-12 lg:py-16">
             <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
