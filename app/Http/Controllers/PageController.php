@@ -52,6 +52,11 @@ class PageController extends Controller
         return view('pages.user.cart');
     }
 
+    public function productDetails()
+    {
+        return view('pages.user.productDetails');
+    }
+
 }
 
 

@@ -11,6 +11,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
     Route::get('/cart', 'cart')->name('cartPage');
+    Route::get('/shop/product/{id}', 'productDetails')->name("productDetails");
 
     // Route::middleware(['auth', 'isAdmin'])->group(function () {
 
@@ -33,4 +34,3 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header
 
 });
-
