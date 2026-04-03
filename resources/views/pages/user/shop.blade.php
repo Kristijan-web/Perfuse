@@ -6,14 +6,14 @@
 
 @section('content')
     @php
+        // defisane min i max vrednosti na osnovu proizvoda
         $sliderMinPrice = is_numeric($minPrice) ? (int) $minPrice : 0;
         $sliderMaxPrice = is_numeric($maxPrice) ? (int) $maxPrice : $sliderMinPrice;
 
-        $selectedMinPrice = (int) $request->query('minPrice', $sliderMinPrice);
+        // vrednosti koje je korisnik izabrao
+        $selectedMinPrice = (int) $request->query('minPrice', $sliderMinPrice); 
         $selectedMaxPrice = (int) $request->query('maxPrice', $sliderMaxPrice);
 
-        $selectedMinPrice = max($sliderMinPrice, min($selectedMinPrice, $sliderMaxPrice));
-        $selectedMaxPrice = max($selectedMinPrice, min($selectedMaxPrice, $sliderMaxPrice));
     @endphp
 
     <section class="gradient_image_shop relative mb-18 h-thumbnail w-full bg-cover bg-no-repeat bg-left sm:bg-center ">
