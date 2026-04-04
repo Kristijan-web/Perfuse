@@ -4,6 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="@yield('description')" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>@yield('title')</title>
 </head>
