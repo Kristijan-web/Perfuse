@@ -57,7 +57,22 @@ class PageController extends Controller
 
     public function cart()
     {
-        return view('pages.user.cart');
+        $products = collect();
+
+        if (auth()->check()) {
+            $products = auth()->user()
+                ->cart()
+                ->with([
+                    'products.brand',
+                    'products.waterType',
+                    'products.discount',
+                    'products.images',
+                    'products.mls',
+                ])
+                ->first()?->products ?? collect();
+        }
+
+        return view('pages.user.cart', ['products' => $products]);
     }
 
     public function contact()
