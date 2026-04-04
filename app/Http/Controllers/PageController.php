@@ -39,7 +39,8 @@ class PageController extends Controller
 
     public function productDetails(Product $product, Request $request)
     {
-        // dd($product->title);
+
+        $product = $product->load(['brand', 'waterType', 'discount', 'images', 'mls']);
 
         return view('pages.user.productDetails', ['product' => $product]);
     }
