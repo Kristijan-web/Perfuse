@@ -75,4 +75,9 @@ class User extends Authenticatable
         return $this->hasMany(OrderLine::class);
     }
 
+    public function contactForms()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
 }

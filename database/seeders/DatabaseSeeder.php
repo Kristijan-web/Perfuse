@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -33,7 +32,8 @@ class DatabaseSeeder extends Seeder
             DiscountHistorySeeder::class,
             MlSeeder::class,
             MlProductSeeder::class,
-            CartItemSeeder::class
+            CartItemSeeder::class,
+            ContactSeeder::class
         ]);
 
 
