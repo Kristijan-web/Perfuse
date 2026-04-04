@@ -104,6 +104,22 @@
             const response = await fetchData.json();
 
             console.log("Evo ga response", response);
+            // NEXT
+            // Sitauacije tokom ajaxa:
+
+            // Loading
+            // dohvati div u kojem je button za submit
+            // dok se loadaju podaci prikazi loader
+
+            // Success
+            // prikazi success poruku negde kod submit dugmeta
+
+            // Error
+            // prikazi error poruku negde kod submit dugmenta
+
+            // Za success i error pa cak i za loading mogu koristiti toaster biblioteku
+
+
         }
 
 

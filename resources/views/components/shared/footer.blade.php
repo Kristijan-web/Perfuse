@@ -55,6 +55,8 @@
             <a class="transition hover:opacity-80" href="tel:+111222333">+111 222-333</a>
             <a class="break-all transition hover:opacity-80" href="mailto:exmoor23@gmail.com">exmoor23@gmail.com</a>
             {{-- <p>RSS &amp; SITEMAP</p> --}}
+            <a target="_blank"
+                href="https://docs.google.com/document/d/14VFhHnE1wXvzJvdk7aRGN52EpVKT6kezRIlkECFUr6k/edit?usp=sharing">Dokumentacija</a>
         </div>
 
         <div class="text-secondary-color">
