@@ -6,31 +6,15 @@
 
 @section('content')
 
-    {{-- // Koje podatke sadrzi 1 procuct?
-    // - title
-    // - price
-    // - gender
-    // - brand_id
-    // - water_type_id
-    // - discount_id
-    // - ml_ids [array]
-    // - images [array]
-
-    // Odakle se prosledjuju podaci za ovaj view
-    // - iz PageControlera
-
-    // Da li su podaci eager loadovani? --}}
-
     @php
-        // dohvatanje main slike
-        // $main_image;
-        // foreach ($product->images as $row) {
-        //     // imam 1 red
-        //     if ($row->is_main_image) {
-        //         $main_image = $row->path;
-        //     }
-        // }
-        // dd($main_image);
+        $mainImage = $product->images->firstWhere('is_main_image', true)?->path
+            ?? $product->images->first()?->path;
+
+        $discountPercent = $product->discount?->discount;
+        $discountedPrice = $discountPercent
+            ? $product->price - round(($product->price * $discountPercent) / 100)
+            : null;
+
     @endphp
 
     <section class="mx-auto max-w-7xl px-6 py-12 lg:px-12 lg:py-16">
@@ -38,31 +22,31 @@
             <div class="space-y-5">
                 <div class="overflow-hidden rounded-xl bg-white shadow-my-shadow">
                     <div class="bg-linear-to-br from-stone-100 via-white to-stone-200 p-8 sm:p-12">
-                        {{-- // ispod je main Image --}}
-                        {{-- // Kako ce se uzeti main image?
-                        -- // Procice se kroz sve slike i uzeti main
-
-
-                        --}}
-                        <img src="{{ 5 }}" alt="{{ 5 }} " class="mx-auto aspect-square w-full max-w-md object-contain">
+                        @if ($mainImage)
+                            <img src="{{ $mainImage }}" alt="{{ $product->brand->title }} {{ $product->title }}"
+                                class="mx-auto aspect-square w-full max-w-md object-contain">
+                        @else
+                            <div
+                                class="mx-auto flex aspect-square w-full max-w-md items-center justify-center rounded-lg border border-dashed border-black/15 bg-white/70 text-sm uppercase tracking-[0.2em] text-black/35">
+                                Nema slike
+                            </div>
+                        @endif
                     </div>
                 </div>
 
-                <div class="grid grid-cols-3 gap-4">
-
-                    {{-- // ispisati sve slike za proizvod --}}
-
-                    @foreach($product->images as $row)
-
-
+                <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                    @forelse($product->images as $row)
                         <div
-                            class="overflow-hidden rounded-lg border <?php    echo $index === 0 ? 'border-black bg-stone-100' : 'border-black/10 bg-white'; ?> p-4">
-                            <img src="{{ $row->path }}" alt="product image" class=" aspect-square w-full object-contain">
+                            class="overflow-hidden rounded-lg border {{ $row->is_main_image ? 'border-black bg-stone-100' : 'border-black/10 bg-white' }} p-4">
+                            <img src="{{ $row->path }}" alt="{{ $product->brand->title }} {{ $product->title }}"
+                                class="aspect-square w-full object-contain">
                         </div>
-
-                    @endforeach
-
-
+                    @empty
+                        <div
+                            class="col-span-full rounded-lg border border-dashed border-black/15 bg-white p-6 text-center text-sm text-black/45">
+                            Nema dodatnih slika za ovaj proizvod.
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
@@ -74,26 +58,35 @@
                         </span>
                         <span
                             class="rounded-md border border-black/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-black/70">
-                            {{ $product->waterType->type }}
+                            {{ $product->waterType?->type ?? 'Bez tipa' }}
                         </span>
-                        <span
-                            class="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs uppercase tracking-[0.2em] text-emerald-700">
-                            -
-                            {{ $product->discount->discount }}
-                        </span>
+                        @if ($discountPercent)
+                            <span
+                                class="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs uppercase tracking-[0.2em] text-emerald-700">
+                                -{{ $discountPercent }}%
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="space-y-2 border-b border-black/10 pb-6">
+                        <p class="text-sm uppercase tracking-[0.24em] text-black/45">
+                            {{ $product->brand?->title ?? 'Brend' }}
+                        </p>
+                        <h1 class="text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+                            {{ $product->title }}
+                        </h1>
                     </div>
 
                     <div class="flex flex-wrap items-end gap-4 border-b border-black/10 pb-6">
                         <div class="flex items-center gap-3">
                             <span class="text-4xl font-semibold">
-                                {{-- // ovde se prikazuje cena na popustu --}}
-                                {{-- {{ $discountPrice }} --}}
-                                BUDUCA CENA NA POPUSTU
+                                {{ number_format($discountedPrice ?? $product->price, 0, ',', '.') }} RSD
                             </span>
-                            <s class="text-lg text-black/45">
-                                {{-- // ovde se prikazuje precrtana stara cena --}}
-                                {{ $product->price }}
-                            </s>
+                            @if ($discountedPrice)
+                                <s class="text-lg text-black/45">
+                                    {{ number_format($product->price, 0, ',', '.') }} RSD
+                                </s>
+                            @endif
                         </div>
                         <span class="text-sm text-black/55">PDV ukljucen u cenu</span>
                     </div>
@@ -101,39 +94,40 @@
                     <div class="grid gap-4 py-6 sm:grid-cols-2">
                         <div class="rounded-lg bg-stone-100 p-4">
                             <p class="text-xs uppercase tracking-[0.24em] text-black/45">Militraza</p>
+                            @if ($product->mls->isNotEmpty())
+                                <select name="ml_id"
+                                    class="mt-2 w-full rounded-md border border-black/10 bg-white px-3 py-2 text-sm text-black outline-none transition focus:border-black/30">
+                                    @foreach($product->mls->sortBy('size_ml') as $ml)
+                                        <option value="{{ $ml->id }}">{{ $ml->size_ml }} ml</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <p class="mt-2 text-sm text-black/45">Nije navedeno</p>
+                            @endif
+                        </div>
+                        <div class="rounded-lg bg-stone-100 p-4">
+                            <p class="text-xs uppercase tracking-[0.24em] text-black/45">Pol</p>
                             <p class="mt-2 text-xl">
-                                OVDE CE MILITRAZA
+                                {{ $product->gender }}
                             </p>
                         </div>
                         <div class="rounded-lg bg-stone-100 p-4">
-                            <p class="text-xs uppercase tracking-[0.24em] text-black/45">Trajnost</p>
+                            <p class="text-xs uppercase tracking-[0.24em] text-black/45">Vrsta vode</p>
                             <p class="mt-2 text-xl">
-                                LONGEVITY
+                                {{ $product->waterType?->type ?? 'Nije navedeno' }}
                             </p>
                         </div>
                         <div class="rounded-lg bg-stone-100 p-4">
-                            <p class="text-xs uppercase tracking-[0.24em] text-black/45">Koncentracija</p>
+                            <p class="text-xs uppercase tracking-[0.24em] text-black/45">Brend</p>
                             <p class="mt-2 text-xl">
-                                CONCENTRATION
-                            </p>
-                        </div>
-                        <div class="rounded-lg bg-stone-100 p-4">
-                            <p class="text-xs uppercase tracking-[0.24em] text-black/45">Poreklo</p>
-                            <p class="mt-2 text-xl">
-                                POREKLO
+                                {{ $product->brand?->title ?? 'Nije navedeno' }}
                             </p>
                         </div>
                     </div>
 
                     <div
                         class="flex flex-col gap-4 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                        <div>
-                            <p class="text-sm text-black/50">Ocena kupaca</p>
-                            <p class="text-lg">
-                                5 / 5 <span class="text-black/45"> 10 RECENZIJA
-                                </span>
-                            </p>
-                        </div>
+
                         <div class="flex gap-3">
                             <button class="btn">Dodaj u korpu</button>
                             <button
@@ -144,14 +138,7 @@
                     </div>
                 </div>
 
-                <div class="grid gap-4 sm:grid-cols-3">
 
-                    <div class="rounded-lg border border-black/10 bg-white p-5 shadow-sm">
-                        <p class="text-sm leading-7 text-black/75">
-                            HIGHLIGHT
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
