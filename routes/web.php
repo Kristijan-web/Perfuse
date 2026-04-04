@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,12 @@ Route::controller(AuthController::class)->group(function () {
     });
 
     Route::post('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header
+
+});
+
+Route::controller(ContactController::class)->group(function () {
+
+    // post radi se novi upis u bazi
+    Route::post('/api/contacts', 'store')->name('createContactAPI');
 
 });

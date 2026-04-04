@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="px-8 py-12 sm:px-10 lg:px-12">
-                    <form class="space-y-6">
+                    <form class="space-y-6" id="contact-form">
                         <div class="space-y-2">
                             <label for="contact-title" class="text-sm font-medium text-slate-800">
                                 Naslov
@@ -55,4 +55,59 @@
             </div>
         </section>
     </main>
+
+    <script>
+        // Sta je cilj?
+        // - Podaci iz forme se preko ajax-a salju back-u
+
+        // Kako to da uradim?
+        // Sta mi je potrebno?
+        // - Backend endpoint
+        // - na frontu obican async/await koji gadja taj endpoint
+
+        // Na sta obratiti paznju kad se radi sa ajax-om na frontu?
+        // - Flow moze imati 3 stanja, loading, successfull i error, sva 3 stanja treba obraditi ovde u view-u
+
+        // Sta treba u js-u da uradim?
+        // - da dohvatim form element i slusam za submit event
+        // - da dohvatim inpute cije cu vrednosti proslediti back-u
+
+        const contactForm = document.querySelector('#contact-form');
+        const title = document.querySelector('#contact-title')
+        const text = document.querySelector('#contact-text');
+        const token = document.querySelector('meta[name="csrf-token"]').content;
+
+
+        const appName = "{{ config('app.url') }}";
+
+        contactForm.addEventListener('submit', submitForm)
+
+        async function submitForm(e) {
+
+            e.preventDefault()
+            console.log('hellos')
+            console.log(text);
+
+
+            const fetchData = await fetch(`/api/contacts`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify({
+                    'title': title.value,
+                    'text': text.value
+                })
+            })
+
+            const response = await fetchData.json();
+
+            console.log("Evo ga response", response);
+        }
+
+
+
+    </script>
+
 @endsection
