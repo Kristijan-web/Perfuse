@@ -45,11 +45,12 @@
                             <textarea id="contact-text" name="text" rows="8" placeholder="Napišite vašu poruku..."
                                 class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70"></textarea>
                         </div>
-
-                        <button type="submit"
-                            class="inline-flex w-full items-center justify-center rounded-2xl bg-[#101010] px-6 py-3 text-sm font-semibold text-white transition hover:bg-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 sm:w-auto">
+                        <div id="contact-response-container"></div>
+                        <button type="submit" id="contact-button"
+                            class="inline-flex w-full items-center justify-center rounded-2xl bg-[#101010] px-6 py-3 text-sm font-semibold text-white transition hover:bg-black active:bg-white active:text-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 sm:w-auto">
                             Pošalji poruku
                         </button>
+
                     </form>
                 </div>
             </div>
@@ -76,34 +77,49 @@
         const title = document.querySelector('#contact-title')
         const text = document.querySelector('#contact-text');
         const token = document.querySelector('meta[name="csrf-token"]').content;
-
+        const button = document.querySelector('#contact-button');
+        const responseContainer = document.querySelector('#contact-response-container');
 
         const appName = "{{ config('app.url') }}";
 
         contactForm.addEventListener('submit', submitForm)
 
         async function submitForm(e) {
+            try {
 
-            e.preventDefault()
-            console.log('hellos')
-            console.log(text);
+                e.preventDefault()
+                console.log('hello')
+                button.textContent = 'Loading...'
+                button.disabled = true
 
-
-            const fetchData = await fetch(`/api/contacts`, {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json',
-                    'X-CSRF-TOKEN': token
-                },
-                body: JSON.stringify({
-                    'title': title.value,
-                    'text': text.value
+                const fetchData = await fetch(`/api/contacts`, {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json',
+                        'X-CSRF-TOKEN': token
+                    },
+                    body: JSON.stringify({
+                        'title': title.value,
+                        'text': text.value
+                    })
                 })
-            })
 
-            const response = await fetchData.json();
+                if (!fetchData.ok || fetchData.status != 200) {
+                    // 
+                }
 
-            console.log("Evo ga response", response);
+                const response = await fetchData.json();
+
+                console.log("Evo ga response", response);
+
+            } catch {
+
+            } finally {
+                button.textContent = 'Pošalji poruku'
+                button.disabled = false
+            }
+
+
             // NEXT
             // Sitauacije tokom ajaxa:
 
