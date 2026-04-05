@@ -84,6 +84,8 @@
         const appName = "{{ config('app.url') }}";
 
         title.addEventListener('input', checkTitleRegex)
+        text.addEventListener('input', checkTextLength);
+
         contactForm.addEventListener('submit', submitForm)
 
 
@@ -93,10 +95,11 @@
             try {
                 e.preventDefault();
 
-                // if (!checkTitleRegex()) return;
-                // if (!checkTextLength()) return;
-                if (!checkTextLength() || !(checkTextLength)) return;
+                const regexChecks = [checkTitleRegex, checkTextLength];
 
+                const runnedRegexChecks = regexChecks.map((regexChecks) => regexChecks())
+
+                if (runnedRegexChecks.includes(false)) return;
 
                 button.textContent = 'Loading...'
                 button.disabled = true
@@ -188,11 +191,26 @@
 
         function checkTextLength() {
             if (text.value.length < 20) {
-                console.log("ALO")
-                displayErrorMessage(text, "Forma mora imati preko 20 karaktera")
+
+
+                const parentChildrenLength = text.parentElement.children.length;
+                console.log(!parentChildrenLength === 3)
+
+                if (!(parentChildrenLength == 3)) {
+                    displayErrorMessage(text, 'Forma mora imati najmanje 20 karaktera');
+                }
+
+
                 return false;
             }
             else {
+
+                const parent = text.parentElement
+
+                if (parent.querySelector('p')) {
+                    parent.querySelector('p').remove();
+                }
+
                 return true;
             }
         }
