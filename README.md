@@ -1,3 +1,4 @@
+**Nije jos uradjen admin panel**
 
 **For starting the project you need:**
 
@@ -44,6 +45,6 @@ Clone the project: git clone https://github.com/Kristijan-web/Perfuse.git
 
 **Dokumentacija**
 
-- Dokumtacija se nalazi u footeru sajta
+- Dokumtacija se nalazi u footeru sajta ili na linku https://docs.google.com/document/d/14VFhHnE1wXvzJvdk7aRGN52EpVKT6kezRIlkECFUr6k/edit?tab=t.0
 
 
