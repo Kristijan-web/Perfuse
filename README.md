@@ -1,5 +1,5 @@
 
-For starting the project you need:
+**For starting the project you need:**
 
 - Composer version 2.8.12 
 - MYSQL database
