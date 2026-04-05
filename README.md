@@ -20,13 +20,13 @@ Clone the project: git clone https://github.com/Kristijan-web/Perfuse.git
 - DB_DATABASE=perfuse
 - DB_CONNECTION=mysql
 - SESSION_DRIVER=file
-- Uncomment:
+- Uncomment next variables:
 - DB_PORT=3306
 - DB_DATABASE=laravel
 - DB_USERNAME=root
 - DB_PASSWORD=
 
-3. Run: composer i 
+3. Run: composer install
 
 4. Run: npm install
 
