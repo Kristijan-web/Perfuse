@@ -39,7 +39,7 @@ class APIFeatures
     public function filter()
     {
 
-        $allowedFields = ['minPrice', 'maxPrice', 'brand', 'waterType', 'onSale', 'gender'];
+        $allowedFields = ['minPrice', 'maxPrice', 'brand', 'waterType', 'onSale', 'gender', 'title'];
 
         $queryStringCopy = $this->queryString;
 
@@ -57,6 +57,7 @@ class APIFeatures
         $onSale = $queryStringCopy['onSale'] ?? null;
         $gender = $queryStringCopy['gender'] ?? null;
         $waterType = $queryStringCopy['waterType'] ?? null;
+        $title = $queryStringCopy['title'] ?? null;
 
         // price filtering
         if ($minPrice && $maxPrice) {
@@ -67,6 +68,11 @@ class APIFeatures
         }
         if (!$minPrice && $maxPrice) {
             $this->query->where('price', "<=", $maxPrice);
+        }
+
+        if ($title) {
+            $this->query->whereIn('title', $title);
+            dd($this->query);
         }
 
         // product title filtering

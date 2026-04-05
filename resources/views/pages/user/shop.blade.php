@@ -151,18 +151,44 @@
 
                 </div>
             </form>
+{{-- <form method="GET" action="{{ route('shopPage') }}"
+    class="relative col-span-full row-start-1 row-end-2 h-11 self-start overflow-visible lg:col-start-4 lg:col-end-10 lg:w-full lg:overflow-hidden xl:w-[108%] 2xl:col-end-9">
 
-            <div
+    <input 
+        type="text" 
+        placeholder="Pretrazite..." 
+        name="title" 
+        value="{{ request('title') }}"
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500" 
+    />
+
+    <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-3.5-3.5" stroke-linecap="round" />
+        </svg>
+    </button>
+
+</form> --}}
+            <form method="GET" action="{{ route('shopPage') }}"
                 class="relative col-span-full row-start-1 row-end-2 h-11 self-start overflow-visible lg:col-start-4 lg:col-end-10 lg:w-full lg:overflow-hidden xl:w-[108%] 2xl:col-end-9">
-                <input type="text" placeholder="Pretrazite..."
+                <input type="text" placeholder="Pretrazite..." name="title" 
                     class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-500">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                    <button class="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-500" type="submit">
+
+                    {{-- <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-500">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="7"></circle>
                         <path d="m20 20-3.5-3.5" stroke-linecap="round" />
-                    </svg>
-                </span>
-            </div>
+                        </svg>
+                    </span> --}}
+                    SUBMIT
+                    
+                    </button>
+         
+     
+            </form>
 
             <div
                 class="bg-main-color-shade text-secondary-color col-start-7 col-end-13  rounded-sm py-4 lg:col-start-10 lg:col-end-13 lg:bg-white lg:py-0 lg:text-main-color-shade 2xl:col-start-9">
