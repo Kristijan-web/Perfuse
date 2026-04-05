@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateContactRequest;
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -26,14 +29,29 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateContactRequest $request)
     {
         //
         // ovaj endpoint se gadja
 
+        // posto se salju podaci treba da se uradi validacija
+
+        $validated = $request->validated();
+
+
+        // mora da se ubaci i user id
+
+        // $userId = Auth::user()->id;
+
+        // Contact::create([...$validated, 'user_id', $userId]);
+
+        $request->user()->contactForms()->create($validated);
+
+
+
+
         return response()->json([
             'message' => 'success',
-            'data' => 'hello',
         ], 201);
 
     }

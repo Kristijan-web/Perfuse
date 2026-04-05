@@ -12,12 +12,15 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
     Route::get('/cart', 'cart')->name('cartPage');
-    Route::get('/contact', 'contact')->name('contactpage');
     Route::get('/shop/product/{product}', 'productDetails')->name("productDetails");
 
     // Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     // });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/contact', 'contact')->name('contactpage');
+    });
 
     Route::middleware('guest')->group(function () {
         Route::get('/register', 'register')->name('registerPage');
@@ -37,7 +40,7 @@ Route::controller(AuthController::class)->group(function () {
 
 });
 
-Route::controller(ContactController::class)->group(function () {
+Route::controller(ContactController::class)->middleware('auth')->group(function () {
 
     // post radi se novi upis u bazi
     Route::post('/api/contacts', 'store')->name('createContactAPI');
