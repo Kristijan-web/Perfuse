@@ -152,14 +152,7 @@
         // - Proverava se regex za neki field
         // - Ako se desi greska uzima se trenutni input element, i odmah ispred njega pravimo p tag i ispisujemo gresku
 
-        function displayErrorMessage(element, message) {
 
-            let messageElement = document.createElement('p');
-            messageElement.style.color = 'red';
-            messageElement.style.fontSize = '18px';
-            messageElement.textContent = `* ${message}`
-            element.after(messageElement);
-        }
 
         function checkTitleRegex() {
 
@@ -167,24 +160,12 @@
 
             if (!titleRegex.test(title.value)) {
 
-                const parentChildrenLength = title.parentElement.children.length;
-                console.log(!parentChildrenLength === 3)
-
-                if (!(parentChildrenLength == 3)) {
-                    displayErrorMessage(title, 'Naslov mora poceti velikim slovom i imati barem 2 karaktera');
-                }
-
+                displayErrorMessage(title, 'Naslov mora poceti velikim slovom i imati barem 2 karaktera');
                 return false;
-
             }
             else {
 
-                const parent = title.parentElement
-
-                if (parent.querySelector('p')) {
-                    parent.querySelector('p').remove();
-                }
-
+                removeErrorMessage(title);
                 return true;
             }
         }
@@ -192,26 +173,37 @@
         function checkTextLength() {
             if (text.value.length < 20) {
 
-
-                const parentChildrenLength = text.parentElement.children.length;
-                console.log(!parentChildrenLength === 3)
-
-                if (!(parentChildrenLength == 3)) {
-                    displayErrorMessage(text, 'Forma mora imati najmanje 20 karaktera');
-                }
-
-
+                displayErrorMessage(text, "Forma mora imati najmanje 20 karaktera");
                 return false;
             }
             else {
 
-                const parent = text.parentElement
-
-                if (parent.querySelector('p')) {
-                    parent.querySelector('p').remove();
-                }
-
+                removeErrorMessage(text);
                 return true;
+            }
+        }
+
+
+        function displayErrorMessage(element, message) {
+
+            let messageElement = document.createElement('p');
+            messageElement.style.color = 'red';
+            messageElement.style.fontSize = '18px';
+            messageElement.textContent = `* ${message}`
+
+
+            const parentChildrenLength = element.parentElement.children.length;
+
+            if (!(parentChildrenLength == 3)) {
+                element.after(messageElement);
+            }
+        }
+
+        function removeErrorMessage(element) {
+            const parent = element.parentElement
+
+            if (parent.querySelector('p')) {
+                parent.querySelector('p').remove();
             }
         }
 
