@@ -167,25 +167,7 @@
 
                 </div>
             </form>
-{{-- <form method="GET" action="{{ route('shopPage') }}"
-    class="relative col-span-full row-start-1 row-end-2 h-11 self-start overflow-visible lg:col-start-4 lg:col-end-10 lg:w-full lg:overflow-hidden xl:w-[108%] 2xl:col-end-9">
 
-    <input 
-        type="text" 
-        placeholder="Pretrazite..." 
-        name="title" 
-        value="{{ request('title') }}"
-        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500" 
-    />
-
-    <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="7"></circle>
-            <path d="m20 20-3.5-3.5" stroke-linecap="round" />
-        </svg>
-    </button>
-
-</form> --}}
             <form  method="GET" action="{{ route('shopPage') }}"
                 class="relative col-span-full row-start-1 row-end-2 h-11 self-start overflow-visible lg:col-start-4 lg:col-end-10 lg:w-full lg:overflow-hidden xl:w-[108%] 2xl:col-end-9">
 
@@ -207,11 +189,7 @@
                 @endforeach
 
                 <input type="text" placeholder="Pretrazite..." name="title" 
-                {{-- Uzmi vrednost iz urla ako postoji i upisi je u input --}}
-                {{-- Kako cu to da uradim?
-                - Mogu da proverim da li postoji request->query('title') i ako postoji setujem tu vrednost ako ne prazan string onda
-                
-                --}}
+       
 
                value="{{ $request?->query('title') ? $request->query('title') : '' }}"
                     class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500" />
