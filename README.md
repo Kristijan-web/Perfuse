@@ -18,10 +18,10 @@ Clone the project: git clone https://github.com/Kristijan-web/Perfuse.git
 - DB_CONNECTION=mysql
 - SESSION_DRIVER=file
 - Uncomment:
-# DB_PORT=3306
-# DB_DATABASE=laravel
-# DB_USERNAME=root
-# DB_PASSWORD=
+ DB_PORT=3306
+ DB_DATABASE=laravel
+ DB_USERNAME=root
+ DB_PASSWORD=
 
 3. Run: composer i 
 
