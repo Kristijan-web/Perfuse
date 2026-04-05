@@ -34,7 +34,7 @@ class ContactController extends Controller
         return response()->json([
             'message' => 'success',
             'data' => 'hello',
-        ], 200);
+        ], 201);
 
     }
 

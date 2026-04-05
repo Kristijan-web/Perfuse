@@ -51,7 +51,6 @@
                             class="inline-flex w-full items-center justify-center rounded-2xl bg-[#101010] px-6 py-3 text-sm font-semibold text-white transition hover:bg-black active:bg-white active:text-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 sm:w-auto">
                             Pošalji poruku
                         </button>
-
                     </form>
                 </div>
             </div>
@@ -59,21 +58,6 @@
     </main>
 
     <script>
-        // Sta je cilj?
-        // - Podaci iz forme se preko ajax-a salju back-u
-
-        // Kako to da uradim?
-        // Sta mi je potrebno?
-        // - Backend endpoint
-        // - na frontu obican async/await koji gadja taj endpoint
-
-        // Na sta obratiti paznju kad se radi sa ajax-om na frontu?
-        // - Flow moze imati 3 stanja, loading, successfull i error, sva 3 stanja treba obraditi ovde u view-u
-
-        // Sta treba u js-u da uradim?
-        // - da dohvatim form element i slusam za submit event
-        // - da dohvatim inpute cije cu vrednosti proslediti back-u
-
         const contactForm = document.querySelector('#contact-form');
         const title = document.querySelector('#contact-title')
         const text = document.querySelector('#contact-text');
@@ -86,14 +70,14 @@
         title.addEventListener('input', checkTitleRegex)
         text.addEventListener('input', checkTextLength);
 
-        contactForm.addEventListener('submit', submitForm)
-
-
+        contactForm.addEventListener('submit', submitForm);
 
 
         async function submitForm(e) {
             try {
                 e.preventDefault();
+
+                removeMessage(responseContainer); // brise success poruku ako klijent odmah odluci da ponovo submituje novu formu
 
                 const regexChecks = [checkTitleRegex, checkTextLength];
 
@@ -116,41 +100,27 @@
                     })
                 })
 
-                if (!fetchData.ok || fetchData.status != 200) {
-                    // 
+                if (!fetchData.ok || fetchData.status != 201) {
+                    throw new Error();
                 }
 
                 const response = await fetchData.json();
 
                 console.log("Evo ga response", response);
 
+
+
+                displayMessage(responseContainer, "Forma uspesno poslata", 'success');
+
             } catch {
+
+                displayMessage(responseContainer, "Nesto nije u redu, pokusajte ponovo", 'error')
 
             } finally {
                 button.textContent = 'Pošalji poruku'
                 button.disabled = false
             }
         }
-
-        // NEXT
-        // Sitauacije tokom ajaxa:
-
-        // Loading
-        // dohvati div u kojem je button za submit
-        // dok se loadaju podaci prikazi loader
-
-        // Success
-        // prikazi success poruku negde kod submit dugmeta
-
-        // Error
-        // prikazi error poruku negde kod submit dugmenta
-
-        // Za success i error pa cak i za loading mogu koristiti toaster biblioteku
-
-        // =========
-        // Kako ispisati regex greske ispod elementa
-        // - Proverava se regex za neki field
-        // - Ako se desi greska uzima se trenutni input element, i odmah ispred njega pravimo p tag i ispisujemo gresku
 
 
 
@@ -160,12 +130,12 @@
 
             if (!titleRegex.test(title.value)) {
 
-                displayErrorMessage(title, 'Naslov mora poceti velikim slovom i imati barem 2 karaktera');
+                displayMessage(title, 'Naslov mora poceti velikim slovom i imati barem 2 karaktera', 'error');
                 return false;
             }
             else {
 
-                removeErrorMessage(title);
+                removeMessage(title);
                 return true;
             }
         }
@@ -173,21 +143,21 @@
         function checkTextLength() {
             if (text.value.length < 20) {
 
-                displayErrorMessage(text, "Forma mora imati najmanje 20 karaktera");
+                displayMessage(text, "Forma mora imati najmanje 20 karaktera", 'error');
                 return false;
             }
             else {
 
-                removeErrorMessage(text);
+                removeMessage(text);
                 return true;
             }
         }
 
 
-        function displayErrorMessage(element, message) {
+        function displayMessage(element, message, type = 'error') {
 
             let messageElement = document.createElement('p');
-            messageElement.style.color = 'red';
+            messageElement.style.color = type == 'error' ? 'red' : 'green';
             messageElement.style.fontSize = '18px';
             messageElement.textContent = `* ${message}`
 
@@ -199,7 +169,7 @@
             }
         }
 
-        function removeErrorMessage(element) {
+        function removeMessage(element) {
             const parent = element.parentElement
 
             if (parent.querySelector('p')) {
