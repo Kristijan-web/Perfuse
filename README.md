@@ -6,6 +6,8 @@
 - Web server (Apache)
 - Node.js v22.21.0. (Using tailwind for styling)
 
+
+
 **Steps to successfuly structure the project:**
 
 Clone the project: git clone https://github.com/Kristijan-web/Perfuse.git
@@ -18,10 +20,10 @@ Clone the project: git clone https://github.com/Kristijan-web/Perfuse.git
 - DB_CONNECTION=mysql
 - SESSION_DRIVER=file
 - Uncomment:
- DB_PORT=3306
- DB_DATABASE=laravel
- DB_USERNAME=root
- DB_PASSWORD=
+- DB_PORT=3306
+- DB_DATABASE=laravel
+- DB_USERNAME=root
+- DB_PASSWORD=
 
 3. Run: composer i 
 
@@ -31,10 +33,13 @@ Clone the project: git clone https://github.com/Kristijan-web/Perfuse.git
 
 6. Run: php artisan migrate:fresh --seed (Sometimes the certain factory makes 2 same id's for 2 diffrent columns in table that has their combination set as unique, so if that happens run migration again untill the seeding is successful)
 
+
+
 **To run the project:**
 
 - php artisan serve
 - npm run dev
+
 
 
 **Dokumentacija**
