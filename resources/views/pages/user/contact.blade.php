@@ -43,6 +43,7 @@
                                 Tekst
                             </label>
                             <textarea id="contact-text" name="text" rows="8" placeholder="Napišite vašu poruku..."
+                                minlength="20"
                                 class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70"></textarea>
                         </div>
                         <div id="contact-response-container"></div>
@@ -82,13 +83,21 @@
 
         const appName = "{{ config('app.url') }}";
 
+        title.addEventListener('input', checkTitleRegex)
         contactForm.addEventListener('submit', submitForm)
+
+
+
 
         async function submitForm(e) {
             try {
+                e.preventDefault();
 
-                e.preventDefault()
-                console.log('hello')
+                // if (!checkTitleRegex()) return;
+                // if (!checkTextLength()) return;
+                if (!checkTextLength() || !(checkTextLength)) return;
+
+
                 button.textContent = 'Loading...'
                 button.disabled = true
 
@@ -118,26 +127,75 @@
                 button.textContent = 'Pošalji poruku'
                 button.disabled = false
             }
-
-
-            // NEXT
-            // Sitauacije tokom ajaxa:
-
-            // Loading
-            // dohvati div u kojem je button za submit
-            // dok se loadaju podaci prikazi loader
-
-            // Success
-            // prikazi success poruku negde kod submit dugmeta
-
-            // Error
-            // prikazi error poruku negde kod submit dugmenta
-
-            // Za success i error pa cak i za loading mogu koristiti toaster biblioteku
-
-
         }
 
+        // NEXT
+        // Sitauacije tokom ajaxa:
+
+        // Loading
+        // dohvati div u kojem je button za submit
+        // dok se loadaju podaci prikazi loader
+
+        // Success
+        // prikazi success poruku negde kod submit dugmeta
+
+        // Error
+        // prikazi error poruku negde kod submit dugmenta
+
+        // Za success i error pa cak i za loading mogu koristiti toaster biblioteku
+
+        // =========
+        // Kako ispisati regex greske ispod elementa
+        // - Proverava se regex za neki field
+        // - Ako se desi greska uzima se trenutni input element, i odmah ispred njega pravimo p tag i ispisujemo gresku
+
+        function displayErrorMessage(element, message) {
+
+            let messageElement = document.createElement('p');
+            messageElement.style.color = 'red';
+            messageElement.style.fontSize = '18px';
+            messageElement.textContent = `* ${message}`
+            element.after(messageElement);
+        }
+
+        function checkTitleRegex() {
+
+            const titleRegex = /^[A-Z][a-zA-Z]{1,20}$/
+
+            if (!titleRegex.test(title.value)) {
+
+                const parentChildrenLength = title.parentElement.children.length;
+                console.log(!parentChildrenLength === 3)
+
+                if (!(parentChildrenLength == 3)) {
+                    displayErrorMessage(title, 'Naslov mora poceti velikim slovom i imati barem 2 karaktera');
+                }
+
+                return false;
+
+            }
+            else {
+
+                const parent = title.parentElement
+
+                if (parent.querySelector('p')) {
+                    parent.querySelector('p').remove();
+                }
+
+                return true;
+            }
+        }
+
+        function checkTextLength() {
+            if (text.value.length < 20) {
+                console.log("ALO")
+                displayErrorMessage(text, "Forma mora imati preko 20 karaktera")
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
 
 
     </script>
