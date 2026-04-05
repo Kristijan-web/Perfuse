@@ -35,6 +35,22 @@
             <form method="GET" action="{{ route('shopPage') }}"
                 class="bg-main-color-shade text-secondary-color row-start-2 row-end-3 col-start-1 col-end-7  rounded-sm py-4 lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-end-4 lg:h-full lg:bg-white lg:p-5 lg:py-4 lg:text-main-color-shade lg:shadow-my-shadow">
                 <div class="flex items-center justify-between px-4 lg:hidden">
+            @foreach(request()->query() as $key => $value)
+
+                    @if(!in_array($key, ['brand','minPrice','maxPrice','gender','waterType','onSale']))
+
+                        @if(is_array($value))
+                            @foreach($value as $v)
+                                <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
+                            @endforeach
+                        @else
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
+
+                    @endif
+
+            @endforeach
+                    
                     <span>Filteri</span>
                     <span class="flex items-center justify-center">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -170,25 +186,49 @@
     </button>
 
 </form> --}}
-            <form method="GET" action="{{ route('shopPage') }}"
+            <form  method="GET" action="{{ route('shopPage') }}"
                 class="relative col-span-full row-start-1 row-end-2 h-11 self-start overflow-visible lg:col-start-4 lg:col-end-10 lg:w-full lg:overflow-hidden xl:w-[108%] 2xl:col-end-9">
+
+
+               @foreach(request()->query() as $key => $value)
+
+                    @if($key !== 'title')
+
+                        @if(is_array($value))
+                            @foreach($value as $v)
+                                <input type="hidden" name="{{ $key }}[]" value="{{ $v }}">
+                            @endforeach
+                        @else
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
+
+                    @endif
+
+                @endforeach
+
                 <input type="text" placeholder="Pretrazite..." name="title" 
+                {{-- Uzmi vrednost iz urla ako postoji i upisi je u input --}}
+                {{-- Kako cu to da uradim?
+                - Mogu da proverim da li postoji request->query('title') i ako postoji setujem tu vrednost ako ne prazan string onda
+                
+                --}}
+
+               value="{{ $request?->query('title') ? $request->query('title') : '' }}"
                     class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500" />
 
                     <button class="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-500" type="submit">
 
-                    {{-- <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-500">
+                     <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-500">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="7"></circle>
                         <path d="m20 20-3.5-3.5" stroke-linecap="round" />
                         </svg>
-                    </span> --}}
-                    SUBMIT
+                    </span> 
                     
                     </button>
          
      
-            </form>
+                </form>
 
             <div
                 class="bg-main-color-shade text-secondary-color col-start-7 col-end-13  rounded-sm py-4 lg:col-start-10 lg:col-end-13 lg:bg-white lg:py-0 lg:text-main-color-shade 2xl:col-start-9">
@@ -212,16 +252,7 @@
                     <a class="btn px-9 py-2" href="{{ route('shopPage', array_merge(request()->query(), ['sortBy' => 'price','sortOrder' => 'asc'])) }}">
                           Prvo najmanja
                     </a>
-                    {{-- <form method="GET" action="{{ route('shopPage') }}" class="hidden items-center gap-3 2xl:flex">
-                        <input type="hidden" name="sortOrder" value="asc">        
-                        <button name="sortBy" value="price" type="submit" class="btn px-9 py-2">Prvo najmanja</button>
-                    </form> --}}
-
-                    {{-- <form method="GET" action="{{ route('shopPage') }}">
-                        <input type="hidden" name="sortOrder" value="desc">
-                        <button name='sortBy' value="price" type="submit" class="btn px-9 py-2">Prvo najveca</button>
-
-                    </form> --}}
+ 
                         <a class="btn px-9 py-2" href="{{ route('shopPage', array_merge(request()->query(), ['sortBy' => 'price','sortOrder' => 'desc'])) }}">
                           Prvo najveca
                     </a>

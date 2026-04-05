@@ -71,8 +71,9 @@ class APIFeatures
         }
 
         if ($title) {
-            $this->query->whereIn('title', $title);
-            dd($this->query);
+
+            $this->query->where('title', 'LIKE', "%$title%");
+
         }
 
         // product title filtering
