@@ -52,10 +52,11 @@
             @endguest
 
             @auth
-                <form method="POST" action="{{ route('logoutAPI') }}"
+                <form method="GET" action="{{ route('logoutAPI') }}"
                     class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
-                                                                                                        duration-200 hover:opacity-75">
+                                                                                                            duration-200 hover:opacity-75">
                     @csrf
+                    @method("DELETE")
 
                     {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
                         aria-hidden="true">

@@ -12,15 +12,12 @@ Route::controller(PageController::class)->group(function () {
 
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
-    Route::get('/cart', 'cart')->name('cartPage');
     Route::get('/shop/product/{product}', 'productDetails')->name("productDetails");
-
-    // Route::middleware(['auth', 'isAdmin'])->group(function () {
-
-    // });
 
     Route::middleware('auth')->group(function () {
         Route::get('/contact', 'contact')->name('contactpage');
+        Route::get('/cart', 'cart')->name('cartPage');
+
     });
 
     Route::middleware('guest')->group(function () {
@@ -37,7 +34,7 @@ Route::controller(AuthController::class)->group(function () {
         Route::post('/register', 'register')->name("registerAPI");
     });
 
-    Route::post('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header
+    Route::get('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header, mada obicno po REST konvecniji je namena post-a da kreira nesto u bazi, a sa logout ne pravimo nista
 
 });
 
@@ -52,5 +49,4 @@ Route::controller(CartController::class)->middleware('auth')->group(function () 
     // ukoliko korisnik nije ulogovan i pokusa da doda proizvod u cart treba da se uloguje
 
     Route::post('/api/carts/{product}', 'store')->name('createCartAPI');
-    Route::delete('/api/carts/items/{cartItem}', 'destroy')->name('deleteCartItemAPI');
 });
