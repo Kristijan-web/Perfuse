@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,3 +54,8 @@ Route::controller(CartController::class)->middleware('auth')->group(function () 
     Route::delete('/api/carts/{cart}', 'destroy')->name('deleteCartItemAPI');
 });
 
+Route::controller(OrderController::class)->middleware('auth')->group(function () {
+
+    Route::post('/api/orders', 'store')->name('createOrderAPI');
+
+});

@@ -24,7 +24,7 @@ class OrderLineFactory extends Factory
             //
             // order_id, user_id, product_id, quantity
             'order_id' => Order::inRandomOrder()->first()->id,
-            'user_id' => User::inRandomOrder()->first()->id,
+            // 'user_id' => User::inRandomOrder()->first()->id,
             'product_id' => Product::inRandomOrder()->first()->id,
             'quantity' => fake()->numberBetween(1, 5)
 

@@ -70,11 +70,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, 'cart_items');
     }
 
-    public function orderLines()
-    {
-        return $this->hasMany(OrderLine::class);
-    }
+    // public function orderLines()
+    // {
+    //     return $this->hasMany(OrderLine::class);
+    // }
 
+    // 1 user moze da ima vise order-a, jedan order pripada jednom useru
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     public function contactForms()
     {
         return $this->hasMany(Contact::class);

@@ -19,4 +19,12 @@ class Order extends Model
     {
         return $this->hasMany(OrderLine::class);
     }
+
+    // 1 order moze da pripada 1 useru
+    // 1 user moze da ima vise ordera
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

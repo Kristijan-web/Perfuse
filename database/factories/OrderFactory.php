@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,10 +19,17 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-            // total_price i total_quantity
-            'total_price' => fake()->numberBetween(5000, 1000),
+            'name' => fake()->firstName(),
+            'lastname' => fake()->lastName(),
+            'email' => fake()->safeEmail(),
+            'phone_number' => fake()->phoneNumber(),
+            'adress' => fake()->streetAddress(),
+            'city' => fake()->city(),
+            'postal_code' => fake()->postcode(),
+            'note' => fake()->optional()->sentence(),
+            'total_price' => fake()->numberBetween(1000, 5000),
             'total_quantity' => fake()->numberBetween(1, 5),
+            'user_id' => User::inRandomOrder()->first()->id
         ];
     }
 }

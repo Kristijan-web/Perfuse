@@ -30,6 +30,10 @@ class OrderController extends Controller
     {
         //
         // logika za pravljenje novog order-a i order_line-a
+        // Sta mi sve treba od podataka da bih napravio order?
+        // - total_price
+        // - total_quantity
+
     }
 
     /**

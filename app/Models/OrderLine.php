@@ -21,10 +21,10 @@ class OrderLine extends Model
 
     // 1 stavka racuna pripada jednom useru
     // 1 user moze imati vise stavki racuna
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
     // 1 stavka moze da pripada jednom proizvodu
     // 1 proizvod moze da bude u vise stavki
