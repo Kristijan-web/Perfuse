@@ -223,7 +223,7 @@
                     napadan.
                 </p>
                 <p class="mt-6 text-center text-xl font-semibold">Milos</p>
-                <p class="mt-3 text-center text-sm uppercase tracking-[0.24em] text-amber-500">5/5 rating</p>
+                {{-- <p class="mt-3 text-center text-sm uppercase tracking-[0.24em] text-amber-500">5/5 rating</p> --}}
             </article>
 
             <article class="relative rounded-sm bg-stone-300 p-9 pt-16 shadow-my-shadow">
@@ -235,7 +235,7 @@
                     Narucivanje je bilo jednostavno, a prezentacija proizvoda odmah ostavlja utisak ozbiljnog brenda.
                 </p>
                 <p class="mt-6 text-center text-xl font-semibold">Nikola</p>
-                <p class="mt-3 text-center text-sm uppercase tracking-[0.24em] text-amber-500">5/5 rating</p>
+                {{-- <p class="mt-3 text-center text-sm uppercase tracking-[0.24em] text-amber-500">5/5 rating</p> --}}
             </article>
 
             <article class="relative rounded-sm bg-black p-9 pt-16 text-white shadow-my-shadow">
@@ -248,7 +248,7 @@
                     okruzenju.
                 </p>
                 <p class="mt-6 text-center text-xl font-semibold">Bojan</p>
-                <p class="mt-3 text-center text-sm uppercase tracking-[0.24em] text-amber-400">5/5 rating</p>
+                {{-- <p class="mt-3 text-center text-sm uppercase tracking-[0.24em] text-amber-400">5/5 rating</p> --}}
             </article>
         </div>
     </section>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\APIFeatures;
 use App\Models\Brand;
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\WaterType;
 use Illuminate\Http\Request;
@@ -55,24 +57,17 @@ class PageController extends Controller
         return view("pages.user.register");
     }
 
-    public function cart()
+    public function cart(Request $request)
     {
-        // $products = collect();
 
-        // if (auth()->check()) {
-        //     $products = auth()->user()
-        //         ->cart()
-        //         ->with([
-        //             'products.brand',
-        //             'products.waterType',
-        //             'products.discount',
-        //             'products.images',
-        //             'products.mls',
-        //         ])
-        //         ->first()?->products ?? collect();
-        // }
+        $userCart = Cart::where('user_id', $request->user()->id)->first();
 
-        // return view('pages.user.cart', ['products' => $products]);
+        $userProducts = CartItem::with('product')->where('cart_id', $userCart->id)->get();
+
+
+
+
+        return view('pages.user.cart', ['products' => $userProducts]);
     }
 
     public function contact()
