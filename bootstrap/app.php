@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-        // ovde mogu i da hvatam svoje custom error-e i da im dodajem statusCode koji tip podatka vracu (JSON/XML, text,itd...) i mogu da uzmem prosledjenu poruku preko $e->getMessage(0)
+        // Ovo je global error handler
         //
     
 

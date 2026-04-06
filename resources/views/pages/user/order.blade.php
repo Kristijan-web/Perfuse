@@ -73,6 +73,7 @@
                                 <div class="space-y-2">
                                     <label for="name" class="text-sm font-medium text-slate-800">Ime</label>
                                     <input id="name" name="name" type="text" placeholder="Unesite ime"
+                                        value="{{ old('name') ? old('name') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
 
                                     @if($errors->has('name'))
@@ -88,55 +89,61 @@
                                 <div class="space-y-2">
                                     <label for="lastname" class="text-sm font-medium text-slate-800">Prezime</label>
                                     <input id="lastname" name="lastname" type="text" placeholder="Unesite prezime"
+                                        value="{{ old('lastname') ? old('lastname') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
-                                    @error('lastname')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
+                                    @if($errors->has('lastname'))
+                                        <p class="text-red-500">* {{ $errors->first('lastname') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="space-y-2">
                                     <label for="email" class="text-sm font-medium text-slate-800">Email</label>
                                     <input id="email" name="email" type="email" placeholder="ime@email.com"
+                                        value="{{ old('email') ? old('email') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
-                                    @error('email')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
+                                    @if($errors->has('email'))
+                                        <p class="text-red-500">* {{ $errors->first('email') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="space-y-2">
                                     <label for="phone_number" class="text-sm font-medium text-slate-800">Telefon</label>
                                     <input id="phone_number" name="phone_number" type="tel" placeholder="+381 60 123 4567"
+                                        value="{{ old('phone_number') ? old('phone_number') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
-                                    @error('phone_number')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
+                                    @if($errors->has('phone_number'))
+                                        <p class="text-red-500">* {{ $errors->first('phone_number') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="space-y-2 sm:col-span-2">
                                     <label for="adress" class="text-sm font-medium text-slate-800">Adresa</label>
                                     <input id="adress" name="adress" type="text" placeholder="Ulica i broj"
+                                        value="{{ old('adress') ? old('adress') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
-                                    @error('adress')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
+                                    @if($errors->has('adress'))
+                                        <p class="text-red-500">* {{ $errors->first('adress') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="space-y-2">
                                     <label for="city" class="text-sm font-medium text-slate-800">Grad</label>
                                     <input id="city" name="city" type="text" placeholder="Unesite grad"
+                                        value="{{ old('city') ? old('city') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
-                                    @error('city')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
+                                    @if($errors->has('city'))
+                                        <p class="text-red-500">* {{ $errors->first('city') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="space-y-2">
                                     <label for="postal_code" class="text-sm font-medium text-slate-800">Postanski broj</label>
                                     <input id="postal_code" name="postal_code" type="text" placeholder="11000"
+                                        value="{{ old('postal_code') ? old('postal_code') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
-                                    @error('postal_code')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
+                                    @if($errors->has('postal_code'))
+                                        <p class="text-red-500">* {{ $errors->first('postal_code') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="space-y-2 sm:col-span-2">
