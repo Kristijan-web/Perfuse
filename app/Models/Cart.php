@@ -9,6 +9,9 @@ class Cart extends Model
 {
     /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
+
+    protected $fillable = ['quantity', 'user_id'];
+
     // cart zavisi od user-a i od proizvoda
     public function user()
     {
@@ -22,6 +25,7 @@ class Cart extends Model
     {
         return $this->belongsToMany(Product::class, 'cart_items');
     }
+
 
 
 

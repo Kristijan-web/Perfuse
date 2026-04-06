@@ -19,19 +19,22 @@
             @auth
                 <a href="{{ route('contactpage') }}"
                     class="text-white transition-opacity duration-200 hover:opacity-75">Kontakt</a>
+
+                <a href="{{ route('cartPage') }}"
+                    class="inline-flex items-center gap-[10px] text-white transition-opacity duration-200 hover:opacity-75">
+                    <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <circle cx="9" cy="20" r="1.25"></circle>
+                        <circle cx="18" cy="20" r="1.25"></circle>
+                        <path d="M3 4h2.2l2.4 10.2h10.1l2.1-7.1H7.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span>Korpa</span>
+                </a>
             @endauth
 
 
-            <a href="{{ route('cartPage') }}"
-                class="inline-flex items-center gap-[10px] text-white transition-opacity duration-200 hover:opacity-75">
-                <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
-                    aria-hidden="true">
-                    <circle cx="9" cy="20" r="1.25"></circle>
-                    <circle cx="18" cy="20" r="1.25"></circle>
-                    <path d="M3 4h2.2l2.4 10.2h10.1l2.1-7.1H7.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                <span>Korpa</span>
-            </a>
+
+
 
             {{-- // sad sintaksa da se ode na login --}}
             @guest
@@ -40,7 +43,7 @@
 
                     <span>Register</span>
                 </a>
-                <a href="{{ route('loginPage') }}"
+                <a href="{{ route('login') }}"
                     class="inline-flex items-center gap-[10px] text-white  decoration-white  transition-opacity duration-200 hover:opacity-75">
 
                     <span>Login</span>
@@ -49,8 +52,9 @@
             @endguest
 
             @auth
-                <form method="POST" action="{{ route('logoutAPI') }}" class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
-                                                                                duration-200 hover:opacity-75">
+                <form method="POST" action="{{ route('logoutAPI') }}"
+                    class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
+                                                                                                        duration-200 hover:opacity-75">
                     @csrf
 
                     {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"

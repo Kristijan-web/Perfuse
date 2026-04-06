@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ Route::controller(PageController::class)->group(function () {
 
     Route::middleware('guest')->group(function () {
         Route::get('/register', 'register')->name('registerPage');
-        Route::get('/login', 'login')->name('loginPage');
+        Route::get('/login', 'login')->name('login');
     });
 
 });
@@ -45,4 +46,10 @@ Route::controller(ContactController::class)->middleware('auth')->group(function 
     // post radi se novi upis u bazi
     Route::post('/api/contacts', 'store')->name('createContactAPI');
 
+});
+
+Route::controller(CartController::class)->middleware('auth')->group(function () {
+    // ukoliko korisnik nije ulogovan i pokusa da doda proizvod u cart treba da se uloguje
+
+    Route::post('/api/carts/{product}', 'store')->name('createCartAPI');
 });

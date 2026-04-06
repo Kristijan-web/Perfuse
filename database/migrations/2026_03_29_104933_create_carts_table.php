@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->foreignId("user_id")->constrained(); // ovde bi cak trebalo uraditi cascadeOnDelete, jer kad se obrise korisnik nema smisla cuvati njegov kart?
-            $table->foreignId("product_id")->constrained();
+            // $table->foreignId("product_id")->constrained();
             $table->integer("quantity");
         });
     }

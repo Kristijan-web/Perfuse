@@ -46,5 +46,5 @@ Clone the project: git clone https://github.com/Kristijan-web/Perfuse.git
 **Dokumentacija**
 
 - Dokumtacija se nalazi u footeru sajta ili na linku https://docs.google.com/document/d/14VFhHnE1wXvzJvdk7aRGN52EpVKT6kezRIlkECFUr6k/edit?tab=t.0
-
+- Lokalna dokumentacija za deo projekta gde se koriste slike nalazi se u fajlu [docs/image-documentation.md](/c:/Users/Kristijan/Desktop/Perfuse/docs/image-documentation.md)
 

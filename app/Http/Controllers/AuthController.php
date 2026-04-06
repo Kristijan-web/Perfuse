@@ -84,7 +84,7 @@ class AuthController extends Controller
 
         User::create(['email' => $validated['email'], 'password' => $validated['password'], 'name' => $validated['name'], 'role_id' => 1]);
 
-        return redirect()->route('loginPage');
+        return redirect()->route('login');
 
     }
 

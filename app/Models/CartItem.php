@@ -12,6 +12,7 @@ class CartItem extends Model
 
     // nema sta ovde
 
+    protected $fillable = ['cart_id', 'product_id', 'quantity'];
     public function cart()
     {
 

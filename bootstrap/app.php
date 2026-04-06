@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Log;
+use \Illuminate\Auth\AuthenticationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -23,6 +24,14 @@ return Application::configure(basePath: dirname(__DIR__))
         // ovde mogu i da hvatam svoje custom error-e i da im dodajem statusCode koji tip podatka vracu (JSON/XML, text,itd...) i mogu da uzmem prosledjenu poruku preko $e->getMessage(0)
         //
     
+        $exceptions->render(function (AuthenticationException $e, $request) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Unauthenticated'], 401);
+            }
+
+            return redirect()->route('login');
+        });
+
         $exceptions->render(function (Throwable $err) {
 
 
@@ -40,6 +49,8 @@ return Application::configure(basePath: dirname(__DIR__))
             return redirect()->back()->withErrors(['errorCode' => $errorCode]);
 
         });
+
+
 
 
         // $exceptions->render(function (ModelNotFoundException $e, $request) {

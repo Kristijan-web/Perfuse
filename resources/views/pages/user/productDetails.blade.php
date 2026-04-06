@@ -23,7 +23,10 @@
                 <div class="overflow-hidden rounded-xl bg-white shadow-my-shadow">
                     <div class="bg-linear-to-br from-stone-100 via-white to-stone-200 p-8 sm:p-12">
                         @if ($mainImage)
-                            <img src="{{ $mainImage }}" alt="{{ $product->brand->title }} {{ $product->title }}"
+                            {{-- {{ $mainImage }} --}}
+                            {{-- http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg --}}
+                            <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
+                                alt="{{ $product->brand->title }} {{ $product->title }}"
                                 class="mx-auto aspect-square w-full max-w-md object-contain">
                         @else
                             <div
@@ -38,7 +41,9 @@
                     @forelse($product->images as $row)
                         <div
                             class="overflow-hidden rounded-lg border {{ $row->is_main_image ? 'border-black bg-stone-100' : 'border-black/10 bg-white' }} p-4">
-                            <img src="{{ $row->path }}" alt="{{ $product->brand->title }} {{ $product->title }}"
+                            {{-- ovo je islo u src {{ $row->path }} --}}
+                            <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
+                                alt="{{ $product->brand->title }} {{ $product->title }}"
                                 class="aspect-square w-full object-contain">
                         </div>
                     @empty
@@ -125,11 +130,18 @@
                         </div>
                     </div>
 
+                    @if(session()->has('success'))
+                        <p class="text-green-600 text-xl">{{ session()->get('success') }}</p>
+                    @endif
+
                     <div
                         class="flex flex-col gap-4 border-t border-black/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-
                         <div class="flex gap-3">
-                            <button class="btn">Dodaj u korpu</button>
+                            {{-- // mora i Militraza da se obavije u form tag jer se ona bira kad se pravi cart --}}
+                            <form method="POST" action="{{ route('createCartAPI', $product->id) }}">
+                                @csrf
+                                <button type="submit" class="btn">Dodaj u korpu</button>
+                            </form>
                             <button
                                 class="rounded-sm border border-main-color-shade px-6 py-3 transition hover:bg-black hover:text-white">
                                 Sacuvaj

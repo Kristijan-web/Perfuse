@@ -24,7 +24,7 @@ class CartFactory extends Factory
             // user_id, product_id, quantity
 
             'user_id' => User::inRandomOrder()->first()->id,
-            'product_id' => Product::inRandomOrder()->first()->id,
+            // 'product_id' => Product::inRandomOrder()->first()->id,
             'quantity' => fake()->numberBetween(1, 5)
 
 
