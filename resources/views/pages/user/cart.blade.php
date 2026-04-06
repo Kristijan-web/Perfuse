@@ -4,12 +4,19 @@
 
 @section('content')
     @php
-        $subtotal = $products->sum(function ($product) {
-            $discountPercent = $product->discount?->discount;
+        $subtotal = $products->sum(function ($cartItem) {
+            $product = $cartItem->product;
 
-            return $discountPercent
+            if (!$product) {
+                return 0;
+            }
+
+            $discountPercent = $product->discount?->discount;
+            $finalPrice = $discountPercent
                 ? $product->price - round(($product->price * $discountPercent) / 100)
                 : $product->price;
+
+            return $finalPrice * $cartItem->quantity;
         });
     @endphp
 
@@ -31,75 +38,92 @@
         @else
             <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
                 <div class="space-y-5">
-                    @foreach ($products as $product)
+                    @foreach ($products as $cartItem)
                         @php
-                            $mainImage = $product->images->firstWhere('is_main_image', true)?->path
-                                ?? $product->images->first()?->path;
+                            $product = $cartItem->product;
+                            $mainImage = $product?->images->firstWhere('is_main_image', true)?->path
+                                ?? $product?->images->first()?->path;
                             $discountPercent = $product->discount?->discount;
                             $finalPrice = $discountPercent
                                 ? $product->price - round(($product->price * $discountPercent) / 100)
                                 : $product->price;
                         @endphp
 
-                        <article class="grid gap-5 rounded-2xl bg-white p-5 shadow-my-shadow sm:grid-cols-[140px_1fr] sm:p-6">
-                            <a href="{{ route('productDetails', $product->id) }}"
-                                class="flex items-center justify-center rounded-xl bg-stone-100 p-4">
-                                @if ($mainImage)
-                                    <img src="{{ $mainImage }}" alt="{{ $product->brand?->title }} {{ $product->title }}"
-                                        class="aspect-square w-full max-w-[120px] object-contain">
-                                @else
-                                    <div
-                                        class="flex aspect-square w-full max-w-[120px] items-center justify-center rounded-lg border border-dashed border-black/15 bg-white text-xs uppercase tracking-[0.2em] text-black/35">
-                                        Nema slike
-                                    </div>
-                                @endif
-                            </a>
+                        @if ($product)
+                            <article class="grid gap-5 rounded-2xl bg-white p-5 shadow-my-shadow sm:grid-cols-[140px_1fr] sm:p-6">
+                                <a href="{{ route('productDetails', $product->id) }}"
+                                    class="flex items-center justify-center rounded-xl bg-stone-100 p-4">
+                                    @if ($mainImage)
+                                        <img src="{{ $mainImage }}" alt="{{ $product->brand?->title }} {{ $product->title }}"
+                                            class="aspect-square w-full max-w-[120px] object-contain">
+                                    @else
+                                        <div
+                                            class="flex aspect-square w-full max-w-[120px] items-center justify-center rounded-lg border border-dashed border-black/15 bg-white text-xs uppercase tracking-[0.2em] text-black/35">
+                                            Nema slike
+                                        </div>
+                                    @endif
+                                </a>
 
-                            <div class="flex flex-col gap-4">
-                                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                                    <div>
-                                        <p class="text-xs uppercase tracking-[0.24em] text-black/45">
-                                            {{ $product->brand?->title ?? 'Brend' }}
-                                        </p>
-                                        <a href="{{ route('productDetails', $product->id) }}"
-                                            class="mt-1 block text-2xl font-semibold tracking-tight text-black">
-                                            {{ $product->title }}
-                                        </a>
+                                <div class="flex flex-col gap-4">
+                                    <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                                        <div>
+                                            <p class="text-xs uppercase tracking-[0.24em] text-black/45">
+                                                {{ $product->brand?->title ?? 'Brend' }}
+                                            </p>
+                                            <a href="{{ route('productDetails', $product->id) }}"
+                                                class="mt-1 block text-2xl font-semibold tracking-tight text-black">
+                                                {{ $product->title }}
+                                            </a>
+                                        </div>
+
+                                        <div class="text-left sm:text-right">
+                                            <p class="text-2xl font-semibold text-black">
+                                                {{ number_format($finalPrice, 0, ',', '.') }} RSD
+                                            </p>
+                                            @if ($discountPercent)
+                                                <s class="text-sm text-black/45">
+                                                    {{ number_format($product->price, 0, ',', '.') }} RSD
+                                                </s>
+                                            @endif
+                                        </div>
                                     </div>
 
-                                    <div class="text-left sm:text-right">
-                                        <p class="text-2xl font-semibold text-black">
-                                            {{ number_format($finalPrice, 0, ',', '.') }} RSD
-                                        </p>
+                                    <div class="flex flex-wrap gap-3 text-sm">
+                                        <span class="rounded-md bg-black px-3 py-2 uppercase tracking-[0.18em] text-white">
+                                            {{ $product->gender }}
+                                        </span>
+                                        <span
+                                            class="rounded-md border border-black/10 px-3 py-2 uppercase tracking-[0.18em] text-black/70">
+                                            {{ $product->waterType?->type ?? 'Bez tipa' }}
+                                        </span>
+                                        @if ($product->mls->isNotEmpty())
+                                            <span class="rounded-md border border-black/10 px-3 py-2 text-black/70">
+                                                {{ $product->mls->sortBy('size_ml')->pluck('size_ml')->implode(' / ') }} ml
+                                            </span>
+                                        @endif
+                                        <span class="rounded-md border border-black/10 px-3 py-2 text-black/70">
+                                            Kolicina: {{ $cartItem->quantity }}
+                                        </span>
                                         @if ($discountPercent)
-                                            <s class="text-sm text-black/45">
-                                                {{ number_format($product->price, 0, ',', '.') }} RSD
-                                            </s>
+                                            <span class="rounded-md bg-emerald-50 px-3 py-2 text-emerald-700">
+                                                -{{ $discountPercent }}%
+                                            </span>
                                         @endif
                                     </div>
-                                </div>
 
-                                <div class="flex flex-wrap gap-3 text-sm">
-                                    <span class="rounded-md bg-black px-3 py-2 uppercase tracking-[0.18em] text-white">
-                                        {{ $product->gender }}
-                                    </span>
-                                    <span
-                                        class="rounded-md border border-black/10 px-3 py-2 uppercase tracking-[0.18em] text-black/70">
-                                        {{ $product->waterType?->type ?? 'Bez tipa' }}
-                                    </span>
-                                    @if ($product->mls->isNotEmpty())
-                                        <span class="rounded-md border border-black/10 px-3 py-2 text-black/70">
-                                            {{ $product->mls->sortBy('size_ml')->pluck('size_ml')->implode(' / ') }} ml
-                                        </span>
-                                    @endif
-                                    @if ($discountPercent)
-                                        <span class="rounded-md bg-emerald-50 px-3 py-2 text-emerald-700">
-                                            -{{ $discountPercent }}%
-                                        </span>
-                                    @endif
+                                    <div>
+                                        <form method="POST" action="{{ route('deleteCartItemAPI', $cartItem->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="rounded-sm border cursor-pointer border-red-300 px-4 py-2 text-sm text-red-700 transition hover:bg-red-50">
+                                                Obrisi iz korpe
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
+                        @endif
                     @endforeach
                 </div>
 
@@ -121,7 +145,7 @@
                     </div>
 
                     <a href="{{ route('shopPage') }}" class="btn mt-6 flex w-full items-center justify-center px-6 py-3">
-                        Nastavi kupovinu
+                        Porucite
                     </a>
                 </aside>
             </div>

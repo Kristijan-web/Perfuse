@@ -52,4 +52,5 @@ Route::controller(CartController::class)->middleware('auth')->group(function () 
     // ukoliko korisnik nije ulogovan i pokusa da doda proizvod u cart treba da se uloguje
 
     Route::post('/api/carts/{product}', 'store')->name('createCartAPI');
+    Route::delete('/api/carts/items/{cartItem}', 'destroy')->name('deleteCartItemAPI');
 });

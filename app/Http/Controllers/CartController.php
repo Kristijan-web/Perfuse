@@ -123,8 +123,22 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, CartItem $cartItem)
     {
-        //
+        $userCart = Cart::where('user_id', $request->user()->id)->first();
+
+        if (!$userCart || $cartItem->cart_id !== $userCart->id) {
+            abort(403);
+        }
+
+        $cartItem->delete();
+
+        if (!CartItem::where('cart_id', $userCart->id)->exists()) {
+            $userCart->delete();
+        }
+
+        session()->put('success', 'Proizvod uspesno uklonjen iz korpe');
+
+        return redirect()->route('cartPage');
     }
 }
