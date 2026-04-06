@@ -72,7 +72,7 @@
                             <div class="grid gap-5 px-7 py-7 sm:grid-cols-2 sm:px-8 sm:py-8">
                                 <div class="space-y-2">
                                     <label for="name" class="text-sm font-medium text-slate-800">Ime</label>
-                                    <input id="name" name="name" type="text" placeholder="Unesite ime"
+                                    <input id="name" name="name" type="text" placeholder="Unesite ime" value="Kristijan"
                                         value="{{ old('name') ? old('name') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
 
@@ -89,7 +89,7 @@
                                 <div class="space-y-2">
                                     <label for="lastname" class="text-sm font-medium text-slate-800">Prezime</label>
                                     <input id="lastname" name="lastname" type="text" placeholder="Unesite prezime"
-                                        value="{{ old('lastname') ? old('lastname') : '' }}"
+                                        value="Stojanovic" value="{{ old('lastname') ? old('lastname') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
                                     @if($errors->has('lastname'))
                                         <p class="text-red-500">* {{ $errors->first('lastname') }}</p>
@@ -99,7 +99,7 @@
                                 <div class="space-y-2">
                                     <label for="email" class="text-sm font-medium text-slate-800">Email</label>
                                     <input id="email" name="email" type="email" placeholder="ime@email.com"
-                                        value="{{ old('email') ? old('email') : '' }}"
+                                        value="krimster8@gmail.com" value="{{ old('email') ? old('email') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
                                     @if($errors->has('email'))
                                         <p class="text-red-500">* {{ $errors->first('email') }}</p>
@@ -109,7 +109,7 @@
                                 <div class="space-y-2">
                                     <label for="phone_number" class="text-sm font-medium text-slate-800">Telefon</label>
                                     <input id="phone_number" name="phone_number" type="tel" placeholder="+381 60 123 4567"
-                                        value="{{ old('phone_number') ? old('phone_number') : '' }}"
+                                        value="062123123" value="{{ old('phone_number') ? old('phone_number') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
                                     @if($errors->has('phone_number'))
                                         <p class="text-red-500">* {{ $errors->first('phone_number') }}</p>
@@ -118,7 +118,7 @@
 
                                 <div class="space-y-2 sm:col-span-2">
                                     <label for="adress" class="text-sm font-medium text-slate-800">Adresa</label>
-                                    <input id="adress" name="adress" type="text" placeholder="Ulica i broj"
+                                    <input id="adress" name="adress" type="text" placeholder="Ulica i broj" value="Petrovska"
                                         value="{{ old('adress') ? old('adress') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
                                     @if($errors->has('adress'))
@@ -128,7 +128,7 @@
 
                                 <div class="space-y-2">
                                     <label for="city" class="text-sm font-medium text-slate-800">Grad</label>
-                                    <input id="city" name="city" type="text" placeholder="Unesite grad"
+                                    <input id="city" name="city" type="text" placeholder="Unesite grad" value="Beograd"
                                         value="{{ old('city') ? old('city') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
                                     @if($errors->has('city'))
@@ -138,7 +138,7 @@
 
                                 <div class="space-y-2">
                                     <label for="postal_code" class="text-sm font-medium text-slate-800">Postanski broj</label>
-                                    <input id="postal_code" name="postal_code" type="text" placeholder="11000"
+                                    <input id="postal_code" name="postal_code" type="text" placeholder="11000" value="11000"
                                         value="{{ old('postal_code') ? old('postal_code') : '' }}"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
                                     @if($errors->has('postal_code'))
@@ -172,7 +172,7 @@
                             </div>
 
                             <div class="mt-8 space-y-5">
-                                @foreach ($orderItems as $cartItem)
+                                @foreach ($orderItems as $key => $cartItem)
                                     @php
                                         $product = $cartItem->product;
                                         $mainImage = $product?->images->firstWhere('is_main_image', true)?->path
@@ -182,6 +182,11 @@
                                             ? $product->price - round(($product->price * $discountPercent) / 100)
                                             : $product->price;
                                     @endphp
+
+                                    <input type="hidden" name="products[{{ $key }}][quantity]" value="{{ $cartItem->id }}">
+                                    <input type="hidden" name="products[{{ $key }}][product_id]" value="{{ $product->id }}">
+
+
 
                                     <article
                                         class="grid gap-5 rounded-2xl border border-black/10 bg-[#fcfbf8] p-5 sm:grid-cols-[120px_1fr] sm:p-6">

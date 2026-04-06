@@ -25,8 +25,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // Ovo je global error handler
         //
     
-
         $exceptions->render(function (ValidationException $err, $request) {
+
             return redirect()
                 ->back()
                 ->withErrors($err->errors())
@@ -43,7 +43,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
 
         $exceptions->render(function (Throwable $err) {
-
             $errorCode = uuid_create();
             $errorLine = $err->getLine();
             $errorFile = $err->getFile();

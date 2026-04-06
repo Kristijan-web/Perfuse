@@ -10,6 +10,12 @@ class OrderLine extends Model
     /** @use HasFactory<\Database\Factories\OrderLineFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'quantity',
+    ];
+
     // 1 stavka pripada jednom order-u
 
     public function order()

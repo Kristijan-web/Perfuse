@@ -14,6 +14,20 @@ class Order extends Model
 
     // 1 order ima vise stavki(orderline)
     // 1 stavka(orderline) pripada jednom order-u
+    protected $fillable = [
+        'name',
+        'lastname',
+        'email',
+        'phone_number',
+        'adress',
+        'city',
+        'postal_code',
+        'note',
+        'total_price',
+        'total_quantity',
+        'user_id',
+    ];
+
 
     public function orders()
     {
