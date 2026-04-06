@@ -75,6 +75,24 @@ class PageController extends Controller
         return view('pages.user.contact');
     }
 
+    public function order(Request $request)
+    {
+
+
+        // $products = CartItem::where('user_id', $request->user()->id);
+        $userCartId = $request->user()->cart->id;
+        $products = CartItem::with('product')->where('cart_id', $userCartId)->get();
+
+        // Ovo iznad ali prakticnije napisano
+        // $products = $request->user()
+        // ?->cart
+        // ?->items()
+        // ->with('product')
+        // ->get()
+
+        return view('pages.user.order', ['products' => $products]);
+    }
+
 
 }
 

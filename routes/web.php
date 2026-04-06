@@ -19,6 +19,7 @@ Route::controller(PageController::class)->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/contact', 'contact')->name('contactpage');
         Route::get('/cart', 'cart')->name('cartPage');
+        Route::get('/order', 'order')->name('orderPage');
 
     });
 

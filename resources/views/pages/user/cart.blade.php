@@ -151,7 +151,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('shopPage') }}" class="btn mt-6 flex w-full items-center justify-center px-6 py-3">
+                    <a href="{{ route('orderPage') }}" class="btn mt-6 flex w-full items-center justify-center px-6 py-3">
                         Porucite
                     </a>
                 </aside>
