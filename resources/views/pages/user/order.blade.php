@@ -46,7 +46,8 @@
             </div>
 
             @if ($orderItems->isEmpty())
-                <div class="rounded-[2rem] border border-dashed border-black/15 bg-white px-6 py-16 text-center shadow-my-shadow">
+                <div
+                    class="rounded-[2rem] border border-dashed border-black/15 bg-white px-6 py-16 text-center shadow-my-shadow">
                     <p class="text-sm uppercase tracking-[0.24em] text-black/45">Nemate proizvode za porucivanje</p>
                     <h2 class="mt-3 text-2xl font-semibold tracking-tight text-black">
                         Dodajte parfeme u korpu kako biste nastavili na stranicu porudzbine.
@@ -124,7 +125,8 @@
                                         Pregled proizvoda iz korpe
                                     </h2>
                                 </div>
-                                <a href="{{ route('cartPage') }}" class="text-sm font-medium text-black/60 transition hover:text-black">
+                                <a href="{{ route('cartPage') }}"
+                                    class="text-sm font-medium text-black/60 transition hover:text-black">
                                     Izmeni korpu
                                 </a>
                             </div>
@@ -237,12 +239,7 @@
                                     </div>
                                 </div>
 
-                                <div class="rounded-2xl border border-black/10 bg-[#fcfbf8] p-4">
-                                    <p class="text-xs uppercase tracking-[0.22em] text-black/45">Napomena</p>
-                                    <p class="mt-2 text-sm leading-6 text-black/65">
-                                        Nakon potvrde, nas tim ce vas kontaktirati radi verifikacije porudzbine i detalja dostave.
-                                    </p>
-                                </div>
+
 
                                 <button type="button"
                                     class="inline-flex w-full items-center justify-center rounded-2xl bg-[#101010] px-6 py-4 text-sm font-semibold text-white transition hover:bg-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2">

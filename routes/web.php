@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Sav view je u PageController-u
+
 // Svi ostali kontroleri su "API" kontroleri
 
 Route::controller(PageController::class)->group(function () {

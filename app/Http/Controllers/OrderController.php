@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateOrderRequest;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -26,13 +28,46 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateOrderRequest $request)
     {
         //
         // logika za pravljenje novog order-a i order_line-a
         // Sta mi sve treba od podataka da bih napravio order?
-        // - total_price
-        // - total_quantity
+        // $table->string('name');
+        // $table->string('lastname');
+        // $table->string('email');
+        // $table->string('phone_number');
+        // $table->string('adress');
+        // $table->string('city');
+        // $table->string('postal_code');
+        // $table->text('note')->nullable();
+        // $table->integer("total_price");
+        // $table->integer("total_quantity");
+        // $table->foreignId("user_id")->constrained();
+
+        // treba bi user_id
+
+        $validated = $request->validated();
+
+        $userId = $request->user()->id;
+
+        Order::create([
+            'name' => $validated['name'],
+            'lastname' => $validated['lastname'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'adress' => $validated['adress'],
+            'city' => $validated['city'],
+            'postal_code' => $validated['postal_code'],
+            'note' => $validated['note'] ?? null,
+            'total_price' => $validated['total_price'],
+            'total_quantity' => $validated['total_quantity'],
+            'user_id' => $userId,
+        ]);
+
+        session()->flash('success', 'Narudzbina uspesno kreirana');
+        return redirect()->back();
+
 
     }
 
