@@ -54,7 +54,10 @@
                                 <a href="{{ route('productDetails', $product->id) }}"
                                     class="flex items-center justify-center rounded-xl bg-stone-100 p-4">
                                     @if ($mainImage)
-                                        <img src="{{ $mainImage }}" alt="{{ $product->brand?->title }} {{ $product->title }}"
+                                        {{-- http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg --}}
+                                        {{-- src="{{ $mainImage }}" --}}
+                                        <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
+                                            alt="{{ $product->brand?->title }} {{ $product->title }}"
                                             class="aspect-square w-full max-w-[120px] object-contain">
                                     @else
                                         <div
@@ -112,9 +115,13 @@
                                     </div>
 
                                     <div>
-                                        <form method="POST" action="{{ route('deleteCartItemAPI', $cartItem->id) }}">
+                                        {{-- @php
+                                        dd($cartItem->id);
+                                        @endphp --}}
+                                        <form method="POST" action="{{ route('deleteCartItemAPI', $cartItem->cart_id) }}">
                                             @csrf
                                             @method('DELETE')
+                                            <input type="hidden" name="product_id" value="{{ $cartItem->product_id }}">
                                             <button type="submit"
                                                 class="rounded-sm border cursor-pointer border-red-300 px-4 py-2 text-sm text-red-700 transition hover:bg-red-50">
                                                 Obrisi iz korpe

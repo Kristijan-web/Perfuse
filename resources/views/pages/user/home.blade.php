@@ -43,8 +43,8 @@
                         <p class="mt-2 text-xs uppercase tracking-[0.24em] text-white/65">Brza obrada porudzbine</p>
                     </div>
                     <div class="rounded-xl border border-white/10 bg-white/8 p-5 backdrop-blur-sm">
-                        <p class="text-3xl font-semibold">4.9/5</p>
-                        <p class="mt-2 text-xs uppercase tracking-[0.24em] text-white/65">Ocena kupaca</p>
+                        <p class="text-3xl font-semibold">20+</p>
+                        <p class="mt-2 text-xs uppercase tracking-[0.24em] text-white/65">Brandova</p>
                     </div>
                 </div>
             </div>

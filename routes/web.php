@@ -7,6 +7,8 @@ use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 
+// Sav view je u PageController-u
+// Svi ostali kontroleri su "API" kontroleri
 
 Route::controller(PageController::class)->group(function () {
 
@@ -40,13 +42,13 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(ContactController::class)->middleware('auth')->group(function () {
 
-    // post radi se novi upis u bazi
     Route::post('/api/contacts', 'store')->name('createContactAPI');
 
 });
 
 Route::controller(CartController::class)->middleware('auth')->group(function () {
-    // ukoliko korisnik nije ulogovan i pokusa da doda proizvod u cart treba da se uloguje
 
     Route::post('/api/carts/{product}', 'store')->name('createCartAPI');
+    Route::delete('/api/carts/{cart}', 'destroy')->name('deleteCartItemAPI');
 });
+

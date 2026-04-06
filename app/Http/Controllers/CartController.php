@@ -90,7 +90,7 @@ class CartController extends Controller
         // Kako cu znati da je prozivod uspesno dodat u korpu
         // ovde mogu da upisem u sesiju
 
-        session()->put('success', 'Proizvod uspesno dodat u korpu');
+        session()->flash('success', 'Proizvod uspesno dodat u korpu');
         return redirect()->back();
 
 
@@ -123,22 +123,34 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, CartItem $cartItem)
+    public function destroy(Request $request, Cart $cart)
     {
-        $userCart = Cart::where('user_id', $request->user()->id)->first();
 
-        if (!$userCart || $cartItem->cart_id !== $userCart->id) {
-            abort(403);
+        $cartId = $cart->id;
+        $productId = $request->input('product_id');
+
+        $cartItemsRecord = CartItem::where('cart_id', $cartId)->where('product_id', $productId)->first();
+
+        // logika ako postoji zapis za taj proizvod u cart_items
+
+        // proveriti da li je quantity veci od 1 ako je veci od 1 onda umanjiti za 1
+        // ako nije onda obrisati record
+
+        if ($cartItemsRecord->quantity > 1) {
+            // Ako je quantity veci od 1 update-uje se
+
+            $cartItemsRecord->update(['quantity' => $cartItemsRecord->quantity - 1]);
+        } else {
+            // ako je quantity 1 znaci da se brise record i brise se ceo cart u cart tabeli
+            $cartItemsRecord->delete();
+            // cim se obrise mora da se pita da li postoji jos recorda koji pripadaju ovom cart id-u i ako ne postoij birse se cart
+            $areThereOtherProductsInTheCart = CartItem::where('cart_id', $cartId)->first();
+
+            if (!$areThereOtherProductsInTheCart) {
+                Cart::find($cartItemsRecord->cart_id)->delete();
+            }
+
         }
-
-        $cartItem->delete();
-
-        if (!CartItem::where('cart_id', $userCart->id)->exists()) {
-            $userCart->delete();
-        }
-
-        session()->put('success', 'Proizvod uspesno uklonjen iz korpe');
-
-        return redirect()->route('cartPage');
+        return redirect()->back();
     }
 }

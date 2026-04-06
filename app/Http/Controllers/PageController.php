@@ -60,9 +60,9 @@ class PageController extends Controller
     public function cart(Request $request)
     {
 
-        $userCart = Cart::where('user_id', $request->user()->id)->first();
+        $userCart = Cart::where('user_id', $request->user()->id)?->first();
 
-        $userProducts = CartItem::with('product')->where('cart_id', $userCart->id)->get();
+        $userProducts = CartItem::with('product')->where('cart_id', $userCart?->id)->get();
 
 
 
