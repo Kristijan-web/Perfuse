@@ -1,7 +1,7 @@
-@extends('layouts.user');
+@extends('layouts.user')
 
 
-@section('title', 'Order');
+@section('title', 'Order')
 
 
 @section('content')
@@ -57,7 +57,10 @@
                     </a>
                 </div>
             @else
-                <div class="grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
+                <form method="POST" action="{{ route('createOrderAPI') }}" class="grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
+                    @csrf
+                    <input type="hidden" name="total_price" value="{{ $total }}">
+                    <input type="hidden" name="total_quantity" value="{{ $totalQuantity }}">
                     <div class="space-y-8">
                         <section
                             class="overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.08)]">
@@ -66,55 +69,85 @@
                                 <h2 class="mt-2 text-2xl font-semibold tracking-tight">Unesite vase podatke</h2>
                             </div>
 
-                            <form class="grid gap-5 px-7 py-7 sm:grid-cols-2 sm:px-8 sm:py-8">
+                            <div class="grid gap-5 px-7 py-7 sm:grid-cols-2 sm:px-8 sm:py-8">
                                 <div class="space-y-2">
-                                    <label for="first_name" class="text-sm font-medium text-slate-800">Ime</label>
-                                    <input id="first_name" name="first_name" type="text" placeholder="Unesite ime"
+                                    <label for="name" class="text-sm font-medium text-slate-800">Ime</label>
+                                    <input id="name" name="name" type="text" placeholder="Unesite ime"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
+
+                                    @if($errors->has('name'))
+                                        <p class="text-red-500">* {{ $errors->first('name') }}</p>
+                                    @endif
+
+                                    {{-- @error('name')
+
+                                    <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror --}}
                                 </div>
 
                                 <div class="space-y-2">
-                                    <label for="last_name" class="text-sm font-medium text-slate-800">Prezime</label>
-                                    <input id="last_name" name="last_name" type="text" placeholder="Unesite prezime"
+                                    <label for="lastname" class="text-sm font-medium text-slate-800">Prezime</label>
+                                    <input id="lastname" name="lastname" type="text" placeholder="Unesite prezime"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
+                                    @error('lastname')
+                                        <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="space-y-2">
                                     <label for="email" class="text-sm font-medium text-slate-800">Email</label>
                                     <input id="email" name="email" type="email" placeholder="ime@email.com"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
+                                    @error('email')
+                                        <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="space-y-2">
-                                    <label for="phone" class="text-sm font-medium text-slate-800">Telefon</label>
-                                    <input id="phone" name="phone" type="tel" placeholder="+381 60 123 4567"
+                                    <label for="phone_number" class="text-sm font-medium text-slate-800">Telefon</label>
+                                    <input id="phone_number" name="phone_number" type="tel" placeholder="+381 60 123 4567"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
+                                    @error('phone_number')
+                                        <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="space-y-2 sm:col-span-2">
-                                    <label for="address" class="text-sm font-medium text-slate-800">Adresa</label>
-                                    <input id="address" name="address" type="text" placeholder="Ulica i broj"
+                                    <label for="adress" class="text-sm font-medium text-slate-800">Adresa</label>
+                                    <input id="adress" name="adress" type="text" placeholder="Ulica i broj"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
+                                    @error('adress')
+                                        <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="space-y-2">
                                     <label for="city" class="text-sm font-medium text-slate-800">Grad</label>
                                     <input id="city" name="city" type="text" placeholder="Unesite grad"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
+                                    @error('city')
+                                        <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="space-y-2">
                                     <label for="postal_code" class="text-sm font-medium text-slate-800">Postanski broj</label>
                                     <input id="postal_code" name="postal_code" type="text" placeholder="11000"
                                         class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">
+                                    @error('postal_code')
+                                        <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="space-y-2 sm:col-span-2">
                                     <label for="note" class="text-sm font-medium text-slate-800">Napomena</label>
                                     <textarea id="note" name="note" rows="4" placeholder="Dodatne informacije za dostavu"
-                                        class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70"></textarea>
+                                        class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:bg-white focus:ring-4 focus:ring-slate-200/70">{{ old('note') }}</textarea>
+                                    @error('note')
+                                        <p class="text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                            </form>
+                            </div>
                         </section>
 
                         <section class="rounded-[2rem] border border-black/10 bg-white p-7 shadow-my-shadow sm:p-8">
@@ -241,7 +274,7 @@
 
 
 
-                                <button type="button"
+                                <button type="submit"
                                     class="inline-flex w-full items-center justify-center rounded-2xl bg-[#101010] px-6 py-4 text-sm font-semibold text-white transition hover:bg-black focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2">
                                     Potvrdite porudzbinu
                                 </button>
@@ -253,7 +286,7 @@
                             </div>
                         </div>
                     </aside>
-                </div>
+                </form>
             @endif
         </section>
     </main>

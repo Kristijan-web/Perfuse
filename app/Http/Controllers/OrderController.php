@@ -46,7 +46,7 @@ class OrderController extends Controller
         // $table->foreignId("user_id")->constrained();
 
         // treba bi user_id
-
+        dd($request);
         $validated = $request->validated();
 
         $userId = $request->user()->id;
