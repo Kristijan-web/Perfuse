@@ -188,7 +188,7 @@
 
                 @endforeach
 
-                <input type="text" placeholder="Pretrazite..." name="title" 
+                <input type="text" placeholder="Pretrazite po nazivu parfema..." name="title" 
        
 
                value="{{ $request?->query('title') ? $request->query('title') : '' }}"

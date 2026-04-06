@@ -142,10 +142,7 @@
                                 @csrf
                                 <button type="submit" class="btn">Dodaj u korpu</button>
                             </form>
-                            <button
-                                class="rounded-sm border border-main-color-shade px-6 py-3 transition hover:bg-black hover:text-white">
-                                Sacuvaj
-                            </button>
+
                         </div>
                     </div>
                 </div>
