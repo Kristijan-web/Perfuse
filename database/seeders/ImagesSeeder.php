@@ -35,15 +35,36 @@ class ImagesSeeder extends Seeder
 
         $imageRows = [];
         $productCount = $productIds->count();
+        $imageCount = $imageFiles->count();
+        $timestamp = now();
 
-        foreach ($imageFiles as $index => $file) {
-            $productIndex = intdiv($index, 2) % $productCount;
+        foreach ($productIds as $index => $productId) {
+            if ($index >= $imageCount) {
+                break;
+            }
+
             $imageRows[] = [
-                'path' => 'images/ShopPage/Products/' . $file->getFilename(),
+                'path' => 'images/ShopPage/Products/' . $imageFiles[$index]->getFilename(),
+                'product_id' => $productId,
+                'is_main_image' => 1,
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
+            ];
+        }
+
+        for ($index = $productCount; $index < $imageCount; $index++) {
+            $productIndex = $index - $productCount;
+
+            if ($productIndex >= $productCount) {
+                break;
+            }
+
+            $imageRows[] = [
+                'path' => 'images/ShopPage/Products/' . $imageFiles[$index]->getFilename(),
                 'product_id' => $productIds[$productIndex],
-                'is_main_image' => $index % 2 === 0 ? 1 : 0,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'is_main_image' => 0,
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
             ];
         }
 

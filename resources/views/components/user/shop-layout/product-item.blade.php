@@ -18,9 +18,8 @@
 
 
 @endphp
-
-<a href="{{ route("productDetails", $product->id) }}">
-    <article class="shadow-my-shadow relative flex w-full flex-col items-center justify-between gap-3 overflow-hidden rounded-sm
+<a href="{{ route("productDetails", $product->id) }}" class="block h-full w-full">
+    <article class="shadow-my-shadow relative flex h-full w-full flex-col items-center justify-between gap-3 overflow-hidden rounded-sm
 p-10">
         @if ($product->discount?->discount)
             <div class="text-secondary-color absolute -right-7 top-5 w-[120px] rotate-45 bg-black text-center">
@@ -29,7 +28,7 @@ p-10">
         @endif
         {{-- src="{{ $main_image }}" --}}
         {{-- src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg" --}}
-        <img class="mb-5 w-full rounded-sm sm:w-full min-[440px]:w-1/2" src="{{ $main_image }}"
+        <img class="mb-5 aspect-square w-full rounded-sm object-cover sm:w-full min-[440px]:w-1/2" src="{{ $main_image }}"
             alt="{{ $product->brand->title }} {{ $product->brand->title }}">
 
         <p class="text-xl">{{ $product->brand->title }} {{ $product->title }}</p>
