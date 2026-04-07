@@ -31,7 +31,7 @@ Route::controller(PageController::class)->group(function () {
         Route::get('/contact', 'contact')->name('contactpage');
         Route::get('/cart', 'cart')->name('cartPage');
         Route::get('/order', 'order')->name('orderPage');
-
+        Route::get('/order/success', 'orderSuccess')->name('orderSuccessPage');
     });
 
     Route::middleware('isAdmin')->group(function () {

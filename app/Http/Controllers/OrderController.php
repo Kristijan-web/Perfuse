@@ -108,7 +108,7 @@ class OrderController extends Controller
 
         session()->flash('success', 'Narudzbina uspesno kreirana');
 
-        return redirect()->route('shopPage');
+        return redirect()->route('orderSuccessPage');
 
 
     }
