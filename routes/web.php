@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(PageController::class)->group(function () {
 
+    // bez obzira na role
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
     Route::get('/shop/product/{product}', 'productDetails')->name("productDetails");
@@ -47,7 +49,7 @@ Route::controller(AuthController::class)->group(function () {
         Route::post('/register', 'register')->name("registerAPI");
     });
 
-    Route::get('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header, mada obicno po REST konvecniji je namena post-a da kreira nesto u bazi, a sa logout ne pravimo nista
+    Route::get('/logout', 'logout')->name("logoutAPI"); // iso bih sa POST umeto GET jer ipak saljemo neke podatke a to je sesija korisnika kroz header, mada obicno po REST konvecniji je namena post-a da kreira nesto u bazi, a sa logout ne pravimo nista u bazi
 
 });
 
@@ -67,4 +69,8 @@ Route::controller(OrderController::class)->middleware('auth')->group(function ()
 
     Route::post('/api/orders', 'store')->name('createOrderAPI');
 
+});
+
+Route::controller(ProductController::class)->middleware('isAdmin')->group(function () {
+    Route::delete('/api/products/{id}', 'destroy')->name('deleteProductAPI');
 });
