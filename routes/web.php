@@ -19,6 +19,12 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/shop/product/{product}', 'productDetails')->name("productDetails");
     Route::get('/author', 'author')->name('authorPage');
 
+
+    Route::middleware('guest')->group(function () {
+        Route::get('/register', 'register')->name('registerPage');
+        Route::get('/login', 'login')->name('login');
+    });
+
     Route::middleware('auth')->group(function () {
         Route::get('/contact', 'contact')->name('contactpage');
         Route::get('/cart', 'cart')->name('cartPage');
@@ -26,10 +32,11 @@ Route::controller(PageController::class)->group(function () {
 
     });
 
-    Route::middleware('guest')->group(function () {
-        Route::get('/register', 'register')->name('registerPage');
-        Route::get('/login', 'login')->name('login');
+    Route::middleware('isAdmin')->group(function () {
+        Route::get("/admin", 'adminProduct')->name('adminProductsPage');
     });
+
+
 
 });
 

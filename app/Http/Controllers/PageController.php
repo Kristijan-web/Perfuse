@@ -98,6 +98,24 @@ class PageController extends Controller
         return view('pages.user.author');
     }
 
+    // Ispod su stranice za admina
+
+    public function adminProduct()
+    {
+        // mora da dostavim sve podatke o proizvodima
+
+        // $table->foreignId('brand_id')->constrained();
+        // $table->foreignId('water_type_id')->constrained();
+        // $table->foreignId('discount_id')->nullable()->constrained();
+        // isto fali images
+        // isto fali ml_p
+
+        $products = Product::with(['brand', 'waterType', 'discount', 'images', 'mls'])->get();
+
+        return view('pages.admin.product', ['products' => $products]);
+
+    }
+
 
 }
 

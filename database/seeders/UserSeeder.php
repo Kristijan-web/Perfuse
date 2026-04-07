@@ -17,8 +17,8 @@ class UserSeeder extends Seeder
     {
         //
         // JA ovde mora da napravim celog usera
-        User::create(['name' => 'Kristijan', 'email' => 'kristijan1@gmail.com', 'password' => Hash::make('password'), 'role_id' => Role::where('name', 'user')->first()->id]);
-        User::create(['name' => 'Pera', 'email' => 'petar1@gmail.com', 'password' => Hash::make('password'), 'role_id' => Role::where('name', 'admin')->first()->id]);
+        User::create(['name' => 'Kristijan', 'email' => 'krimster8@gmail.com', 'password' => Hash::make('cao123'), 'role_id' => Role::where('name', 'admin')->first()->id]);
+        User::create(['name' => 'Pera', 'email' => 'petar1@gmail.com', 'password' => Hash::make('password'), 'role_id' => Role::where('name', 'user')->first()->id]);
 
         User::factory(10)->create();
 

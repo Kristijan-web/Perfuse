@@ -1,5 +1,9 @@
 **Nije jos uradjen admin panel**
 
+**Info o projektu**
+- Projekat nema try catch u controlerima jer koristi global error handler definisan u app.php unutar bootstrap foldera
+- Sve greske u aplikaciji se loguju u storage/logs/error.php
+
 **For starting the project you need:**
 
 - Composer version 2.8.12 
