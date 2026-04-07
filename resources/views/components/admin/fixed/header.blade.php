@@ -18,7 +18,7 @@
         <p class="px-3 text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Navigation</p>
 
         <nav class="mt-4 flex flex-col gap-2 text-sm font-medium">
-            <a href="{{ route('adminUserPage') }}"
+            <a href="{{ route('adminUsersPage') }}"
                 class="{{ request()->is('admin/users*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200">
                 <span>Users</span>
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">01</span>
@@ -36,7 +36,7 @@
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">03</span>
             </a>
 
-            <a href="{{ url('/admin/contacts') }}"
+            <a href="{{ route('adminSubmissionsPage') }}"
                 class="{{ request()->is('admin/contacts*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200">
                 <span>Contact Submissions</span>
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">04</span>

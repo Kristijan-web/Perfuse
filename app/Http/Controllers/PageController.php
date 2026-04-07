@@ -7,6 +7,7 @@ use App\Http\Helpers\APIFeatures;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Contact;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\WaterType;
@@ -121,6 +122,17 @@ class PageController extends Controller
         $users = User::with('role');
 
         return view('pages.admin.user', ['users' => $users]);
+    }
+
+    public function adminContactSubmission()
+    {
+        // mora da izvadim sve submisione
+        // mora da ispisem contact i usera koji ga je napravio 
+        $contacts = Contact::with('user')->get();
+
+        return view('pages.admin.contact', ['contacts' => $contacts]);
+
+
     }
 
 

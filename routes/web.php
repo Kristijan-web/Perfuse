@@ -36,7 +36,8 @@ Route::controller(PageController::class)->group(function () {
 
     Route::middleware('isAdmin')->group(function () {
         Route::get("/admin", 'adminProduct')->name('adminProductsPage');
-        Route::get('/admin/users', 'adminUser')->name('adminUserPage');
+        Route::get('/admin/users', 'adminUser')->name('adminUsersPage');
+        Route::get('/admin/contacts', 'adminContactSubmission')->name('adminSubmissionsPage');
     });
 
 
