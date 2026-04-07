@@ -247,6 +247,54 @@
 
                 @endforeach
             </div>
+
+            <div class="col-span-full mt-8 flex items-center justify-center gap-4 lg:col-start-4 lg:col-end-13">
+            
+                    {{-- // kako da znam kada da skinem dugme back?
+                    // - ako u url stoji page = 1 ili je url prazan onda se skida to dugme
+                    // $pageQuery = $request->query('page') = 1; --}}
+                    {{-- @if(!$request->query('page') || $request->query('page') > 1 )  --}}
+                    @if($request->query('page') > 1 ) 
+                    <form method="GET" action="{{ url()->current() }}">
+                        @foreach ($request->except('page') as $key => $value)
+                            @if (is_array($value))
+                                @foreach ($value as $item)
+                                    <input type="hidden" name="{{ $key }}[]" value="{{ $item }}">
+                                @endforeach
+                            @else
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                        @endforeach
+                        <button type="submit" name="page" value="{{ $products->currentPage() - 1 }}"
+                            class="cursor-pointer flex h-12 w-12 items-center justify-center rounded-full border border-main-color-shade/20 bg-white text-main-color-shade shadow-sm transition hover:border-main-color-shade hover:bg-main-color-shade hover:text-white">
+                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m15 18-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+                    @endif
+           
+                @if($products->hasMorePages()) 
+                <form method="GET" action="{{ url()->current() }}">
+                    @foreach ($request->except('page') as $key => $value)
+                        @if (is_array($value))
+                            @foreach ($value as $item)
+                                <input type="hidden" name="{{ $key }}[]" value="{{ $item }}">
+                            @endforeach
+                        @else
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
+                    @endforeach
+                    <button type="submit" name="page" value="{{ $products->currentPage() + 1 }}"
+                        class="cursor-pointer flex h-12 w-12 items-center justify-center rounded-full border border-main-color-shade/20 bg-white text-main-color-shade shadow-sm transition hover:border-main-color-shade hover:bg-main-color-shade hover:text-white">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </form>
+                @endif
+  
+            </div>
         </div>
     </section>
 

@@ -138,10 +138,39 @@ class APIFeatures
 
     }
 
-    public function paginate($page = 1)
+    public function paginate($productsPerPage = 1)
     {
 
         // Jednostavno ako se vraca 30 redova, treba da se uzmu redovi od 1-10 za page 1 pa za page 2 od 11 do 20, page 3 od 21 do 30
+
+        // Cemu sluzi paginacija?
+        // - Da se ne vrate svi proizvodi iz baze vec samo deo, jer ako dodje baza to 1000+ proizvoda mozda to cak nece moci ni stati u file size JSON-a koji prihvata browser a i servera da pokupi 1000+ recorda i da napravi popuni html moze biti sporo
+
+        //
+        $allowedFields = ['page'];
+        $queryStringCopy = $this->queryString;
+
+
+        foreach ($queryStringCopy as $field => $fieldValue) {
+
+            if (!in_array($field, $allowedFields)) {
+                unset($queryStringCopy[$field]);
+            }
+        }
+
+        $page = $queryStringCopy['page'] ?? null;
+
+
+        // ako je page 1 treba biti od 1 do 10 ((1-1) * 10) + 1 = 1
+        // ako je page 2 treba biti od 11 d 20   ((2-1) * 10 ) + 1 = 11
+        // ako je page 3 treba biti od 21 do 30   ((3-1) * 10 )  + 1 = 21
+        // treba samo da kazemo odakle da pocne od kog id-a
+        // kako ide formula?
+        // - ((page-1) * 10 ) + 1 
+
+        $this->query->paginate($productsPerPage);
+
+        return $this;
 
     }
 
