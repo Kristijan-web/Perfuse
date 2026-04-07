@@ -134,6 +134,11 @@ class PageController extends Controller
 
 
     }
+    public function adminOrder()
+    {
+
+
+    }
 
 
 }

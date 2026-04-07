@@ -1,6 +1,7 @@
 **Info o projektu**
 - Projekat nema try catch u controlerima jer koristi global error handler definisan u app.php unutar bootstrap foldera
 - Sve greske u aplikaciji se loguju u storage/logs/error.php
+- Dosta stvari/funkcionalnosti je jos moglo da se doda: mailer za potvrdu naloga i mogucnosti restarta sifre, mogucnosti filtiranja i sortiranja u admin panelu, mailer za obavestavanje korisnika da je order uspesan, opcija da korisnik moze da edituje svoje podatke, mogucnost da admin odgovori na submitane contact forme, itd...
 
 **Kredencijali**
 - Admin: email: krimster8@gmail.com password: cao123
