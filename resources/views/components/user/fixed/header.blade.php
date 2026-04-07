@@ -30,7 +30,28 @@
                     </svg>
                     <span>Korpa</span>
                 </a>
+
+
+                @if(Auth::user()->role->name === 'admin')
+                    <a href="/admin">Admin</a>
+                @endif
+
+                <form method="GET" action="{{ route('logoutAPI') }}"
+                    class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
+                                                                                                                                            duration-200 hover:opacity-75">
+                    @csrf
+                    @method("DELETE")
+
+                    {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 20c1.6-4 5-6 8-6s6.4 2 8 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg> --}}
+                    <button type="submit">Logout</button>
+                </form>
+
             @endauth
+
 
 
 
@@ -51,21 +72,9 @@
 
             @endguest
 
-            @auth
-                <form method="GET" action="{{ route('logoutAPI') }}"
-                    class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
-                                                                                                            duration-200 hover:opacity-75">
-                    @csrf
-                    @method("DELETE")
+            {{-- @auth
 
-                    {{-- <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
-                        aria-hidden="true">
-                        <circle cx="12" cy="8" r="4"></circle>
-                        <path d="M4 20c1.6-4 5-6 8-6s6.4 2 8 6" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg> --}}
-                    <button type="submit">Logout</button>
-                </form>
-            @endauth
+            @endauth --}}
 
         </nav>
     </div>
