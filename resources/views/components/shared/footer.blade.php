@@ -56,6 +56,7 @@
             <a class="break-all transition hover:opacity-80" href="mailto:exmoor23@gmail.com">exmoor23@gmail.com</a>
             {{-- <p>RSS &amp; SITEMAP</p> --}}
             <a target="_blank" href="{{ asset('DocumentationPerfuse.pdf') }}">Dokumentacija</a>
+            <a target="_blank" href="{{ route('authorPage') }}">Author</a>
         </div>
 
         <div class="text-secondary-color">

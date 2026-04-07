@@ -93,6 +93,11 @@ class PageController extends Controller
         return view('pages.user.order', ['products' => $products]);
     }
 
+    public function author()
+    {
+        return view('pages.user.author');
+    }
+
 
 }
 

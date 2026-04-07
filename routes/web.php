@@ -17,6 +17,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/', 'home')->name('homePage');
     Route::get('/shop', 'shop')->name('shopPage');
     Route::get('/shop/product/{product}', 'productDetails')->name("productDetails");
+    Route::get('/author', 'author')->name('authorPage');
 
     Route::middleware('auth')->group(function () {
         Route::get('/contact', 'contact')->name('contactpage');
