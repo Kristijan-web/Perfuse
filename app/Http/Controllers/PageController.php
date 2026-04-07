@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\WaterType;
 use Illuminate\Http\Request;
 
@@ -107,18 +108,19 @@ class PageController extends Controller
 
     public function adminProduct()
     {
-        // mora da dostavim sve podatke o proizvodima
-
-        // $table->foreignId('brand_id')->constrained();
-        // $table->foreignId('water_type_id')->constrained();
-        // $table->foreignId('discount_id')->nullable()->constrained();
-        // isto fali images
-        // isto fali ml_p
 
         $products = Product::with(['brand', 'waterType', 'discount', 'images', 'mls'])->get();
 
         return view('pages.admin.product', ['products' => $products]);
 
+    }
+    public function adminUser()
+    {
+        // dohvati sve podakte o userima koji postoje u aplikaciji
+
+        $users = User::with('role');
+
+        return view('pages.admin.user', ['users' => $users]);
     }
 
 

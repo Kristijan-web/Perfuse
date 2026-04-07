@@ -1,7 +1,9 @@
-<header class="fixed left-0 top-0 flex h-screen w-72 flex-col border-r border-slate-200 bg-slate-950 text-slate-100 shadow-2xl">
+<header
+    class="fixed left-0 top-0 flex h-screen w-72 flex-col border-r border-slate-200 bg-slate-950 text-slate-100 shadow-2xl">
     <div class="border-b border-slate-800 px-6 py-6">
         <div class="flex items-center gap-3">
-            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-sky-500 to-blue-600 text-sm font-semibold text-white shadow-lg shadow-sky-950/30">
+            <div
+                class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-sky-500 to-blue-600 text-sm font-semibold text-white shadow-lg shadow-sky-950/30">
                 AP
             </div>
 
@@ -16,34 +18,26 @@
         <p class="px-3 text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Navigation</p>
 
         <nav class="mt-4 flex flex-col gap-2 text-sm font-medium">
-            <a
-                href="{{ url('/admin/users') }}"
-                class="{{ request()->is('admin/users*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200"
-            >
+            <a href="{{ route('adminUserPage') }}"
+                class="{{ request()->is('admin/users*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200">
                 <span>Users</span>
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">01</span>
             </a>
 
-            <a
-                href="{{ url('/admin/products') }}"
-                class="{{ request()->is('admin/products*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200"
-            >
+            <a href="{{ route('adminProductsPage') }}"
+                class="{{ request()->is('admin/products*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200">
                 <span>Products</span>
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">02</span>
             </a>
 
-            <a
-                href="{{ url('/admin/orders') }}"
-                class="{{ request()->is('admin/orders*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200"
-            >
+            <a href="{{ url('/admin/orders') }}"
+                class="{{ request()->is('admin/orders*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200">
                 <span>Orders</span>
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">03</span>
             </a>
 
-            <a
-                href="{{ url('/admin/contacts') }}"
-                class="{{ request()->is('admin/contacts*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200"
-            >
+            <a href="{{ url('/admin/contacts') }}"
+                class="{{ request()->is('admin/contacts*') ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200">
                 <span>Contact Submissions</span>
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">04</span>
             </a>
