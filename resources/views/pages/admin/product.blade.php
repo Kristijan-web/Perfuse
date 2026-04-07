@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Products');
+@section('title', 'Products')
 
 @section('content')
+
     <section class="min-h-screen bg-slate-100 px-4 py-8 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl space-y-6">
-            <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 px-6 py-8 text-white shadow-xl">
+            <div
+                class="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 px-6 py-8 text-white shadow-xl">
                 <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div>
                         <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-300">Admin Panel</p>
@@ -29,7 +31,8 @@
             </div>
 
             <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-                <div class="flex flex-col gap-3 border-b border-slate-200 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+                <div
+                    class="flex flex-col gap-3 border-b border-slate-200 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <h2 class="text-lg font-semibold text-slate-900">Product table</h2>
                         <p class="text-sm text-slate-500">All currently available product records from the database.</p>
@@ -46,45 +49,68 @@
                                 <th class="px-6 py-4">Product</th>
                                 <th class="px-6 py-4">Brand</th>
                                 <th class="px-6 py-4">Water Type</th>
+                                <th class="px-6 py-4">Available ml</th>
                                 <th class="px-6 py-4">Gender</th>
                                 <th class="px-6 py-4">Price</th>
                                 <th class="px-6 py-4">Discount</th>
-                                <th class="px-6 py-4">Images</th>
+                                <th class="px-6 py-4">Image</th>
                                 <th class="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200 bg-white">
                             @forelse ($products as $product)
+                                @php
+                                    $discountedPrice = $product->discount?->discount
+                                        ? $product->price - round(($product->price * $product->discount->discount) / 100)
+                                        : null;
+                                    $mainImage = $product->images->firstWhere('is_main_image', true)?->path
+                                        ?? $product->images->first()?->path;
+                                @endphp
                                 <tr class="align-top transition hover:bg-slate-50/80">
                                     <td class="px-6 py-4">
-                                        <div class="flex items-start gap-3">
-                                            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 text-sm font-bold text-white">
-                                                {{ strtoupper(substr($product->title, 0, 2)) }}
-                                            </div>
-                                            <div>
-                                                <p class="font-semibold text-slate-900">{{ $product->title }}</p>
-                                                <p class="text-sm text-slate-500">ID: {{ $product->id }}</p>
-                                            </div>
+                                        <div>
+                                            <p class="font-semibold text-slate-900">{{ $product->title }}</p>
+                                            <p class="text-sm text-slate-500">ID: {{ $product->id }}</p>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 text-sm text-slate-700">
-                                        {{ $product->brand?->name ?? 'No brand' }}
+                                        {{ $product->brand?->title ?? 'No brand' }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-slate-700">
-                                        {{ $product->waterType?->name ?? 'No type' }}
+                                        {{ $product->waterType?->type ?? 'No type' }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-700">
+                                        @if ($product->mls->isNotEmpty())
+                                            {{ $product->mls->pluck('size_ml')->map(fn($size) => $size . ' ml')->implode(', ') }}
+                                        @else
+                                            No ml
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-700">
+                                        <span
+                                            class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-700">
                                             {{ $product->gender }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-sm font-semibold text-slate-900">
-                                        ${{ number_format($product->price, 2) }}
+                                    <td class="px-6 py-4 text-sm text-slate-900">
+                                        @if ($discountedPrice !== null)
+                                            <div class="space-y-1">
+                                                <p class="text-xs font-medium uppercase tracking-wide text-slate-400 line-through">
+                                                    ${{ number_format($product->price, 2) }}
+                                                </p>
+                                                <p class="font-semibold text-emerald-600">
+                                                    ${{ number_format($discountedPrice, 2) }}
+                                                </p>
+                                            </div>
+                                        @else
+                                            <p class="font-semibold">${{ number_format($product->price, 2) }}</p>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4">
                                         @if ($product->discount)
-                                            <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                                                Active
+                                            <span
+                                                class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                                                {{ $product->discount->discount }}% off
                                             </span>
                                         @else
                                             <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
@@ -93,7 +119,12 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-sm text-slate-700">
-                                        {{ $product->images->count() }}
+                                        @if ($mainImage)
+                                            <img src="{{ $mainImage }}" alt="{{ $product->title }}"
+                                                class="h-16 w-16 rounded-2xl object-cover ring-1 ring-slate-200">
+                                        @else
+                                            <span class="text-slate-400">No image</span>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex justify-end gap-2">
@@ -110,9 +141,10 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="px-6 py-16 text-center">
+                                    <td colspan="9" class="px-6 py-16 text-center">
                                         <div class="mx-auto max-w-md">
-                                            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+                                            <div
+                                                class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-500">
                                                 0
                                             </div>
                                             <h3 class="mt-4 text-lg font-semibold text-slate-900">No products found</h3>
