@@ -14,6 +14,11 @@ class BrandSeeder extends Seeder
     public function run(): void
     {
         //
-        Brand::factory(10)->create();
+        Brand::firstorCreate(['title' => 'Zara']);
+        Brand::firstorCreate(['title' => 'Exmoor']);
+        Brand::firstorCreate(['title' => 'Davidoff']);
+        Brand::firstorCreate(['title' => 'Chanel']);
+        Brand::firstorCreate(['title' => 'Dior']);
+        Brand::firstorCreate(['title' => 'Versace']);
     }
 }

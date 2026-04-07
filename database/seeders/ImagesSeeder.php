@@ -15,7 +15,7 @@ class ImagesSeeder extends Seeder
     {
         //
 
-        $images = Images::factory()->count(10)->create();
+        $images = Images::factory()->count(15)->create();
 
         // now you have ALL of them
         $images->each(function ($image) use ($images) {
@@ -26,7 +26,7 @@ class ImagesSeeder extends Seeder
 
             $product_id = $image->product_id;
 
-            $certainProduct = Images::where('product_id', $product_id)->first(); // imam sve slike za x proizvod
+            $certainProduct = Images::where('product_id', $product_id)->first(); // imam jednu sliku za x proizvod
 
             // ako je $certainProduct length = 1 onda dodeli 1 odmah
             if ($certainProduct->count() === 1) {
