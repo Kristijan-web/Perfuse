@@ -41,6 +41,11 @@
                 <span>Contact Submissions</span>
                 <span class="text-xs text-slate-500 transition group-hover:text-slate-300">04</span>
             </a>
+            <a href="{{ route('homePage') }}"
+                class="{{ false ? 'bg-slate-800 text-white shadow-lg shadow-slate-950/20 ring-1 ring-inset ring-slate-700' : 'text-slate-300 hover:bg-slate-900 hover:text-white' }} group flex items-center justify-between rounded-2xl px-4 py-3 transition duration-200">
+                <span>Back to site</span>
+                <span class="text-xs text-slate-500 transition group-hover:text-slate-300">05</span>
+            </a>
         </nav>
     </div>
 
