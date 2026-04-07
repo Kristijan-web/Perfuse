@@ -193,7 +193,8 @@
                                         <a href="{{ route('productDetails', $product->id) }}"
                                             class="flex items-center justify-center rounded-2xl bg-white p-4">
                                             @if ($mainImage)
-                                                <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
+                                                {{-- <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg" --}} <img
+                                                    src={{ asset($mainImage) }}
                                                     alt="{{ $product->brand?->title }} {{ $product->title }}"
                                                     class="aspect-square w-full max-w-[96px] object-contain">
                                             @else

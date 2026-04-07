@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Images;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class ImagesSeeder extends Seeder
 {
@@ -13,31 +14,39 @@ class ImagesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $imageDirectory = public_path('images/ShopPage/Produts');
 
-        $images = Images::factory()->count(15)->create();
+        if (!File::exists($imageDirectory)) {
+            $imageDirectory = public_path('images/ShopPage/Products');
+        }
 
-        // now you have ALL of them
-        $images->each(function ($image) use ($images) {
-            // full access to collection
+        $imageFiles = collect(File::files($imageDirectory))
+            ->sortBy(fn($file) => $file->getFilename())
+            ->values();
 
-            // ovde sad treba da uzmem images proizvod id i da izvucem sve image za taj proizvod
+        $productIds = Product::query()
+            ->orderBy('id')
+            ->pluck('id')
+            ->values();
 
+        if ($imageFiles->isEmpty() || $productIds->isEmpty()) {
+            return;
+        }
 
-            $product_id = $image->product_id;
+        $imageRows = [];
+        $productCount = $productIds->count();
 
-            $certainProduct = Images::where('product_id', $product_id)->first(); // imam jednu sliku za x proizvod
+        foreach ($imageFiles as $index => $file) {
+            $productIndex = intdiv($index, 2) % $productCount;
+            $imageRows[] = [
+                'path' => 'images/ShopPage/Products/' . $file->getFilename(),
+                'product_id' => $productIds[$productIndex],
+                'is_main_image' => $index % 2 === 0 ? 1 : 0,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
 
-            // ako je $certainProduct length = 1 onda dodeli 1 odmah
-            if ($certainProduct->count() === 1) {
-                $certainProduct->is_main_image = 1;
-            }
-
-
-            $certainProduct->is_main_image = 1;
-
-            $certainProduct->save();
-
-        });
+        Images::query()->insert($imageRows);
     }
 }

@@ -56,8 +56,7 @@
                                     @if ($mainImage)
                                         {{-- http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg --}}
                                         {{-- src="{{ $mainImage }}" --}}
-                                        <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
-                                            alt="{{ $product->brand?->title }} {{ $product->title }}"
+                                        <img src="{{ asset($mainImage) }}" alt="{{ $product->brand?->title }} {{ $product->title }}"
                                             class="aspect-square w-full max-w-[120px] object-contain">
                                     @else
                                         <div

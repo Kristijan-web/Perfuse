@@ -27,7 +27,7 @@ class PageController extends Controller
         // - Ja samo treba da pozovem APIFeatures i da mu prosledim query builder za model i queryString
         // Kako ide sintaksa da pristupim query string-u
         $queryString = $request->query(); // vraca asocijativni array sa vrednostima 
-        $products = (new APIFeatures($queryString, Product::query()))->filter()->sort()->getQuery()->paginate(5); /// ovaj query treba da se trigerje
+        $products = (new APIFeatures($queryString, Product::query()))->filter()->sort()->getQuery()->paginate(12); /// ovaj query treba da se trigerje
         // $products = $productsQuery->get();
         // $products = Product::with(['brand', 'waterType', 'images', 'discount', 'mls'])->get();
         // ovo vraca sve recorde a meni trebaju samo title-ovi

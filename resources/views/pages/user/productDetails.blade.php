@@ -25,8 +25,9 @@
                         @if ($mainImage)
                             {{-- {{ $mainImage }} --}}
                             {{-- http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg --}}
-                            <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
-                                alt="{{ $product->brand->title }} {{ $product->title }}"
+                            @php
+                            @endphp
+                            <img src="{{ asset($mainImage) }}" alt="{{ $product->brand->title }} {{ $product->title }}"
                                 class="mx-auto aspect-square w-full max-w-md object-contain">
                         @else
                             <div
@@ -42,7 +43,8 @@
                         <div
                             class="overflow-hidden rounded-lg border {{ $row->is_main_image ? 'border-black bg-stone-100' : 'border-black/10 bg-white' }} p-4">
                             {{-- ovo je islo u src {{ $row->path }} --}}
-                            <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
+                            {{-- <img src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg" --}} <img
+                                src={{ asset($row->path) }}
                                 alt="{{ $product->brand->title }} {{ $product->title }}"
                                 class="aspect-square w-full object-contain">
                         </div>

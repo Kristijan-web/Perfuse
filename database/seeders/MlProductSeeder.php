@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\MlProduct;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class MlProductSeeder extends Seeder
@@ -15,16 +15,20 @@ class MlProductSeeder extends Seeder
     {
         //
         // MlProduct::factory(10)->create();
-        MlProduct::firstOrCreate(['ml_id' => 1, "product_id" => 1]);
-        MlProduct::firstOrCreate(['ml_id' => 2, "product_id" => 1]);
-        MlProduct::firstOrCreate(['ml_id' => 3, "product_id" => 1]);
+        $timestamp = now();
+        $rows = [];
 
-        MlProduct::firstOrCreate(['ml_id' => 1, "product_id" => 2]);
-        MlProduct::firstOrCreate(['ml_id' => 2, "product_id" => 2]);
-        MlProduct::firstOrCreate(['ml_id' => 3, "product_id" => 2]);
+        foreach (Product::query()->pluck('id') as $productId) {
+            foreach ([1, 2, 3] as $mlId) {
+                $rows[] = [
+                    'ml_id' => $mlId,
+                    'product_id' => $productId,
+                    'created_at' => $timestamp,
+                    'updated_at' => $timestamp,
+                ];
+            }
+        }
 
-        MlProduct::firstOrCreate(['ml_id' => 1, "product_id" => 3]);
-        MlProduct::firstOrCreate(['ml_id' => 2, "product_id" => 3]);
-        MlProduct::firstOrCreate(['ml_id' => 3, "product_id" => 3]);
+        MlProduct::query()->insertOrIgnore($rows);
     }
 }

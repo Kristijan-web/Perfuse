@@ -28,8 +28,8 @@ p-10">
             </div>
         @endif
         {{-- src="{{ $main_image }}" --}}
-        <img class="mb-5 w-full rounded-sm sm:w-full min-[440px]:w-1/2"
-            src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg"
+        {{-- src="http://127.0.0.1:8000/Images/ShopPage/Thumbnail/thumbnail.jpg" --}}
+        <img class="mb-5 w-full rounded-sm sm:w-full min-[440px]:w-1/2" src="{{ $main_image }}"
             alt="{{ $product->brand->title }} {{ $product->brand->title }}">
 
         <p class="text-xl">{{ $product->brand->title }} {{ $product->title }}</p>
