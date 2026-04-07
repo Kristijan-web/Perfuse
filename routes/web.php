@@ -72,5 +72,5 @@ Route::controller(OrderController::class)->middleware('auth')->group(function ()
 });
 
 Route::controller(ProductController::class)->middleware('isAdmin')->group(function () {
-    Route::delete('/api/products/{id}', 'destroy')->name('deleteProductAPI');
+    Route::delete('/api/products/{product}', 'destroy')->name('deleteProductAPI');
 });
