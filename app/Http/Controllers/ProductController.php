@@ -30,10 +30,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // Kako ce se raditi upload slike
-        // - Pa najveci problem ce biti upload slike
-        // - Kada slika stize ona valjda stize kao objekat
-        // - i
+        // Kako uraditi upload slike/slika?
+        // - U kom data type-u stize slika?
+        // - Kako ide sintaksa za prihvatanje slike? 
+        // - Sta ako je poslato vise slika, kako cu znati koja je main slika?
 
     }
 
