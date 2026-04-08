@@ -11,6 +11,15 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'price',
+        'gender',
+        'brand_id',
+        'water_type_id',
+        'discount_id',
+    ];
+
     use SoftDeletes;
 
     public function brand()

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Cart;
+use App\Models\Discount;
+use App\Models\Images;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -28,37 +31,67 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        // Kako uraditi upload slike/slika?
-        // - U kom data type-u stize slika?
-        // - Kako ide sintaksa za prihvatanje slike? 
-        // - Kako cu uopste znati da li je poslata jedna slika ili vise slika
-        // - Sta ako je poslato vise slika, kako cu znati koja je main slika?
 
-        // Kako ide sintaksa za prihvatanje slike?
-        // $request->file('image');
+        // Note za mene
+        // Ja uopste ne bih znao kako da napravim ovu logiku da ne znam kakva mi je struktura baze i kakve su veze u njoj
+        $validated = $request->validated();
+
+        $images = $validated['images'];
 
 
-        // U kom data type stize slika?
-        // - Posto je na frontu stavljeno name='images[]' onda stize kao obican niz
 
-        $image = $request->file('images')[0];
-        // image name ide u bazu
-        // Gde uploadujem sliku
-        // Na serveru
-        // - Gde na serveru?
-        // - Pa da bi je browser video mora da bude u public folderu
-        // Kako to izvesti?
-        // - Pa verovatno ima neka sintaksa gde navodim file objekat i path gde se uploaduje
+        // mora da se proveri da li je poslat discount ako jeste pravi se novi record u discont tabeli i dodeljuje proizovdu
+        // Kako cu znati da li je discount prosledjen?
+        // Sta uopste discount tabela ocekuje?
 
-        // $file = $request->file('image');
+        $discountId = null;
 
-        $name = time() . '_' . $image->getClientOriginalName();
+        if ($validated['discount']) {
+            // pravi novi discount record
+            $discountId = Discount::create(['discount' => $validated['discount'], 'start_date' => $validated['start_date'], 'end_date' => $validated['end_date']])->id;
 
-        // $path = $image->storeAs('images', $name, 'public');
+        }
 
-        $image->move(public_path('images/ShopPage/Products'), $name);
+        // - discount (u procentima)
+        // - start_date
+        // - end_date
+
+
+        $productId = Product::create([
+            'title' => $validated['title'],
+            'price' => $validated['price'],
+            'gender' => $validated['gender'],
+            'brand_id' => $validated['brand_id'],
+            'water_type_id' => $validated['water_type_id'],
+            'discount_id' => $discountId
+        ])->id;
+
+        // sad za svaku sliku napraviti record u images tabeli
+
+
+        foreach ($images as $key => $image) {
+            // sta ocekuje image model od podataka?
+            // - path
+            // is_main_image (bool)
+            // product_id
+
+            $name = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/ShopPage/Products'), $name);
+
+            $imagePath = "images/ShopPage/Products/$name";
+            $is_main_image = $key == 0;
+
+            // samo na prvu slike mainImage
+
+            Images::create(['path' => $imagePath, 'is_main_image' => $is_main_image, 'product_id' => $productId]);
+        }
+
+        // FAli logika za mls jer ako prosledi 150 mora odem u mlP tabelu i tu da upisem ml_id i product_id
+
+        return redirect()->route('adminProductsPage');
+
 
 
     }
