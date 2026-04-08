@@ -35,6 +35,12 @@ class ProductController extends Controller
         // - Kako ide sintaksa za prihvatanje slike? 
         // - Sta ako je poslato vise slika, kako cu znati koja je main slika?
 
+        // U kom data type stize slika?
+        // - Pretpostavljam objekat
+
+        // Kako ide sintaksa za prihvatanje slike?
+        // 
+
     }
 
     /**
