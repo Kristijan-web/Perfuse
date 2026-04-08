@@ -3,7 +3,6 @@
 @section('title', 'Products')
 
 @section('content')
-
     <section class="min-h-screen bg-slate-100 px-4 py-8 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-7xl space-y-6">
             <div
@@ -17,7 +16,11 @@
                         </p>
                     </div>
 
-                    <div class="grid gap-3 sm:grid-cols-2">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                        <a href="{{ url('/admin/products/create') }}"
+                            class="inline-flex items-center justify-center rounded-2xl bg-emerald-500 px-5 py-4 text-sm font-semibold text-white transition hover:bg-emerald-400">
+                            Create New Product
+                        </a>
                         <div class="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur">
                             <p class="text-xs uppercase tracking-[0.2em] text-slate-300">Total products</p>
                             <p class="mt-2 text-2xl font-semibold">{{ $products->count() }}</p>

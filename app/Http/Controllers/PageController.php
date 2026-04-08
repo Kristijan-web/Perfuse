@@ -124,6 +124,12 @@ class PageController extends Controller
         return view('pages.admin.user', ['users' => $users]);
     }
 
+    public function adminCreateUser()
+    {
+
+        return view('pages.admin.create-user');
+    }
+
     public function adminContactSubmission()
     {
         // mora da izvadim sve submisione

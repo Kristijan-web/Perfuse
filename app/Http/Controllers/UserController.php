@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,17 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         //
+        // logika za upisivanje novog usera
+        // znaci podatke mora da kupim i da ih imam u $validated = $request->validated();   
+
+        $validated = $request->validated();
+
+        User::create(['name' => $validated['name'], 'email' => $validated['email'], 'password' => $validated['password']]);
+
+        return redirect()->route('adminUsersPage');
     }
 
     /**

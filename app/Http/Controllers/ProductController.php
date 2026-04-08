@@ -30,6 +30,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // Kako ce se raditi upload slike
+        // - Pa najveci problem ce biti upload slike
+        // - Kada slika stize ona valjda stize kao objekat
+        // - i
 
     }
 

@@ -19,9 +19,13 @@
                         <p class="mt-3 max-w-2xl text-sm text-slate-300 sm:text-base">
                             Review registered users and their account status in one place.
                         </p>
-                    </div>`
+                    </div>
 
-                    <div class="grid gap-3 sm:grid-cols-2">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                        <a href="{{ route('adminCreateUserPage') }}"
+                            class="inline-flex items-center justify-center rounded-2xl bg-emerald-500 px-5 py-4 text-sm font-semibold text-white transition hover:bg-emerald-400">
+                            Add New User
+                        </a>
                         <div class="rounded-2xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur">
                             <p class="text-xs uppercase tracking-[0.2em] text-slate-300">Total users</p>
                             <p class="mt-2 text-2xl font-semibold">{{ $userRecords->count() }}</p>
