@@ -140,8 +140,14 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Order $order)
     {
         //
+
+
+        $order->delete();
+        // ako se brise order mora i njegov orderline mada mogu da koristim i soft delete
+
+        return redirect()->back();
     }
 }

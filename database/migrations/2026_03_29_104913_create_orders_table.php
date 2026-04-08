@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->integer("total_price");
             $table->integer("total_quantity");
             $table->foreignId("user_id")->constrained();
+            $table->softDeletes();
 
             // MORA DA IZMENIM nece id usera biti u orderline nego u order
         });

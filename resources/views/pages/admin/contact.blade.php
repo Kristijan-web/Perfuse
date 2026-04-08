@@ -84,7 +84,7 @@
                                                 class="inline-flex items-center rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100">
                                                 Edit
                                             </a>
-                                            <form method="POST" action="{{ url('/api/contacts/' . $contact->id) }}">
+                                            <form method="POST" action="{{ route('deleteContactAPI', $contact->id) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
