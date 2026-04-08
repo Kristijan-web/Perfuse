@@ -70,6 +70,7 @@
                                 <th class="px-6 py-4">Shipping</th>
                                 <th class="px-6 py-4">Totals</th>
                                 <th class="px-6 py-4">Placed</th>
+                                <th class="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200 bg-white">
@@ -117,10 +118,26 @@
                                     <td class="px-6 py-4 text-sm text-slate-700">
                                         {{ $order->created_at?->format('M d, Y H:i') ?? 'N/A' }}
                                     </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex justify-end gap-2">
+                                            <button type="button"
+                                                class="inline-flex items-center rounded-xl border border-sky-300 px-4 py-2 text-sm font-medium text-sky-700 transition hover:border-sky-400 hover:bg-sky-50">
+                                                Details
+                                            </button>
+                                            <button type="button"
+                                                class="inline-flex items-center rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100">
+                                                Edit
+                                            </button>
+                                            <button type="button"
+                                                class="inline-flex items-center rounded-xl bg-rose-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-rose-700">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-16 text-center">
+                                    <td colspan="7" class="px-6 py-16 text-center">
                                         <div class="mx-auto max-w-md">
                                             <div
                                                 class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-500">

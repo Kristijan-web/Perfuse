@@ -137,17 +137,10 @@ class PageController extends Controller
     public function adminOrder()
     {
 
-        // Sta treba da uradim?
-        // Da dohvatim sve iz orderLine i da prikazem u orders
-        // Sta prikazujem
-        // Order i njegovog user-a i klikom na order bi trebalo da mogu da se vide stavke
 
-        //  mozda je bolje ici od usera i dobiti ordere jer 1 user moze da ima vise ordera a 1 order pripada jednonm useru   
         $orders = User::with('orders')->get();
-        // sad imam za 1 usera sve njegove narudzbine
 
         return view('pages.admin.order', ['orders' => $orders]);
-
 
 
     }
