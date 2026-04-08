@@ -60,7 +60,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(ContactController::class)->middleware('auth')->group(function () {
 
     Route::post('/api/contacts', 'store')->name('createContactAPI');
-    Route::delete('api/contacts/{contact}', 'destroy')->name('deleteContactAPI');
+    Route::delete('api/contacts/{contact}', 'destroy')->middleware('isAdmin')->name('deleteContactAPI');
 
 });
 

@@ -82,7 +82,7 @@
                                         <div class="flex justify-end gap-2">
                                             <a href="{{ url('/admin/contacts/' . $contact->id . '/edit') }}"
                                                 class="inline-flex items-center rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100">
-                                                Edit
+                                                Respond
                                             </a>
                                             <form method="POST" action="{{ route('deleteContactAPI', $contact->id) }}">
                                                 @csrf
