@@ -137,6 +137,11 @@ class PageController extends Controller
     public function adminOrder()
     {
 
+        // Sta treba da uradim?
+        // Da dohvatim sve iz orderLine i da prikazem u orders
+        // Sta prikazujem
+        // Order i njegovog user-a i klikom na order bi trebalo da mogu da se vide stavke
+
 
     }
 
