@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-                        <a href="{{ url('/admin/products/create') }}"
+                        <a href="{{ route('adminCreateProductPage') }}"
                             class="inline-flex items-center justify-center rounded-2xl bg-emerald-500 px-5 py-4 text-sm font-semibold text-white transition hover:bg-emerald-400">
                             Create New Product
                         </a>

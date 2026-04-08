@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Contact;
+use App\Models\Ml;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\WaterType;
@@ -113,6 +114,17 @@ class PageController extends Controller
         $products = Product::with(['brand', 'waterType', 'discount', 'images', 'mls'])->get();
 
         return view('pages.admin.product', ['products' => $products]);
+
+    }
+
+    public function adminCreateProduct()
+    {
+        // mora da prosledim opcije za dropdown
+        $brands = Brand::all();
+        $waterTypes = WaterType::all();
+        $mls = Ml::all();
+
+        return view('pages.admin.create-product', ['brands' => $brands, 'waterTypes' => $waterTypes, 'mls' => $mls]);
 
     }
     public function adminUser()

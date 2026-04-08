@@ -33,6 +33,7 @@ class ProductController extends Controller
         // Kako uraditi upload slike/slika?
         // - U kom data type-u stize slika?
         // - Kako ide sintaksa za prihvatanje slike? 
+        // - Kako cu uopste znati da li je poslata jedna slika ili vise slika
         // - Sta ako je poslato vise slika, kako cu znati koja je main slika?
 
         // U kom data type stize slika?

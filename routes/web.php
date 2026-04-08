@@ -38,8 +38,12 @@ Route::controller(PageController::class)->group(function () {
     Route::middleware('isAdmin')->group(function () {
         Route::get('/admin/users', 'adminUser')->name('adminUsersPage');
         Route::get('/admin/users/create', 'adminCreateUser')->name('adminCreateUserPage');
+
         Route::get('/admin', 'adminProduct')->name('adminProductsPage');
+        Route::get('/admin/products/create', 'adminCreateProduct')->name('adminCreateProductPage');
+
         Route::get('/admin/orders', 'adminOrder')->name('adminOrdersPage');
+
         Route::get('/admin/contacts', 'adminContactSubmission')->name('adminSubmissionsPage');
     });
 
@@ -85,5 +89,7 @@ Route::controller(UserController::class)->middleware('isAdmin')->group(function 
 });
 
 Route::controller(ProductController::class)->middleware('isAdmin')->group(function () {
+
+    Route::post('/api/v1/products', 'store')->name('createProductAPI');
     Route::delete('/api/products/{product}', 'destroy')->name('deleteProductAPI');
 });

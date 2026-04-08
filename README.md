@@ -5,7 +5,9 @@
 - Dosta stvari/funkcionalnosti je jos moglo da se doda: mailer za potvrdu naloga i mogucnosti restarta sifre, mogucnosti filtiranja i sortiranja u admin panelu, mailer za obavestavanje korisnika da je order uspesan, opcija da korisnik moze da edituje svoje podatke, mogucnost da admin odgovori na submitane contact forme, takodje nema confirmation pop-up-a kada se radi opcija brisanja u admin panelu itd, na vise mesta nema modala koji prikazuju poruku za success ili fail itd...
 - U components folderu unutar views bi trebalo da se nalazne rasparcane componente koji cine svaku stranicu, npr views/components/user/home-layout/thumbnail.blade.php pa views/components/user/home-layout/gadgets.php i tako svaki section jedne stranice bude podeljen na componente
 
+**AJAX**
 
+- Ajax se koristi na stranici contact za submitovanje forme
 
 **Kredencijali**
 
