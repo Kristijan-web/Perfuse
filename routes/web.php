@@ -90,6 +90,6 @@ Route::controller(UserController::class)->middleware('isAdmin')->group(function 
 
 Route::controller(ProductController::class)->middleware('isAdmin')->group(function () {
 
-    Route::post('/api/v1/products', 'store')->name('createProductAPI');
+    Route::post('/api/products', 'store')->name('createProductAPI');
     Route::delete('/api/products/{product}', 'destroy')->name('deleteProductAPI');
 });

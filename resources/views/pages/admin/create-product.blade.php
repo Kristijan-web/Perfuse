@@ -16,7 +16,7 @@
             </div>
 
             <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-                <form method="POST" action="{{ url('/api/products') }}" enctype="multipart/form-data" class="space-y-8">
+                <form method="POST" action="{{ route('createProductAPI') }}" enctype="multipart/form-data" class="space-y-8">
                     @csrf
 
                     <div class="grid gap-6 lg:grid-cols-2">

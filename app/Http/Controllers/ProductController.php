@@ -36,11 +36,30 @@ class ProductController extends Controller
         // - Kako cu uopste znati da li je poslata jedna slika ili vise slika
         // - Sta ako je poslato vise slika, kako cu znati koja je main slika?
 
-        // U kom data type stize slika?
-        // - Pretpostavljam objekat
-
         // Kako ide sintaksa za prihvatanje slike?
-        // 
+        // $request->file('image');
+
+
+        // U kom data type stize slika?
+        // - Posto je na frontu stavljeno name='images[]' onda stize kao obican niz
+
+        $image = $request->file('images')[0];
+        // image name ide u bazu
+        // Gde uploadujem sliku
+        // Na serveru
+        // - Gde na serveru?
+        // - Pa da bi je browser video mora da bude u public folderu
+        // Kako to izvesti?
+        // - Pa verovatno ima neka sintaksa gde navodim file objekat i path gde se uploaduje
+
+        // $file = $request->file('image');
+
+        $name = time() . '_' . $image->getClientOriginalName();
+
+        // $path = $image->storeAs('images', $name, 'public');
+
+        $image->move(public_path('images/ShopPage/Products'), $name);
+
 
     }
 
