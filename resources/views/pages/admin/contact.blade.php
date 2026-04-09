@@ -80,7 +80,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex justify-end gap-2">
-                                            <a href="{{ url('/admin/contacts/' . $contact->id . '/edit') }}"
+                                            <a href="{{ route('adminResponseSubmissionsPage', $contact->id)}}"
                                                 class="inline-flex items-center rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100">
                                                 Odgovori
                                             </a>

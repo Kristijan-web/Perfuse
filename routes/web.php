@@ -45,6 +45,7 @@ Route::controller(PageController::class)->group(function () {
         Route::get('/admin/orders', 'adminOrder')->name('adminOrdersPage');
 
         Route::get('/admin/contacts', 'adminContactSubmission')->name('adminSubmissionsPage');
+        route::get('/admin/contacts/respond/{contact}', 'adminContactSubmissionRespond')->name('adminResponseSubmissionsPage');
     });
 
 

@@ -152,9 +152,14 @@ class PageController extends Controller
 
 
     }
-    public function adminOrder()
+
+    public function adminContactSubmissionRespond(Contact $contact)
     {
 
+        return view('pages.admin.respond-contact', ['contact' => $contact]);
+    }
+    public function adminOrder()
+    {
 
         $orders = User::with('orders')->get();
 
