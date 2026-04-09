@@ -11,7 +11,10 @@ class Discount extends Model
     /** @use HasFactory<\Database\Factories\DiscountFactory> */
     use HasFactory;
 
+    protected $fillable = ['discount', 'start_date', 'end_date'];
+
     use SoftDeletes;
+
 
     // 1 discount moze da pripada jednom user-u
 

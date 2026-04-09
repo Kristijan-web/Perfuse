@@ -28,7 +28,9 @@ class ProductRequest extends FormRequest
             'gender' => ['required', 'string', 'in:muski,zenski'],
             'brand_id' => ['required', 'integer', 'exists:brands,id'],
             'water_type_id' => ['required', 'integer', 'exists:water_types,id'],
-            'discount' => ['nullable', 'integer', 'exists:discounts,id'],
+            'discount' => ['nullable', 'integer'],
+            'start_date' => ['nullable'],
+            'end_date' => ['nullable'],
             'mls' => ['required'],
             'images' => ['required']
         ];
@@ -58,7 +60,7 @@ class ProductRequest extends FormRequest
             'water_type_id.exists' => 'Izabrani tip vode ne postoji.',
 
             'discount.integer' => 'Popust mora biti ispravan broj.',
-            'discount.exists' => 'Izabrani popust ne postoji.',
+
 
             'images.required' => "Slika je obavezna"
         ];
