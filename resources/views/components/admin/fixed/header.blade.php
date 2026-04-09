@@ -49,10 +49,5 @@
         </nav>
     </div>
 
-    <div class="border-t border-slate-800 px-6 py-4">
-        <div class="rounded-2xl bg-slate-900 px-4 py-3 ring-1 ring-inset ring-slate-800">
-            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Radni prostor</p>
-            <p class="mt-1 text-sm font-medium text-slate-200">Upravljaj podacima prodavnice kroz preglednu admin navigaciju.</p>
-        </div>
-    </div>
+
 </header>
