@@ -7,6 +7,8 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UserController extends Controller
 {
     /**
@@ -60,9 +62,23 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         //
+        $userData = $request->input();
+        // uzasno je sto radim $request al nemam vremena
+        $userId = $user->id;
+        $user = User::find($userId);
+        // treba da se update-uju podaci samo koji su izmenjeni, znaci filtiraj svaki input koji je razlicit od null
+        foreach ($userData as $key => $value) {
+            if (empty($value)) {
+                unset($userData[$key]);
+            }
+        }
+        // $request->input() je asocijativan niz
+        $user->update($userData);
+
+        return redirect()->back();
     }
 
     /**

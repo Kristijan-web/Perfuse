@@ -10,7 +10,8 @@
                 <div>
                     <p class="text-sm font-medium uppercase tracking-[0.2em] text-slate-500">Admin Panel</p>
                     <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">Odgovori na kontakt zahtev</h1>
-                    <p class="mt-2 text-sm text-slate-600">Pregledajte poruku korisnika i pošaljite jasan odgovor sa jednog mesta.
+                    <p class="mt-2 text-sm text-slate-600">Pregledajte poruku korisnika i pošaljite jasan odgovor sa jednog
+                        mesta.
                     </p>
                 </div>
                 <a href="#"
@@ -35,7 +36,8 @@
                         <div class="rounded-xl bg-slate-50 p-4">
                             <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Korisnik</p>
                             <p class="mt-2 text-base font-semibold text-slate-900">
-                                {{ $contact->user?->name ?? 'Nepoznat korisnik' }}</p>
+                                {{ $contact->user?->name ?? 'Nepoznat korisnik' }}
+                            </p>
                             <p class="mt-1 text-sm text-slate-600">{{ $contact->user?->email ?? 'Email nije dostupan' }}</p>
                         </div>
 
@@ -47,7 +49,8 @@
                             <div class="rounded-xl border border-slate-200 p-4">
                                 <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Primljeno</p>
                                 <p class="mt-2 text-sm font-medium text-slate-800">
-                                    {{ $contact->created_at?->format('M d, Y \\a\\t h:i A') }}</p>
+                                    {{ $contact->created_at?->format('M d, Y \\a\\t h:i A') }}
+                                </p>
                             </div>
                         </div>
 
@@ -61,7 +64,8 @@
                         <div class="rounded-xl bg-emerald-50 p-4">
                             <p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">Interna napomena</p>
                             <p class="mt-2 text-sm text-emerald-900">
-                                Veoma zainteresovan potencijalni klijent. U odgovoru pomenite podršku pri uvođenju i ponudite kratak demo poziv.
+                                Veoma zainteresovan potencijalni klijent. U odgovoru pomenite podršku pri uvođenju i
+                                ponudite kratak demo poziv.
                             </p>
                         </div>
                     </div>
@@ -98,12 +102,12 @@
                                 class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:border-sky-500"
                                 placeholder="Napišite odgovor ovde...">Zdravo {{ $contact->user?->name ?? 'tamo' }},
 
-        Hvala vam što ste nas kontaktirali u vezi sa "{{ $contact->title }}". Biće nam drago da vam pomognemo i pošaljemo dodatne informacije.
+            Hvala vam što ste nas kontaktirali u vezi sa "{{ $contact->title }}". Biće nam drago da vam pomognemo i pošaljemo dodatne informacije.
 
-        Slobodno nam javite ako želite da podelite još neke detalje kako bismo vam efikasnije pomogli.
+            Slobodno nam javite ako želite da podelite još neke detalje kako bismo vam efikasnije pomogli.
 
-        Srdačan pozdrav,
-        Admin tim</textarea>
+            Srdačan pozdrav,
+            Admin tim</textarea>
                         </div>
 
                         <div class="grid gap-5 rounded-2xl bg-slate-50 p-4 sm:grid-cols-2">

@@ -124,7 +124,7 @@ class PageController extends Controller
         $waterTypes = WaterType::all();
         $mls = Ml::all();
 
-        return view('pages.admin.create-product', ['brands' => $brands, 'waterTypes' => $waterTypes, 'mls' => $mls]);
+        return view('pages.admin.product-create', ['brands' => $brands, 'waterTypes' => $waterTypes, 'mls' => $mls]);
 
     }
     public function adminUser()
@@ -139,7 +139,15 @@ class PageController extends Controller
     public function adminCreateUser()
     {
 
-        return view('pages.admin.create-user');
+        return view('pages.admin.user-create');
+    }
+
+    public function adminEditUser(User $user)
+    {
+
+        return view('pages.admin.user-edit', ['user' => $user]);
+
+
     }
 
     public function adminContactSubmission()
@@ -156,7 +164,7 @@ class PageController extends Controller
     public function adminContactSubmissionRespond(Contact $contact)
     {
 
-        return view('pages.admin.respond-contact', ['contact' => $contact]);
+        return view('pages.admin.contact-respond', ['contact' => $contact]);
     }
     public function adminOrder()
     {
