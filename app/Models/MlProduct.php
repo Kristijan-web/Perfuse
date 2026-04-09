@@ -11,6 +11,8 @@ class MlProduct extends Model
 
     use HasFactory;
 
+    protected $fillable = ['ml_id', 'product_id'];
+
     // 1 ml_product moze da pripada jednom proizvodu
     // 1 ml_product moze da pripada jednom ml
 

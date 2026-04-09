@@ -29,6 +29,7 @@ class ProductRequest extends FormRequest
             'brand_id' => ['required', 'integer', 'exists:brands,id'],
             'water_type_id' => ['required', 'integer', 'exists:water_types,id'],
             'discount' => ['nullable', 'integer', 'exists:discounts,id'],
+            'mls' => ['required'],
             'images' => ['required']
         ];
     }

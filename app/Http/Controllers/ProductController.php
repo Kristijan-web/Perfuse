@@ -7,6 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Cart;
 use App\Models\Discount;
 use App\Models\Images;
+use App\Models\MlProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,7 @@ class ProductController extends Controller
         $validated = $request->validated();
 
         $images = $validated['images'];
+        $mls = $validated['mls'];
 
 
 
@@ -89,6 +91,13 @@ class ProductController extends Controller
         }
 
         // FAli logika za mls jer ako prosledi 150 mora odem u mlP tabelu i tu da upisem ml_id i product_id
+        foreach ($mls as $mlId) {
+            // Sta od podataka ocekuje $mls?
+            // - ml_id
+            // - product_id
+
+            MlProduct::create(['ml_id' => $mlId, 'product_id' => $productId]);
+        }
 
         return redirect()->route('adminProductsPage');
 
