@@ -134,7 +134,11 @@ class ProductController extends Controller
      */
     public function destroy(Request $request, Product $product)
     {
+
+        // Posto radim soft delete za proizvod kontam da nema potrebe da brisem i slike koje pripadaju proizvodu
+
         $product->delete();
+
 
         return redirect()->back();
 
