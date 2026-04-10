@@ -16,20 +16,21 @@
                 class="text-white transition-opacity duration-200 hover:opacity-75">Po&ccaron;etna</a>
             <a href="{{ route('shopPage') }}"
                 class="text-white transition-opacity duration-200 hover:opacity-75">Shop</a>
+            <a href="{{ route('cartPage') }}"
+                class="inline-flex items-center gap-[10px] text-white transition-opacity duration-200 hover:opacity-75">
+                <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <circle cx="9" cy="20" r="1.25"></circle>
+                    <circle cx="18" cy="20" r="1.25"></circle>
+                    <path d="M3 4h2.2l2.4 10.2h10.1l2.1-7.1H7.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>Korpa</span>
+            </a>
             @auth
                 <a href="{{ route('contactpage') }}"
                     class="text-white transition-opacity duration-200 hover:opacity-75">Kontakt</a>
 
-                <a href="{{ route('cartPage') }}"
-                    class="inline-flex items-center gap-[10px] text-white transition-opacity duration-200 hover:opacity-75">
-                    <svg class="h-[19px] w-[19px] shrink-0 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24"
-                        aria-hidden="true">
-                        <circle cx="9" cy="20" r="1.25"></circle>
-                        <circle cx="18" cy="20" r="1.25"></circle>
-                        <path d="M3 4h2.2l2.4 10.2h10.1l2.1-7.1H7.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                    <span>Korpa</span>
-                </a>
+
 
 
                 @if(Auth::user()->role->name === 'admin')
@@ -38,7 +39,7 @@
 
                 <form method="GET" action="{{ route('logoutAPI') }}"
                     class=" inline-flex items-center gap-[10px] text-white decoration-white transition-opacity
-                                                                                                                                            duration-200 hover:opacity-75">
+                                                                                                                                                duration-200 hover:opacity-75">
                     @csrf
                     @method("DELETE")
 
