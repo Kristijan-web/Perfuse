@@ -126,7 +126,77 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'integer', 'min:0'],
+            'gender' => ['required', 'string', 'in:muski,zenski'],
+            'brand_id' => ['required', 'integer', 'exists:brands,id'],
+            'water_type_id' => ['required', 'integer', 'exists:water_types,id'],
+            'discount' => ['nullable', 'integer'],
+            'start_date' => ['nullable'],
+            'end_date' => ['nullable'],
+            'mls' => ['required'],
+            'images' => ['nullable'],
+            'main_image_id' => ['nullable', 'integer'],
+        ]);
 
+        $discountId = $product->discount_id;
+        $hasDiscount = $request->boolean('has_discount') && !empty($validated['discount']);
+
+        if ($hasDiscount) {
+            if ($product->discount) {
+                $product->discount->update([
+                    'discount' => $validated['discount'],
+                    'start_date' => $validated['start_date'] ?? null,
+                    'end_date' => $validated['end_date'] ?? null,
+                ]);
+            } else {
+                $discountId = Discount::create([
+                    'discount' => $validated['discount'],
+                    'start_date' => $validated['start_date'] ?? null,
+                    'end_date' => $validated['end_date'] ?? null,
+                ])->id;
+            }
+        } elseif ($product->discount) {
+            $product->discount->delete();
+            $discountId = null;
+        }
+
+        $product->update([
+            'title' => $validated['title'],
+            'price' => $validated['price'],
+            'gender' => $validated['gender'],
+            'brand_id' => $validated['brand_id'],
+            'water_type_id' => $validated['water_type_id'],
+            'discount_id' => $discountId,
+        ]);
+
+        $product->mls()->sync($validated['mls']);
+
+        $mainImageId = $validated['main_image_id'] ?? null;
+
+        if ($mainImageId && $product->images()->where('id', $mainImageId)->exists()) {
+            $product->images()->update(['is_main_image' => false]);
+            $product->images()->where('id', $mainImageId)->update(['is_main_image' => true]);
+        }
+
+        if ($request->hasFile('images')) {
+            $uploadedImages = $request->file('images');
+            $shouldSetFirstUploadedAsMain = !$mainImageId && !$product->images()->where('is_main_image', true)->exists();
+
+            foreach ($uploadedImages as $key => $image) {
+                $name = time() . '_' . $key . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images/ShopPage/Products'), $name);
+
+                Images::create([
+                    'path' => "images/ShopPage/Products/$name",
+                    'is_main_image' => $shouldSetFirstUploadedAsMain && $key === 0,
+                    'product_id' => $product->id,
+                ]);
+            }
+        }
+
+        return redirect()->back();
     }
 
     /**
