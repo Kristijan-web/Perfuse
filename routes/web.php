@@ -95,5 +95,7 @@ Route::controller(UserController::class)->middleware('isAdmin')->group(function 
 Route::controller(ProductController::class)->middleware('isAdmin')->group(function () {
 
     Route::post('/api/products', 'store')->name('createProductAPI');
+    Route::put('/api/products/{product}', 'update')->name('editProductAPI');
     Route::delete('/api/products/{product}', 'destroy')->name('deleteProductAPI');
+
 });

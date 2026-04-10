@@ -31,12 +31,12 @@
                 <div class="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]">
                     <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
                         <form method="POST"
-                            action="{{ $updateRouteExists ? route('editProductAPI', $resolvedProduct->id) : '#' }}"
+                            action="{{ route('editProductAPI', $resolvedProduct->id) }}"
                             enctype="multipart/form-data" class="space-y-8">
                             @csrf
-                            @if ($updateRouteExists)
-                                @method('PUT')
-                            @endif
+                     
+                            @method('PUT')
+                       
 
                             <div class="grid gap-6 lg:grid-cols-2">
                                 <div class="lg:col-span-2">
