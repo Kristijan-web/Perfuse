@@ -286,17 +286,7 @@
                         </div>
                     </aside>
                 </div>
-            @else
-                <div class="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center shadow-sm">
-                    <h2 class="text-xl font-semibold text-slate-900">Nema proizvoda za izmenu</h2>
-                    <p class="mt-3 text-sm text-slate-500">
-                        Prosledi proizvod ili kolekciju proizvoda iz kontrolera kako bi forma mogla da prikaze podatke.
-                    </p>
-                    <a href="{{ route('adminProductsPage') }}"
-                        class="mt-6 inline-flex items-center justify-center rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
-                        Nazad na proizvode
-                    </a>
-                </div>
+
             @endif
         </div>
     </section>
