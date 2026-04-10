@@ -131,10 +131,14 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex justify-end gap-2">
-                                            <button type="button"
-                                                class="inline-flex items-center rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100">
-                                                Izmeni
-                                            </button>
+                                            <form method="GET" action="{{ route('adminEditProductPage', $product->id) }}">
+
+                                                <button type="submit"
+                                                    class="cursor-pointer inline-flex items-center rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-100">
+                                                    Izmeni
+                                                </button>
+                                            </form>
+
                                             <form method="POST" action="{{ route('deleteProductAPI', $product->id) }}">
                                                 @csrf
                                                 @method('DELETE')
@@ -155,7 +159,8 @@
                                                 class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-500">
                                                 0
                                             </div>
-                                            <h3 class="mt-4 text-lg font-semibold text-slate-900">Nema pronadjenih proizvoda</h3>
+                                            <h3 class="mt-4 text-lg font-semibold text-slate-900">Nema pronadjenih proizvoda
+                                            </h3>
                                             <p class="mt-2 text-sm text-slate-500">
                                                 Proizvodi ce se pojaviti ovde kada zapisi budu dostupni u bazi.
                                             </p>

@@ -18,7 +18,7 @@
                 <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
                     <form method="POST" action="{{ route('editUserAPI', $user->id) }}" class="space-y-6">
                         @csrf
-                        @method("PATCH")
+                        @method("PUT")
 
                         <div>
                             <label for="name" class="mb-2 block text-sm font-semibold text-slate-700">Ime i prezime</label>

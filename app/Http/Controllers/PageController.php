@@ -127,6 +127,13 @@ class PageController extends Controller
         return view('pages.admin.product-create', ['brands' => $brands, 'waterTypes' => $waterTypes, 'mls' => $mls]);
 
     }
+    public function adminEditProduct(Product $product)
+    {
+        // imam 1 proizvod, posto ga imam u memoriji mogu zvati load
+        $productData = $product->load(['brand', 'waterType', 'discount', 'images', 'mls']);
+
+        return view('pages.admin.product-edit', ['productData' => $productData]);
+    }
     public function adminUser()
     {
         // dohvati sve podakte o userima koji postoje u aplikaciji
